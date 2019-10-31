@@ -17,11 +17,15 @@ class TenderCreationFlow(Flow):
             # task_title="Tender Creation"
         ).Permission(
             auto_create=True
-            # obj=lambda activation: activation.process.createdby
-        # ).Permission(
-        # lambda act: act.process.created_by
-        ).Next(this.tendor_body)
+        ).Next(this.split_process)
     )
+    split_process = (
+        flow.Split()
+        .Next(this.board_details)
+        .Next(this.tendor_body)
+
+    )
+
     tendor_body = (
         flow.View(
             UpdateProcessView,
@@ -30,7 +34,9 @@ class TenderCreationFlow(Flow):
             task_title="Tender Body"
         ).Permission(
             auto_create=True
-        ).Next(this.board_details)
+        ).Assign(
+            lambda act: act.process.created_by
+        ).Next(this.join_process)
     )
     board_details = (
         flow.View(
@@ -40,8 +46,16 @@ class TenderCreationFlow(Flow):
             task_title="Board Deatils"
         ).Permission(
             auto_create=True
-        ).Next(this.approve)
+        ).Assign(
+            lambda act: act.process.created_by
+        ).Next(this.join_process)
     )
+
+    join_process = (
+        flow.Join()
+            .Next(this.approve)
+    )
+
     approve = (
         flow.View(
             UpdateProcessView,
@@ -63,16 +77,6 @@ class TenderCreationFlow(Flow):
             this.send_hello_world_request
         ).Next(this.end)
     )
-
-    # add_board = flow.View(
-    #     CreateProcessView,
-    #     model=AddBoard,
-    #     fields=[
-    #         'board_code', 'board_desc', 'board_qty',
-    #
-    #     ],
-    #     task_description='Add Board8'
-    # ).Next(this.end)
     end = flow.End()
 
     def send_hello_world_request(self, activation):
