@@ -33,6 +33,7 @@ def add_board_summary(request, **kwargs):
     tender_id_data = request.session.get('tend_id')
     request.activation.prepare(request.POST or None)
     form = forms.BoardDetailForm(request.POST or None)
+
     if form.is_valid():
         board_code = form.cleaned_data['board_code']
         board_desc = form.cleaned_data['board_desc']
@@ -45,12 +46,12 @@ def add_board_summary(request, **kwargs):
         control_bus_bar_qty = form.cleaned_data['control_bus_bar_qty']
         front_access_panel = form.cleaned_data['front_access_panel']
         phase = form.cleaned_data['phase']
-        no_of_bus_section = form.cleaned_data['no_of_bus_section']
+
         p = models.BoardDetails(board_code=board_code, board_desc=board_desc, tender_id=tender_id_data,
                                 stand_or_non=stand_or_non, indoor_or_outdoor=indoor_or_outdoor,
                                 mcc_or_nonstan=mcc_or_nonstan, board_qty=board_qty, mcc_description=mcc_description,
                                 hori_bus_bar_desc=hori_bus_bar_desc, front_access_panel=front_access_panel,
-                                phase=phase, control_bus_bar_qty=control_bus_bar_qty, no_of_bus_section=no_of_bus_section)
+                                phase=phase, control_bus_bar_qty=control_bus_bar_qty)
         p.save()
         return redirect('.')
     if request.POST:
@@ -72,8 +73,7 @@ def add_board_detail(request, **kwargs):
                                stand_or_non=i.stand_or_non, indoor_or_outdoor=i.indoor_or_outdoor,
                                mcc_or_nonstan=i.mcc_or_nonstan, board_qty=i.board_qty,
                                hori_bus_bar_desc=i.hori_bus_bar_desc, front_access_panel=i.front_access_panel,
-                               phase=i.phase, control_bus_bar_qty=i.control_bus_bar_qty,
-                               no_of_bus_section=i.no_of_bus_section)
+                               phase=i.phase, control_bus_bar_qty=i.control_bus_bar_qty)
     form = forms.BoardDetailForm(request.POST or None, instance=new_item)
     if form.is_valid():
         form_data = form.save(commit=False)
@@ -90,6 +90,7 @@ def add_module_list(request, **kwargs):
     tender_id_data = request.session.get('tend_id')
     request.activation.prepare(request.POST or None)
     form = forms.ModuleDetailForm(request.POST or None)
+
     if form.is_valid():
         board_detail = form.cleaned_data['board_detail']
         type = form.cleaned_data['type']
@@ -102,6 +103,9 @@ def add_module_list(request, **kwargs):
         quantity3 = form.cleaned_data['quantity3']
         quantity4 = form.cleaned_data['quantity4']
         quantity5 = form.cleaned_data['quantity5']
+        if bus_section == '3':
+            quantity4 = '0'
+            print(quantity4,'ddddddddddddddddddddddd')
         total_quantity = quantity + quantity2+quantity3+quantity4+quantity5
         p = models.ModuleDetails(board_detail=board_detail, type=type, bus_section=bus_section, tender_id=tender_id_data,
                                  module_code=module_code, quantity=quantity,total_quantity=total_quantity,

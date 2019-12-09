@@ -43,14 +43,14 @@ class BoardDetailForm(forms.ModelForm):
         Row('control_bus_bar_qty','board_qty'),
         Row('indoor_or_outdoor','stand_or_non'),
         Row('mcc_or_nonstan', 'phase'),
-        Row('no_of_bus_section', 'front_access_panel')
+        Row('front_access_panel')
     )
 
     class Meta:
         model = models.BoardDetails
         fields = ['board_code', 'board_desc', 'mcc_description', 'hori_bus_bar_desc',
                   'control_bus_bar_qty', 'board_qty', 'stand_or_non', 'phase',
-                  'mcc_or_nonstan', 'front_access_panel', 'indoor_or_outdoor','no_of_bus_section']
+                  'mcc_or_nonstan', 'front_access_panel', 'indoor_or_outdoor']
 
 
 class AddModuleForm(forms.ModelForm):

@@ -54,7 +54,6 @@ class BoardDetails(models.Model):
     hori_bus_bar_desc = models.CharField(max_length=100, blank=True, help_text='Amps')
     control_bus_bar_qty = models.IntegerField(default=0)
     front_access_panel = models.BooleanField(default=True)
-    no_of_bus_section = models.IntegerField(default=0)
     delete = models.BooleanField(default=False)
     phase = models.CharField(choices=[('D', 'D'), ('T', 'T'), ('N', 'N')], default="", max_length=10,
                              help_text='D=DP/T=TP/N=TPN')
