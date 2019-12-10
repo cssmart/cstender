@@ -6,6 +6,7 @@ from django.views import generic
 urlpatterns = [
     url(r'^workflow/app/tender/board_form/(?P<pk>\d+)/$', views.add_board_detail, name='board'),
     url(r'^workflow/app/tender/module/(?P<pk>\d+)/$', views.module_form_view, name='module'),
+    url(r'^workflow/app/tender/component_form_data/(?P<pk>\d+)/$', views.component_form_view, name='component'),
 ]
 
 

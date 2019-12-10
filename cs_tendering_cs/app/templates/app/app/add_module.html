@@ -173,11 +173,7 @@ input {
              </div>
             {% endfor %}
             </tbody>
-
-
         </table>
-
-
 </div></div></div>
              <div class="card-action row">
                 <div class="col s12 right-align">
@@ -187,7 +183,8 @@ input {
                     {% if wizard.steps.next %}
                     <button class="btn" type="submit">Next</button>
                     {% else %}
-                    <button type="submit" class="btn primary white-text btn-flat">Next</button>
+                     <a href="/workflow/app/tender/component_form/">
+                        <button type="submit" class="btn primary white-text btn-flat" name="next" value="next">Next</button></a>
                     {% endif %}
                 </div>
             </div>

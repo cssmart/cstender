@@ -85,18 +85,22 @@ class ModuleDetails(models.Model):
     revision = models.CharField(max_length=50, default="")
 
     def __str__(self):
+        # return str(self.board_detail)
         return "Module Id : " + self.module_id + " / " + " Description : " + self.description
 
 
 class ComponentDetails(models.Model):
-    module_detail = models.ForeignKey(ModuleDetails, on_delete=models.CASCADE, null=True, blank=True)
+    module_detail = models.ForeignKey(ModuleDetails, on_delete=models.CASCADE,null=True, blank=False)
     # id = models.IntegerField(primary_key=True)
-    tender_code = models.CharField(max_length=20)
+    tender_id = models.CharField(max_length=20)
     tender_version = models.CharField(max_length=20)
     module_id = models.CharField(max_length=30)
     component_id = models.CharField(max_length=30)
     description = models.TextField(max_length=60)
     quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return "Component Id : " + self.component_id + " / " + " Description : " + self.description
 
 
 class BoardsAll(models.Model):

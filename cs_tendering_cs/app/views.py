@@ -54,7 +54,7 @@ def add_board_summary(request, **kwargs):
                                 phase=phase, control_bus_bar_qty=control_bus_bar_qty)
         p.save()
         return redirect('.')
-    if request.POST:
+    elif request.POST:
         return redirect(get_next_task_url(request, request.activation.process))
     form = forms.BoardDetailForm()
     model_data = models.BoardDetails.objects.filter(tender_id=tender_id_data)
@@ -103,9 +103,6 @@ def add_module_list(request, **kwargs):
         quantity3 = form.cleaned_data['quantity3']
         quantity4 = form.cleaned_data['quantity4']
         quantity5 = form.cleaned_data['quantity5']
-        if bus_section == '3':
-            quantity4 = '0'
-            print(quantity4,'ddddddddddddddddddddddd')
         total_quantity = quantity + quantity2+quantity3+quantity4+quantity5
         p = models.ModuleDetails(board_detail=board_detail, type=type, bus_section=bus_section, tender_id=tender_id_data,
                                  module_code=module_code, quantity=quantity,total_quantity=total_quantity,
@@ -113,6 +110,8 @@ def add_module_list(request, **kwargs):
                                  quantity3=quantity3, quantity4=quantity4, quantity5=quantity5)
         p.save()
         return redirect('.')
+    elif request.POST:
+        return redirect(get_next_task_url(request, request.activation.process))
     form = forms.ModuleDetailForm()
     incoming_data = models.ModuleDetails.objects.filter(tender_id=tender_id_data, type='incoming')
     outgoing_data = models.ModuleDetails.objects.filter(tender_id=tender_id_data, type='outgoing')
@@ -147,11 +146,58 @@ def module_form_view(request, **kwargs):
     return render(request, 'app/app/module_form.html', context)
 
 
+@flow_start_view
+def add_component_list(request, **kwargs):
+    tender_id_data = request.session.get('tend_id')
+    request.activation.prepare(request.POST or None)
+    form = forms.ComponentDetailForm(request.POST or None)
+    print(form,'22222222222222222')
+    print(form.is_valid(),'33333333333333333333333')
+    if form.is_valid():
+        module_detail = form.cleaned_data['module_detail']
+        if module_detail:
+            print(module_detail,'xxxxxxxxxxxxxxxxxxxx')
+        else:
+            print(module_detail.errors,'===========================')
+
+        component_id = form.cleaned_data['component_id']
+        description = form.cleaned_data['description']
+        quantity = form.cleaned_data['quantity']
+        print(quantity, 'quantityffffffffffffffffffff')
+        p = models.ComponentDetails(module_detail=module_detail, component_id=component_id, quantity=quantity,
+                                 description=description,tender_id=tender_id_data)
+        print(p,'ddddddddddddddddddddddddddd')
+        p.save()
+        return redirect('.')
+    else:
+        print(form.errors,'444444444444444444444444444')
+    form = forms.ComponentDetailForm()
+    component_data = models.ComponentDetails.objects.filter(tender_id=tender_id_data)
+    return render(request, 'app/app/add_component.html', {
+        'form': form,
+        'component_data': component_data,
+        'activation': request.activation
+    })
 
 
-
-
-
+def component_form_view(request, **kwargs):
+    new_item = get_object_or_404(models.ComponentDetails, pk=kwargs['pk'])
+    print(new_item, "new item")
+    queryset = models.ComponentDetails.objects.select_related().filter(pk=kwargs['pk'])
+    print(queryset,'dddddddddd')
+    for i in queryset:
+        data = queryset.update(module_detail=i.module_detail, component_id=i.component_id, quantity=i.quantity,
+                                 description=i.description)
+        print(data,'ssssssssss')
+    form = forms.ComponentDetailForm(request.POST or None, instance=new_item)
+    if form.is_valid():
+        form_data = form.save(commit=False)
+        form_data.save()
+        return redirect('.')
+    context = {
+        'form': form,
+    }
+    return render(request, 'app/app/component_form.html', context)
 
 
 

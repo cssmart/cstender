@@ -79,3 +79,16 @@ class ModuleDetailForm(forms.ModelForm):
         model = models.ModuleDetails
         fields = ['bus_section', 'type', 'module_code', 'revision', 'quantity',
                   'board_detail', 'description', 'quantity2', 'quantity3', 'quantity4', 'quantity5']
+
+
+class ComponentDetailForm(forms.ModelForm):
+    layout = Layout(
+        Row('module_detail'),
+        Row('component_id', 'description'),
+        Row('quantity'),
+
+    )
+
+    class Meta:
+        model = models.ComponentDetails
+        fields = ['module_detail', 'component_id', 'description', 'quantity']

@@ -98,7 +98,8 @@ input {
                     {% if wizard.steps.next %}
                     <button class="btn" type="submit">Next</button>
                     {% else %}
-                    <button type="submit" class="btn primary white-text btn-flat">Next</button>
+                    <a href="/workflow/app/tender/module_list_data/">
+                        <button type="submit" class="btn primary white-text btn-flat" name="next" value="next">Next</button></a>
                     {% endif %}
                 </div>
             </div>
