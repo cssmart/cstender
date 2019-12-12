@@ -36,13 +36,23 @@ class BoardSummaryForm(forms.ModelForm):
         fields = ['board_code', 'board_desc']
 
 
+class BoardForm(forms.ModelForm):
+    layout = Layout(
+        Row('board_code'),
+    )
+
+    class Meta:
+        model = models.BoardDetails
+        fields = ['board_code']
+
+
 class BoardDetailForm(forms.ModelForm):
     layout = Layout(
         Row('board_code','board_desc'),
-        Row('mcc_description', 'hori_bus_bar_desc'),
+        Row('mcc_or_nonstan', 'mcc_description'),
         Row('control_bus_bar_qty','board_qty'),
         Row('indoor_or_outdoor','stand_or_non'),
-        Row('mcc_or_nonstan', 'phase'),
+        Row('hori_bus_bar_desc', 'phase'),
         Row('front_access_panel')
     )
 

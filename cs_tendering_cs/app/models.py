@@ -1,7 +1,7 @@
 from django.db import models
 from viewflow.models import Process
 from django.contrib.auth.models import User
-
+import re
 
 class TenderDataDetails(models.Model):
 
@@ -37,6 +37,47 @@ class BodyDetails(models.Model):
         return str(self.tender_id)
 
 
+class BoardsTableData(models.Model):
+
+    brd_code = models.CharField(max_length=50, blank=True, null=True)
+    brd_desc = models.CharField(max_length=50, blank=True, null=True)
+    bqty = models.CharField(max_length=50, blank=True, null=True)
+    brd_stn = models.CharField(max_length=50, blank=True, null=True)
+    bqty_mcc = models.CharField(max_length=50, blank=True, null=True)
+    bqty_vbcc = models.CharField(max_length=50, blank=True, null=True)
+    bqty_pcc = models.CharField(max_length=50, blank=True, null=True)
+    bqty_pdum = models.CharField(max_length=50, blank=True, null=True)
+    bqty_prl8 = models.CharField(max_length=50, blank=True, null=True)
+    bqty_prl4 = models.CharField(max_length=50, blank=True, null=True)
+    bqty_dum = models.CharField(max_length=50, blank=True, null=True)
+    bcmp_cst = models.CharField(max_length=50, blank=True, null=True)
+    bdot_cst = models.CharField(max_length=50, blank=True, null=True)
+    bcgl_cst = models.CharField(max_length=50, blank=True, null=True)
+    bpgl_cst = models.CharField(max_length=50, blank=True, null=True)
+    bpfb_cst = models.CharField(max_length=50, blank=True, null=True)
+    bmfb_cst = models.CharField(max_length=50, blank=True, null=True)
+    blfb_cst = models.CharField(max_length=50, blank=True, null=True)
+    bwrg_cst = models.CharField(max_length=50, blank=True, null=True)
+    blwrg_cst = models.CharField(max_length=50, blank=True, null=True)
+    bbb_cst = models.CharField(max_length=50, blank=True, null=True)
+    bcbb_cst = models.CharField(max_length=50, blank=True, null=True)
+    bspc_cst = models.CharField(max_length=50, blank=True, null=True)
+    bunp = models.CharField(max_length=50, blank=True, null=True)
+    bfrg = models.CharField(max_length=50, blank=True, null=True)
+    bmlpf = models.CharField(max_length=50, blank=True, null=True)
+    bertc = models.CharField(max_length=50, blank=True, null=True)
+    btotal = models.CharField(max_length=50, blank=True, null=True)
+    bhbb_rtng = models.CharField(max_length=50, blank=True, null=True)
+    brd_type = models.CharField(max_length=50, blank=True, null=True)
+    pn_phs = models.CharField(max_length=50, blank=True, null=True)
+    pn_code = models.CharField(max_length=50, blank=True, null=True)
+    bcbb_qty = models.CharField(max_length=50, blank=True, null=True)
+    fro_accs = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.brd_desc + " ," + self.brd_code
+
+
 class BoardDetails(models.Model):
     # id = models.IntegerField(primary_key=True)
     # tender = models.ForeignKey(TenderDataDetails, on_delete=models.CASCADE,  default=True)
@@ -48,7 +89,8 @@ class BoardDetails(models.Model):
     indoor_or_outdoor = models.CharField(choices=[('indoor', 'INDOOR'), ('outdoor', 'OUTDOOOR')],
                                          max_length=100, default="")
     mcc_or_nonstan = models.CharField(max_length=100,  blank=False)
-    board_desc = models.CharField(max_length=100)
+    board_desc = models.CharField(max_length=100,  default='')
+    # board_desc = models.ForeignKey(BoardsTableData, on_delete=models.CASCADE,  blank=True, null=True)
     board_qty = models.IntegerField(blank=False, null=True)
     mcc_description = models.CharField(max_length=100, blank=True)
     hori_bus_bar_desc = models.CharField(max_length=100, blank=True, help_text='Amps')
@@ -59,7 +101,13 @@ class BoardDetails(models.Model):
                              help_text='D=DP/T=TP/N=TPN')
 
     def __str__(self):
-        return  "Board Id : " +str(self.id) + ", " "Board Code : " +self.board_code + ", " + " Description : " +self.board_desc
+        return "Board Code : " + self.board_code + ", " + " Description : " + self.board_desc
+    #
+    # def save(self, *args, **kwargs):
+    #     board_code = self.board_code
+    #     board_desc = self.board_desc
+    #     print(board_desc,'44444444444444')
+    #     super(BoardDetails, self).save(*args, **kwargs)
 
 
 class ModuleDetails(models.Model):
@@ -103,9 +151,9 @@ class ComponentDetails(models.Model):
         return "Component Id : " + self.component_id + " / " + " Description : " + self.description
 
 
-class BoardsAll(models.Model):
-    # id = models.IntegerField()
-    description = models.TextField(max_length=60)
+    # class Meta:
+        # order_with_respect_to = 'brd_desc'
+
 
 
 class ModuleAll(models.Model):

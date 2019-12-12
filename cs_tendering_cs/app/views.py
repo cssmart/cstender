@@ -28,42 +28,120 @@ class FirstTenderView(StartFlowMixin, SessionWizardView):
         return redirect(get_next_task_url(self.request, self.activation.process))
 
 
+from django.db import connection
 @flow_view
 def add_board_summary(request, **kwargs):
     tender_id_data = request.session.get('tend_id')
     request.activation.prepare(request.POST or None)
     form = forms.BoardDetailForm(request.POST or None)
-
-    if form.is_valid():
-        board_code = form.cleaned_data['board_code']
-        board_desc = form.cleaned_data['board_desc']
-        stand_or_non = form.cleaned_data['stand_or_non']
-        indoor_or_outdoor = form.cleaned_data['indoor_or_outdoor']
-        mcc_or_nonstan = form.cleaned_data['mcc_or_nonstan']
-        board_qty = form.cleaned_data['board_qty']
-        mcc_description = form.cleaned_data['mcc_description']
-        hori_bus_bar_desc = form.cleaned_data['hori_bus_bar_desc']
-        control_bus_bar_qty = form.cleaned_data['control_bus_bar_qty']
-        front_access_panel = form.cleaned_data['front_access_panel']
-        phase = form.cleaned_data['phase']
-
-        p = models.BoardDetails(board_code=board_code, board_desc=board_desc, tender_id=tender_id_data,
-                                stand_or_non=stand_or_non, indoor_or_outdoor=indoor_or_outdoor,
-                                mcc_or_nonstan=mcc_or_nonstan, board_qty=board_qty, mcc_description=mcc_description,
-                                hori_bus_bar_desc=hori_bus_bar_desc, front_access_panel=front_access_panel,
-                                phase=phase, control_bus_bar_qty=control_bus_bar_qty)
-        p.save()
-        return redirect('.')
-    elif request.POST:
-        return redirect(get_next_task_url(request, request.activation.process))
+    board_form = forms.BoardForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            board_code = form.cleaned_data['board_code']
+            board_desc = form.cleaned_data['board_desc']
+            stand_or_non = form.cleaned_data['stand_or_non']
+            indoor_or_outdoor = form.cleaned_data['indoor_or_outdoor']
+            mcc_or_nonstan = form.cleaned_data['mcc_or_nonstan']
+            board_qty = form.cleaned_data['board_qty']
+            mcc_description = form.cleaned_data['mcc_description']
+            hori_bus_bar_desc = form.cleaned_data['hori_bus_bar_desc']
+            control_bus_bar_qty = form.cleaned_data['control_bus_bar_qty']
+            front_access_panel = form.cleaned_data['front_access_panel']
+            phase = form.cleaned_data['phase']
+            board_save = models.BoardDetails(board_code=board_code, board_desc=board_desc, tender_id=tender_id_data,
+                                             stand_or_non=stand_or_non, indoor_or_outdoor=indoor_or_outdoor,
+                                             mcc_or_nonstan=mcc_or_nonstan, board_qty=board_qty, mcc_description=mcc_description,
+                                             hori_bus_bar_desc=hori_bus_bar_desc, front_access_panel=front_access_panel,
+                                             phase=phase, control_bus_bar_qty=control_bus_bar_qty)
+            board_save.save()
+            return redirect('.')
+    if request.method == 'POST':
+        if board_form.is_valid():
+            board_code = request.POST.get('board_code')
+            print(board_code,'ddddddddddddddddd')
+            queryset = models.BoardsTableData.objects.filter(brd_code=board_code).distinct('brd_code')
+            if queryset:
+                for i in queryset:
+                    p = models.BoardDetails(board_code=board_code, board_desc=i.brd_desc, tender_id=tender_id_data)
+                    p.save()
+            return redirect('.')
+        else:
+            print(form.errors)
+    # elif request.POST:
+    #     return redirect(get_next_task_url(request, request.activation.process))
+    board_form = forms.BoardForm()
     form = forms.BoardDetailForm()
     model_data = models.BoardDetails.objects.filter(tender_id=tender_id_data)
     return render(request, 'app/app/list_board.html', {
         'form': form,
+        'board_form':board_form,
         'model_data': model_data,
         'activation': request.activation
     })
 
+
+
+# from django.db import connection
+# @flow_view
+# def add_board_summary(request, **kwargs):
+#     action_list = []
+#     tender_id_data = request.session.get('tend_id')
+#     request.activation.prepare(request.POST or None)
+#     form = forms.BoardDetailForm(request.POST or None)
+#     print(form.is_valid(),'21wssssss')
+#     if form.is_valid():
+#         form.save(commit=False)
+#         board_code = form.cleaned_data['board_code']
+#         queryset = models.BoardsTableData.objects.filter(brd_code=board_code)
+#         print(queryset,'qqqqqqqqqqqqqqq')
+#         if queryset:
+#             for i in queryset:
+#                 a = models.BoardDetails.objects.filter(board_code=i).update(board_desc=i.brd_desc)
+#                 print(a,'wwwwwwwwwwwwwwwwwwwwwwww')
+#                 brd_desc = request.GET.get(i.brd_desc)
+#                 print(brd_desc,'2fffffffffffffffffffffff')
+#                 # data = request.GET.get(i.brd_desc)
+#                 data = i.brd_desc
+#                 # data = models.BoardDetails.objects.create(board_desc=i.brd_desc)
+#                 print(data,'11111111111111118888888888888')
+#                 # a = queryset.update(brd_desc=data)
+#                 # print(a, '===========================')
+#                 # cursor = connection.cursor()
+#                 # cursor.execute("SELECT  brd_desc FROM  app_boardstabledata WHERE  brd_code ='B0001'")
+#                 # result = cursor.fetchall()
+#                 # print(result, '12222222222223333333333333333333333333333333')
+#                 board_c = i
+#                 print(board_c, '2222222222222222222222222222222222')
+#                 #                 # board_desc = result[0]
+#                 # print(board_desc, 'board desc================================')
+#         # s = models.BoardDetails(board_code=board_c, board_desc=data)
+#         # s.save()
+#         # print(s,'qqqqqqqqqqqqqqqqqqqqq')
+#         stand_or_non = form.cleaned_data['stand_or_non']
+#         indoor_or_outdoor = form.cleaned_data['indoor_or_outdoor']
+#         mcc_or_nonstan = form.cleaned_data['mcc_or_nonstan']
+#         board_qty = form.cleaned_data['board_qty']
+#         mcc_description = form.cleaned_data['mcc_description']
+#         hori_bus_bar_desc = form.cleaned_data['hori_bus_bar_desc']
+#         control_bus_bar_qty = form.cleaned_data['control_bus_bar_qty']
+#         front_access_panel = form.cleaned_data['front_access_panel']
+#         phase = form.cleaned_data['phase']
+#         p = models.BoardDetails(tender_id=tender_id_data,
+#                                 stand_or_non=stand_or_non, indoor_or_outdoor=indoor_or_outdoor,
+#                                 mcc_or_nonstan=mcc_or_nonstan, board_qty=board_qty, mcc_description=mcc_description,
+#                                 hori_bus_bar_desc=hori_bus_bar_desc, front_access_panel=front_access_panel,
+#                                 phase=phase, control_bus_bar_qty=control_bus_bar_qty)
+#         p.save()
+#         return redirect('.')
+#     elif request.POST:
+#         return redirect(get_next_task_url(request, request.activation.process))
+#     form = forms.BoardDetailForm()
+#     model_data = models.BoardDetails.objects.filter(tender_id=tender_id_data)
+#     return render(request, 'app/app/list_board.html', {
+#         'form': form,
+#         'model_data': model_data,
+#         'activation': request.activation
+#     })
 
 def add_board_detail(request, **kwargs):
     new_item = get_object_or_404(models.BoardDetails,  pk=kwargs['pk'])
@@ -198,82 +276,3 @@ def component_form_view(request, **kwargs):
         'form': form,
     }
     return render(request, 'app/app/component_form.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
-# def add_board_detail(request, **kwargs):
-#     new_item = get_object_or_404(models.BoardDetails,  pk=kwargs['pk'])
-#     print(new_item, "new item====================")
-#     if request.method == 'POST':
-#         form = forms.BoardDetailForm(request.POST, instance=new_item)
-#         print(form.is_valid(),'sssssssssssssssssssssssssssssssss')
-#         if form.is_valid():
-#             data = form.save(commit=False)
-#
-#             print(data,'1111111111111111111111111111')
-#             data.board_code = 'form.board_code'
-#             print( new_item.board_code, 'dddddddddddddddddd')
-#
-#             form.save()
-#             # if not request.is_ajax():
-#             #     # reload the page
-#             #     next = request.META['PATH_INFO']
-#             # return HttpResponseRedirect(next)
-#             return redirect('/done')
-#             # if is_ajax(), we just return the validated form, so the modal will close
-#     # else:
-#     #     data = {"board_code": new_item.board_code
-#     #             }
-#     #     print(data,'dddddddddddd22222222222222222')
-#     #     # form = AdvertForm(initial=data)
-#     #
-#     form = forms.BoardDetailForm(instance=new_item)
-#
-#     return render(request, 'app/app/board_form.html', {
-#         # 'object': object,
-#         'form': form,
-#     })
-
-
-
-    # new_item = models.BoardDetails.objects.update_or_create(pk=kwargs['pk'],
-    #                                        defaults={
-    #                                            'board_detail': 'board_detail',
-    #                                        })
-    # # models.BoardDetails.objects.all().update(blog=new_item)
-    # # new_item.board_code ="dddddddddd"
-    # new_item.pk = None
-    # # data = models.BoardDetails.objects.filter(pk='122').update(board_code="11111111")
-    # form = forms.BoardDetailForm(request.POST or None, instance=new_item)
-    #
-    # # print(data, 'dddddeeeeeeeeeeee')
-    # print(form.is_valid(),'fffffffffffffffffffffff')
-    # if form.is_valid():
-    #     board_code = form.cleaned_data['board_code']
-    #     data = models.BoardDetails.objects.update(board_code=board_code)
-    #     # board_detail = new_item['board_code']
-    #     # print(board_detail,'ddddddddddddddddddddddddddddd')
-    #     # data = models.ModuleDetails(board_detail=board_detail)
-    #     data.save()
-    # context = {
-    #         'form':form,
-    #     }
-    # return render(request, 'app/app/board_form.html',context)

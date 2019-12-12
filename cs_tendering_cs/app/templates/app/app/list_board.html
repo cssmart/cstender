@@ -32,26 +32,31 @@ input {
 }
 
 </style>
+
 <div class="left-panel">
     <div class="card">
-        <form role="form"   method="POST">
+  <form role="form"   method="POST">
             <div class="card-content">
-                <div class="card-title black-text">{{ activation.flow_task.task_title|default:activation.task.flow_task }}</div>
-    {% csrf_token %}
-      {{ activation.management_form }}
-    {% form %}
-        {% part form prefix %}
-      {% endpart %}
-        {% endform %}
-
-                 {{ wizard.management_form }}
-                 {% form form=wizard.form %}{% endform %}
+                {% csrf_token %}
+                  {{ activation.management_form }}
+                {{ board_form }}
             </div>
-             <div class="card-action row">
-                <div class="col s12 right-align">
-
+      <div align="center" ><button type="submit" name="_submit" value="add" class="btn">ADD</button></div>
+  </form>
+        <form role="form1"   method="POST">
+            <div class="card-content">
+            {% csrf_token %}
+              {{ activation.management_form }}
+            {% form %}
+                {% endform %}
+            </div>
+            <div align="center" > <button type="submit" class="btn">ADD</button></div>
+     </form>
+        <br/>
+        <div class="card-action row">
+            <div class="col s12 right-align">
      <div class="panel-body">
-         <button type="submit" name="_submit" value="add" class="btn">ADD</button>
+
           <center><h4><b>Board Details</b></h4></center>
         <table id="customers">
             <thead>
@@ -103,7 +108,6 @@ input {
                     {% endif %}
                 </div>
             </div>
-        </form>
     </div>
 </div>
 
