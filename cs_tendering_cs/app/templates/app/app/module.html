@@ -1,0 +1,28 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+<div class="left-panel">
+    <div class="card">
+        <form role="form" action="." method="POST">
+                   <div class="card-content">
+    {% csrf_token %}
+    {% form %}
+        {% endform %}
+            </div>
+          <button type="submit" name="_submit" value="add" class="btn">ADD</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

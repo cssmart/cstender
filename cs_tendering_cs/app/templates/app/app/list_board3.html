@@ -1,0 +1,117 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+{% block left-panel %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+</style>
+
+<div class="left-panel">
+    <div class="card">
+  </form>
+        <form role="form" method="POST">
+            <div class="card-content">
+            {% csrf_token %}
+            {% form %}
+                {% endform %}
+            </div>
+            <div align="center" >
+            <div align="center" >
+                <button type="submit" class="btn"><a href="{% url 'app:master_boards' %}">GET STANDARD BOARDS</a></button>
+                &nbsp;&nbsp;
+            <button type="submit" class="btn">ADD</button></div>
+     </form>
+        <br/>
+        <div class="card-action row">
+            <div class="col s12 right-align">
+     <div class="panel-body">
+
+          <center><h4><b>Board Details</b></h4></center>
+        <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Board Id</th>
+                    <th>Board Code</th>
+                    <th>Module</th>
+                    <th>Description</th>
+                    <th>MCC Description</th>
+                    <th>HBBD</th>
+                    <th>CBB Qty</th>
+                    <th>Board Qty</th>
+                    <th>Stan/NonStan</th>
+                    <th>Indoor/Outdoor</th>
+                    <th>MCC/Nonstan</th>
+                    <th>Phase</th>
+                    <th>FAP</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in model_data %}
+             <div class="scrollable">
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td><a href="{% url 'app:board' post.pk %}">{{ post.board_code }}</a></td>
+                    <td><a href="{% url 'app:modulelist' post.pk %}">Edit</a></td>
+                    <td>{{ post.board_desc }}</td>
+                    <td>{{ post.mcc_description }}</td>
+                    <td>{{ post.hori_bus_bar_desc }}</td>
+                    <td>{{ post.control_bus_bar_qty }}</td>
+                    <td>{{ post.board_qty }}</td>
+                    <td>{{ post.stand_or_non }}</td>
+                    <td>{{ post.indoor_or_outdoor }}</td>
+                    <td>{{ post.mcc_or_nonstan }}</td>
+                    <td>{{ post.phase }}</td>
+                    <td>{{ post.front_access_panel }}</td>
+                    <td> <a href="{% url 'app:delete_board' post.pk %}">Delete</a></td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+</div></div></div>
+             <div class="card-action row">
+                <div class="col s12 right-align">
+                    {% if wizard.steps.prev %}
+                    <button class="btn btn-flat" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Prev</button>
+                    {% endif %}
+                    {% if wizard.steps.next %}
+                    <button class="btn" type="submit">Next</button>
+                    {% else %}
+                    <a href="/workflow/app/tender/module_list_data/">
+                        <button type="submit" class="btn primary white-text btn-flat" name="next" value="next">Next</button></a>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}

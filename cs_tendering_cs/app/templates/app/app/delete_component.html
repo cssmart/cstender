@@ -1,0 +1,10 @@
+{% block content %}
+  <div class="module">
+    <form action="" method="post">
+      {% csrf_token %}
+      <p>Row{{object.id}} Is deleted from database</p>
+       <a href="{{request.META.HTTP_REFERER}}">
+         <input type="submit" class="button" value="Go to Back"></a>
+    </form>
+  </div>
+{% endblock %}

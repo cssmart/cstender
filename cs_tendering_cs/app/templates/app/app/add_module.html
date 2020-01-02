@@ -1,0 +1,195 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+{% block left-panel %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+</style>
+<div class="left-panel">
+    <div class="card">
+        <form role="form" action=" "  method="POST">
+            <div class="card-content">
+    {% csrf_token %}
+    {% form %}
+        {% part form prefix %}
+      {% endpart %}
+        {% endform %}
+            </div>
+             <div class="card-action row">
+                <div class="col s12 right-align">
+
+     <div class="panel-body">
+         <button type="submit" name="_submit" value="add" class="btn">ADD</button>
+          <center><h4><b>Module Details</b></h4></center>
+        <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Module Details</th>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Board Details</th>
+                    <th>Revision</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in incoming_data %}
+             <div class="scrollable">
+                  <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">Code: {{ post.module_code }}, Description{{ post.module_desc }}</a></td>
+                    <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.module_type}}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>Board Code: {{ post.board_code }}, Board Desc:{{ post.board_desc }} </td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                      <td>{{ post.total_quantity }}</td>
+                      <td><a href="{% url 'app:delete_module' post.pk %}">Delete</a></td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+<br/><br/>
+
+         <!--         Another table-->
+            <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Module Details</th>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Board Details</th>
+                    <th>Revision</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                     <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in coupler_data %}
+             <div class="scrollable">
+     <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">Code: {{ post.module_code }}, Description{{ post.module_desc }}</a></td>
+                    <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.module_type }}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>Board Code: {{ post.board_code }}, Board Desc:{{ post.board_desc }} </td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                      <td>{{ post.total_quantity }}</td>
+         <td><a href="{% url 'app:delete_module' post.pk %}">Delete</a></td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+<br/><br/>
+<!--         Another table-->
+            <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Module Details</th>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Board Details</th>
+                    <th>Revision</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                     <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in outgoing_data %}
+             <div class="scrollable">
+                   <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">Code: {{ post.module_code }}, Description{{ post.module_desc }}</a></td>
+                    <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.module_type }}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>Board Code: {{ post.board_code }}, Board Desc:{{ post.board_desc }} </td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                      <td>{{ post.total_quantity }}</td>
+                       <td><a href="{% url 'app:delete_module' post.pk %}">Delete</a></td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+</div></div></div>
+             <div class="card-action row">
+                <div class="col s12 right-align">
+                    {% if wizard.steps.prev %}
+                    <button class="btn btn-flat" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Prev</button>
+                    {% endif %}
+                    {% if wizard.steps.next %}
+                    <button class="btn" type="submit">Next</button>
+                    {% else %}
+                    <a href="/workflow/app/tender/module_list_data/">
+                        <button type="submit" class="btn primary white-text btn-flat" name="next" value="next">Next</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

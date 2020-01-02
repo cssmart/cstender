@@ -1,0 +1,177 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+</style>
+<div class="left-panel">
+    <div class="card">
+        <form role="form" method="POST">
+            <div class="card-content" >
+
+    {% csrf_token %}
+    {% form %}
+        {% endform %}
+            </div>
+   <div align="center" > <button type="submit" class="btn">ADD</button></div>
+                      <center><h4><b>Module Details</b></h4></center>
+        <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Board Code</th>
+                      <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Module Code</th>
+                    <th>Revision</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in incoming_data %}
+             <div class="scrollable">
+                <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">{{ post.board_code }}</a></td>
+                      <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.type }}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>{{ post.module_code }}</td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                    <td>{{ post.total_quantity }}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+<br/><br/>
+
+         <!--         Another table-->
+            <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Board Code</th>
+                      <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Module Code</th>
+                    <th>Revision</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in coupler_data %}
+             <div class="scrollable">
+                <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">{{ post.board_code }}</a></td>
+                     <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.type }}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>{{ post.module_code }}</td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                     <td>{{ post.total_quantity }}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+
+
+        </table>
+<br/><br/>
+<!--         Another table-->
+            <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>Board Code</th>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Bus Section</th>
+                    <th>Module Code</th>
+                    <th>Revision</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Quantity2</th>
+                    <th>Quantity3</th>
+                    <th>Quantity4</th>
+                    <th>Quantity5</th>
+                    <th>Total Quantity</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post in outgoing_data %}
+             <div class="scrollable">
+                <tr>
+                    <td><a href="{% url 'app:module' post.pk %}">{{ post.board_code }}</a></td>
+                    <td><a href="{% url 'app:component_list' post.pk %}">Edit</a></td>
+                    <td>{{ post.type }}</td>
+                    <td>{{ post.bus_section }}</td>
+                    <td>{{ post.module_code }}</td>
+                    <td>{{ post.revision }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.quantity }}</td>
+                    <td>{{ post.quantity2 }}</td>
+                    <td>{{ post.quantity3 }}</td>
+                    <td>{{ post.quantity4 }}</td>
+                    <td>{{ post.quantity5 }}</td>
+                      <td>{{ post.total_quantity }}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
