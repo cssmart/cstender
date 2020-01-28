@@ -1,0 +1,21 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+<div class="left-panel">
+    <p class="card" >
+        <form method="POST" action="">
+            <div class="card-content" >
+
+                <h2> <div align="center">Component Form</div></h2>
+            <br/>
+    {% csrf_token %}
+    {% form %}
+        {% endform %}
+            </div>
+        <button type="submit" name="update" value="update" class="btn">Update</button>
+        </form>
+    <p  style="text-align:center;">
+       <a href="{{request.META.HTTP_REFERER}}">
+            <button type="submit" name="_submit" value="back" class="btn">Back</button></a></p>
+    <br/><br/>
+</div>

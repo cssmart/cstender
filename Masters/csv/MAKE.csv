@@ -1,0 +1,38 @@
+NAME,COMP_CODE,NO_OPTIONS,NO_OF_CHAR
+ACB                              C&S Electric Limited,3AC,1.00,2.00
+Switch                           C&S Electric Limited,"3SF,3SW",2.00,2.00
+HRC Fuse Link                    C&S Electric Limited,"3FL,3CF",2.00,2.00
+Fuse Base                        C&S Electric Limited,3CF,1.00,2.00
+Contactor                        C&S Electric Limited,PROG1,0.00,0.00
+Pneumatic Timer                  C&S Electric Limited,PROG2,0.00,0.00
+Overload Relay                   C&S Electric Limited,1TCOL,1.00,4.00
+Indicating Instrument            MECO/AE/RISHAB/IMP,PROG3,0.00,0.00
+CT                               Pragati/Indcoil/G&M,"3CM,3CP,3CE",3.00,2.00
+Control Transformer              Logicstat/Pragati/Indcoil/G&M,3TF,1.00,2.00
+Protection Relay                 ABB/Alstom/Siemens/GE,"3RN,3RD",2.00,2.00
+PT                               Pragati/Indcoil/G&M,3PT,1.00,2.00
+Selector Switch                  Kaycee/Switron,"3SA,3SD,3AS,3VS",4.00,2.00
+MCB                              C&S Electric Limited/MDS/Indokopp,3MC,1.00,2.00
+MCCB                             C&S Electric Limited,"3MB,3DM,3M3,3M4,3M2",4.00,2.00
+ELCB                             C&S Electric Limited/Datar/GE/MDS,3EL,1.00,2.00
+Indicating Lamp                  C&S Electric Limited,3IL,1.00,2.00
+Push Button                      C&S Electric Limited,"3PB,3RP",2.00,2.00
+Cable Gland /Terminal Block      C&S Electric Limited,PROG4,0.00,0.00
+Cable Lug                        Dowells/ Jainsons,PROG5,0.00,0.00
+Synchronous Timer                L&T,3TISY,1.00,4.00
+Annunciator                      Procon/Minilec,3AN,1.00,2.00
+APFCR                            Syntron/AVOMEC,3CR,1.00,2.00
+Capacitor                        Elcop/Mehar,3CA,1.00,2.00
+SPPR                             L&T/Minilec,3SP,1.00,2.00
+Thermister Protection Relay      OHM SOLITRONICS,1LTTM,1.00,4.00
+Transducer                       AE/Southern/Rishab,3TR,1.00,2.00
+Time Totaliser                   Kaycee,3TT,1.00,2.00
+Diode                            Reputed,3DI,1.00,2.00
+Hooter                           Vaishno/Reputed,3HO,1.00,2.00
+KWH Meter                        GEC/IMP,3WH,1.00,2.00
+KWH Meter with MDI               IMP,3MD,1.00,2.00
+Tri Vector Meter                 IMP,1IAATM,1.00,4.00
+Plug & Socket                    Crompton Greaves / BCH,3PS,1.00,2.00
+Breaker Control Switch           Kaycee/Switron,3BC,1.00,2.00
+Flasher Relay                    System & Devices,3FR,1.00,2.00
+Isolator                         MDS/Indokopp,3IS,1.00,2.00

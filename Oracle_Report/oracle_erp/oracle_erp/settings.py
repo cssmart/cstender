@@ -52,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'oracle_erp.urls'
+DATETIME_FORMAT = '%d-%m-%y'
+USE_L10N = False
+USE_TZ = False # if you plan to disable timezone support
 
 TEMPLATES = [
     {

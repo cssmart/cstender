@@ -1,0 +1,50 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+</style>
+<div class="left-panel">
+    <div class="card">
+        <form role="form" method="POST">
+            <div class="card-content" >
+
+    {% csrf_token %}
+    {% form %}
+        {% endform %}
+
+            </div>
+            <button type="submit" name="_submit" value="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

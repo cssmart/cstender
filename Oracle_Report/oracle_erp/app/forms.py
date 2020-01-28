@@ -3,6 +3,9 @@ from .models import ERPReport
 
 
 class ERPForm(forms.ModelForm):
+    from_date = forms.DateField(
+        widget=forms.widgets.DateInput(format="%m/%d/%Y"))
+    print(from_date,'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
 
     class Meta:
         model = ERPReport

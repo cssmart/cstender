@@ -2,23 +2,33 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 import xlsxwriter
 import cx_Oracle
-from io import BytesIO
+from io import BytesIO, StringIO
 from .forms import ERPForm
 from .models import ERPReport
 from django.http import HttpResponse
+from rest_framework.decorators import api_view
 
 
+@api_view(['POST'])
 def sales_return_report(request):
     '''
     Create Sales Return Report
     :param request:
     :return:
     '''
+
+    data = request.data
+    print(data, 'q22222222222222222222222222222222222222222222222222222222222')
+    business_unit = data['business_unit']
+    from_date = data['to_date']
+    print(business_unit, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+
     dsn_tns = cx_Oracle.makedsn('192.168.100.121', '1525', service_name='SANDBOX')
-    output = BytesIO()
+
     conn = cx_Oracle.connect(user=r'apps', password='apps1234', dsn=dsn_tns)
+
     # cx_Oracle.connect is used to connect the  oracle database
-    data = """
+    data = f"""
     select V.EXCHANGE_RATE,V.BUSINESS_UNIT,
     V.BUSINESS_LINE,
     V.EVENT_CLASS_CODE,
@@ -126,7 +136,7 @@ def sales_return_report(request):
             CNSTECH2.XXCNS_BTBD_ITEM_DETAILS V1
     where V.CUSTOMER_TRX_ID=V1.CUSTOMER_TRX_ID(+)
     AND V.CUSTOMER_TRX_LINE_ID=V1.CUSTOMER_TRX_LINE_ID(+)
-    AND trunc(V.trx_date) between '01-APR-19' and '30-APR-19'
+    AND trunc(V.trx_date) between '{business_unit}' and '30-APR-19' 
     GROUP BY V.EXCHANGE_RATE,
     V.BUSINESS_UNIT,
     V.BUSINESS_LINE,
@@ -214,12 +224,15 @@ def sales_return_report(request):
     V.TAX_CATEGORY_NAME,
     V.CREDIT_MEMO_NUM,
     V.CREDIT_MEMO_DATE"""
+    output = BytesIO()
     cursor = conn.cursor()
     acess_data_query = cursor.execute(data)
+    print(acess_data_query,'gggggggggggggggggggggggggggggggggggggggggggggggggggg')
     list_data = []
     for acess_data in acess_data_query:
         list_data.append(acess_data)
-    workbook = xlsxwriter.Workbook(output)
+
+    workbook = xlsxwriter.Workbook(output, {'constant_memory': True})
     worksheet = workbook.add_worksheet()
     col = 0
     for row, data in enumerate(list_data):
