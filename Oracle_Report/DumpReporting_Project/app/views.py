@@ -3,20 +3,23 @@ from django.shortcuts import render, redirect
 import xlsxwriter
 import cx_Oracle
 from io import BytesIO, StringIO
-from .forms import DumpForm
-from .models import DUMPReport
+from .forms import DumpForm, DumpDownloadForm
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 import psycopg2
 from django.contrib import messages
+TABLE_REPORT_NAME = "public.dump_table_report"
+from django.db import connection
+from datetime import datetime
 
 
 def dump_report_view(request):
-    # if request.method == 'POST':
+    '''
+    Create front view to access the data from the oracle DB..
+    :param request:
+    :return:
+    '''
     form = DumpForm(request.POST or None)
-    print(form, 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    print(request.method, '2111111111111111')
-    print(form.is_valid(), 'qqqqqqqqqq222222222222222222222222222222222222222')
     if form.is_valid():
         data = form.save(commit=False)
         business_line = form.cleaned_data['business_line']
@@ -26,11 +29,8 @@ def dump_report_view(request):
         to_date = form.cleaned_data['to_date']
         unit = form.cleaned_data['unit']
         sales_account = form.cleaned_data['sales_account']
-        # data_save = DUMPReport(business_line=business_line, business_unit=business_unit, shipping_org=shipping_org,
-        #                        from_date=from_date, to_date=to_date, unit=unit, sales_account=sales_account)
-        # data_save.save()
         form.save()
-        return redirect('')
+        return redirect('.')
     else:
         print(form.errors)
     return render(request, 'app/app/dump_report_create.html', {'form':form})
@@ -38,6 +38,11 @@ def dump_report_view(request):
 
 @api_view(['POST'])
 def dump_report_data(request):
+    '''
+    Used to access the data from Oracle Db and store the tables and data into postgres db
+    :param request:
+    :return:
+    '''
     data = request.data
     table_type = data['table_type']
     print(table_type)
@@ -57,12 +62,112 @@ def dump_report_data(request):
     select V.EXCHANGE_RATE,
     V.BUSINESS_UNIT,
     V.BUSINESS_LINE,
-    V.EVENT_CLASS_CODE
+    V.EVENT_CLASS_CODE,
+    V.ENTITY_CODE,
+    V.DEL_ORG_ID,
+    MIN(V.DELIVERY_DETAIL_ID) DELIVERY_DETAIL_ID,
+    V.CONSIGNEE_NAME,
+    V.BILL_TO_SITE_USE_ID,
+    V.SHIP_TO_SITE_USE_ID,
+    V.RAC_BILL_TO_CUSTOMER_NAME,
+    V.CUST_ID,
+    V.RAA_BILL_TO_CONCAT_ADDRESS,
+    V.RAA_BILL_TO_POSTAL_CODE,
+    V.RAA_BILL_TO_STATE,
+    TO_CHAR(V.ORDERED_DATE,'DD-MON-YY'),
+    MIN(V.SHIP_TIME) SHIP_TIME,
+    TO_CHAR(V.TRX_DATE,'DD-MON-YY'),
+    V.TERMS,
+    V.CUST_PO_NUMBER,
+    V.PROJ,
+    TO_CHAR(V.CUSTPODATE,'DD-MON-YY'),
+    V.DELIVERY_ID,
+    V.OA_NO,
+    V.ORDER_TYPE,
+    V.CUR,
+    sum(V.NET) NET,
+    NVL(V.GROSS,''),
+    V.GROSS_WEIGHT,
+    V.HEADER_ID,
+    V.SP_INS,
+    V.VOLUME,
+    V.RAT_TERM_NAME,
+    V.FOB,
+    max(V.GST_DATE) GST_DATE,
+    max(V.GST_TIME) GST_TIME,
+    nvl(v1.INVENTORY_ITEM_ID,V.INVENTORY_ITEM_ID) INVENTORY_ITEM_ID,
+    NVL(V1.ITEM_CODE,V.ITEM_CODE) ITEM_CODE,
+    NVL(V1.DESCRIPTION,V.DESCRIPTION) DESCRIPTION,
+    NVL(V1.UNIT_CODE,V.UNIT_CODE) UNIT_CODE,
+    MIN(V.LINE_NUMBER) LINE_NUMBER,
+    SUM(NVL(V1.QUANTITY,V.QUANTITY)) QUANTITY,
+    NVL(V1.UNIT_SELLING_PRICE,V.UNIT_PRICE) UNIT_PRICE ,
+    V.CONVERSION_RATE,
+    V.WAYBILL,
+    V.TRX_NUMBER,
+    SUM(V.REVENUE_AMOUNT) REVENUE_AMOUNT,
+    V.REV_UNIT,
+    V.REV_ACCOUNT,
+    V.REV_ACCT_DESC,
+    V.SHIPPING_ORG,
+    V.CUSTOMER_NUMBER,
+    V.SHIP_CUSTOMER,
+    V.SHIP_CUST_GSTN,
+    V.SHIP_CUST_STATE,
+    V.CUSTOMER_CLASS_CODE,
+    V.CUSTOMER_CATEGORY_CODE,
+    V.DOM_IBD,
+    V.ZONE,
+    V.REGION,
+    V.BRANCH,
+    V.COUNTRY,
+    V.SALESREP_ID,
+    V.COMM,
+    V.TRX_CLASS,
+    SUM(V.TAXABLE_VALUE) TAXABLE_VALUE,
+    V.TAX_INVOICE_NUM,
+    V.RETURN_REASON_CODE,
+    V.RETURN_ORDER_NUM,
+    V.RETURN_INVOICE_NUM,
+    TO_CHAR((max(V.TAX_INVOICE_DATE)),'DD-MON-YY') TAX_INVOICE_DATE,
+    V.TRX_ID,
+    MIN(V.TRX_LINE_ID) TRX_LINE_ID,
+    V.ORG_ID,
+    V.SUPPLIER_GST_NUMBER,
+    V.SUPPLIER_PAN_NUM,
+    V.CUSTOMER_GST_NUM,
+    V.CUSTOMER_PAN_NUM,
+    SUM(V.CGST) CGST,
+    V.CGST_RATE,
+    SUM(V.SGST) SGST,
+    V.SGST_RATE,
+    SUM(V.IGST) IGST,
+    V.IGST_RATE,
+    V.CURRENCY_CONVERSION_RATE,
+    V.REGIME_CODE,
+    V.GST_EVENT_CLASS_CODE,
+    V.GST_ENTITY_CODE,
+    MIN(V.DET_FACTOR_ID) DET_FACTOR_ID,
+    V.SUPP_STATE,
+    V.BILL_STATE,
+    SUM(V.FREIGHT) FREIGHT,
+    SUM(V.INSURANCE) INSURANCE,
+    SUM(V.PACKING) PACKING,
+    SUM(V.TCS) TCS,
+    V.SALES_PERSON,
+    V.ORDER_CLASS,
+    V.MIS_CAT1,
+    V.MIS_CAT2,
+    V.HSN_SAC,
+    V.ADDRESSEE,
+    V.TAX_CATEGORY_NAME,
+    V.CREDIT_MEMO_NUM,
+    TO_CHAR(V.CREDIT_MEMO_DATE,'DD-MON-YY')
     from apps.XXCNS_SALES_RETURN V,
             CNSTECH2.XXCNS_BTBD_ITEM_DETAILS V1
     where V.CUSTOMER_TRX_ID=V1.CUSTOMER_TRX_ID(+)
     AND V.CUSTOMER_TRX_LINE_ID=V1.CUSTOMER_TRX_LINE_ID(+)
-    AND trunc(V.trx_date) between '{from_date}' and '{to_date}' and rownum<=50
+    AND trunc(V.trx_date) between '{from_date}' and '{to_date}' and rownum<=2
     and V.business_line = NVL('{business_line_input}',business_line)
     and V.business_unit = NVL('{business_unit}',business_unit)
     and nvl(substr(v.rev_account,1,4),'X') = nvl('{unit}',nvl(substr(v.rev_account,1,4),'X'))
@@ -156,47 +261,341 @@ def dump_report_data(request):
     V.CREDIT_MEMO_DATE"""
     cur = cursor.execute(data)
     print(cur)
-    data_list = []
-    for i in cur:
-        data_list.append(i)
-    data_list =data_list
-    res = str(data_list)[1:-1]
+    newData = cur.fetchall()
+    row_data = [tuple(s if s != None else " " for s in tup) for tup in newData]
+    res = str(row_data)[1:-1]
     connection = psycopg2.connect(user="dump_user", password="password", host="127.0.0.1", port="5433",
                                   database="dump_report_db")
-    TABLE_NAME = "Test1_Report"
-    REPLACE_TABLE_NAME = "Dump_Report"
+    TABLE_NAME = "Report_NEW_ONE_TWO"
+    REPLACE_TABLE_NAME = "Test1_Report"
     cursor = connection.cursor()
     try:
         if table_type == 'create&insert':
-            print(table_type, '1111111111111111111111111111111111111111111111111111111111111111111')
             try:
-                sql_statement = """
-                            CREATE TABLE {} (EXCHANGE_RATE VARCHAR(32),
-                            BUSINESS_UNIT VARCHAR(64),
-                            BUSINESS_LINE VARCHAR(32),
-                            EVENT_CLASS_CODE VARCHAR(32));""".format(TABLE_NAME)
-                # sql_statement = dumpreport_table_create()
-                print(sql_statement, 'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+                sql_statement = f""" CREATE TABLE {TABLE_NAME} (EXCHANGE_RATE VARCHAR(32),
+                                   BUSINESS_UNIT VARCHAR(64),
+                                   BUSINESS_LINE VARCHAR(32),
+                                   EVENT_CLASS_CODE VARCHAR(32),
+                                   ENTITY_CODE VARCHAR(100),
+                                   DEL_ORG_ID VARCHAR(100),
+                                    DELIVERY_DETAIL_ID VARCHAR(100),
+                                    CONSIGNEE_NAME  VARCHAR(100),
+                                    BILL_TO_SITE_USE_ID  VARCHAR(100),
+                                    SHIP_TO_SITE_USE_ID  VARCHAR(100),
+                                    RAC_BILL_TO_CUSTOMER_NAME  VARCHAR(100),
+                                    CUST_ID  VARCHAR(100),
+                                    RAA_BILL_TO_CONCAT_ADDRESS  VARCHAR(100),
+                                    RAA_BILL_TO_POSTAL_CODE  VARCHAR(100),
+                                    RAA_BILL_TO_STATE  VARCHAR(100),
+                                    ORDERED_DATE  VARCHAR(100),
+                                    SHIP_TIME  VARCHAR(100),
+                                    TRX_DATE  VARCHAR(100),
+                                    TERMS  VARCHAR(100),
+                                    CUST_PO_NUMBER  VARCHAR(100),
+                                    PROJ VARCHAR(100),
+                                    CUSTPODATE  VARCHAR(100),
+                                    DELIVERY_ID  VARCHAR(100),
+                                    OA_NO  VARCHAR(100),
+                                    ORDER_TYPE  VARCHAR(100),
+                                    CUR  VARCHAR(100),
+                                    NET VARCHAR(100),
+                                    GROSS  VARCHAR(100),
+                                    GROSS_WEIGHT  VARCHAR(100),
+                                    HEADER_ID  VARCHAR(100),
+                                    SP_INS  VARCHAR(100),
+                                    VOLUME  VARCHAR(100),
+                                    RAT_TERM_NAME  VARCHAR(100),
+                                    FOB  VARCHAR(100),
+                                    GST_DATE VARCHAR(100),
+                                    GST_TIME   VARCHAR(100),
+                                    INVENTORY_ITEM_ID VARCHAR(100),
+                                    ITEM_CODE VARCHAR(100),
+                                    DESCRIPTION VARCHAR(100),
+                                    UNIT_CODE VARCHAR(100),
+                                    LINE_NUMBER VARCHAR(100),
+                                    QUANTITY VARCHAR(100),
+                                    UNIT_PRICE  VARCHAR(100) ,
+                                    CONVERSION_RATE  VARCHAR(100),
+                                    WAYBILL  VARCHAR(100),
+                                    TRX_NUMBER  VARCHAR(100),
+                                    REVENUE_AMOUNT VARCHAR(100),
+                                    REV_UNIT  VARCHAR(100),
+                                    REV_ACCOUNT  VARCHAR(100),
+                                    REV_ACCT_DESC  VARCHAR(100),
+                                    SHIPPING_ORG  VARCHAR(100),
+                                    CUSTOMER_NUMBER  VARCHAR(100),
+                                    SHIP_CUSTOMER  VARCHAR(100),
+                                    SHIP_CUST_GSTN  VARCHAR(100),
+                                    SHIP_CUST_STATE  VARCHAR(100),
+                                    CUSTOMER_CLASS_CODE  VARCHAR(100),
+                                    CUSTOMER_CATEGORY_CODE  VARCHAR(100),
+                                    DOM_IBD  VARCHAR(100),
+                                    ZONE  VARCHAR(100),
+                                    REGION  VARCHAR(100),
+                                    BRANCH  VARCHAR(100),
+                                    COUNTRY  VARCHAR(100),
+                                    SALESREP_ID  VARCHAR(100),
+                                    COMM  VARCHAR(100),
+                                    TRX_CLASS  VARCHAR(100),
+                                    TAXABLE_VALUE VARCHAR(100),
+                                    TAX_INVOICE_NUM  VARCHAR(100),
+                                    RETURN_REASON_CODE  VARCHAR(100),
+                                    RETURN_ORDER_NUM  VARCHAR(100),
+                                    RETURN_INVOICE_NUM  VARCHAR(100),
+                                    TAX_INVOICE_DATE VARCHAR(100),
+                                    TRX_ID  VARCHAR(100),
+                                    TRX_LINE_ID  VARCHAR(100),
+                                    ORG_ID VARCHAR(100),
+                                    SUPPLIER_GST_NUMBER VARCHAR(100),
+                                    SUPPLIER_PAN_NUM VARCHAR(100),
+                                    CUSTOMER_GST_NUM VARCHAR(100),
+                                    CUSTOMER_PAN_NUM VARCHAR(100),
+                                    CGST  VARCHAR(100),
+                                    CGST_RATE VARCHAR(100),
+                                    SGST  VARCHAR(100),
+                                    SGST_RATE VARCHAR(100),
+                                    IGST VARCHAR(100),
+                                    IGST_RATE VARCHAR(100),
+                                    CURRENCY_CONVERSION_RATE VARCHAR(100),
+                                    REGIME_CODE VARCHAR(100),
+                                    GST_EVENT_CLASS_CODE VARCHAR(100),
+                                    GST_ENTITY_CODE VARCHAR(100),
+                                    DET_FACTOR_ID VARCHAR(100),
+                                    SUPP_STATE VARCHAR(100),
+                                    BILL_STATE VARCHAR(100),
+                                    FREIGHT VARCHAR(100),
+                                    INSURANCE VARCHAR(100),
+                                    PACKING VARCHAR(100),
+                                    TCS VARCHAR(100),
+                                    SALES_PERSON VARCHAR(100),
+                                    ORDER_CLASS VARCHAR(100),
+                                    MIS_CAT1 VARCHAR(100),
+                                    MIS_CAT2 VARCHAR(100),
+                                    HSN_SAC VARCHAR(100),
+                                    ADDRESSEE VARCHAR(100),
+                                    TAX_CATEGORY_NAME VARCHAR(100),
+                                    CREDIT_MEMO_NUM VARCHAR(100),
+                                    CREDIT_MEMO_DATE VARCHAR(100));"""
                 cursor.execute(sql_statement)
                 connection.commit()
                 print("Table created successfully in PostgreSQL ")
-                sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE, BUSINESS_UNIT,BUSINESS_LINE,EVENT_CLASS_CODE)
-                            VALUES {res};"""
+                sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE,
+BUSINESS_UNIT,
+BUSINESS_LINE,
+EVENT_CLASS_CODE,
+ENTITY_CODE,
+DEL_ORG_ID,
+DELIVERY_DETAIL_ID,
+CONSIGNEE_NAME,
+BILL_TO_SITE_USE_ID,
+SHIP_TO_SITE_USE_ID,
+RAC_BILL_TO_CUSTOMER_NAME,
+CUST_ID,
+RAA_BILL_TO_CONCAT_ADDRESS,
+RAA_BILL_TO_POSTAL_CODE,
+RAA_BILL_TO_STATE,
+ORDERED_DATE,
+SHIP_TIME,
+TRX_DATE,
+TERMS,
+CUST_PO_NUMBER,
+PROJ,
+CUSTPODATE,
+DELIVERY_ID,
+OA_NO,
+ORDER_TYPE,
+CUR,
+NET,
+GROSS,
+GROSS_WEIGHT,
+HEADER_ID,
+SP_INS,
+VOLUME,
+RAT_TERM_NAME,
+FOB,
+GST_DATE,
+GST_TIME,
+INVENTORY_ITEM_ID,
+ITEM_CODE,
+DESCRIPTION,
+UNIT_CODE,
+LINE_NUMBER,
+QUANTITY,
+UNIT_PRICE ,
+CONVERSION_RATE,
+WAYBILL,
+TRX_NUMBER,
+REVENUE_AMOUNT,
+REV_UNIT,
+REV_ACCOUNT,
+REV_ACCT_DESC,
+SHIPPING_ORG,
+CUSTOMER_NUMBER,
+SHIP_CUSTOMER,
+SHIP_CUST_GSTN,
+SHIP_CUST_STATE,
+CUSTOMER_CLASS_CODE,
+CUSTOMER_CATEGORY_CODE,
+DOM_IBD,
+ZONE,
+REGION,
+BRANCH,
+COUNTRY,
+SALESREP_ID,
+COMM,
+TRX_CLASS,
+TAXABLE_VALUE,
+TAX_INVOICE_NUM,
+RETURN_REASON_CODE,
+RETURN_ORDER_NUM,
+RETURN_INVOICE_NUM,
+TAX_INVOICE_DATE,
+TRX_ID,
+TRX_LINE_ID,
+ORG_ID,
+SUPPLIER_GST_NUMBER,
+SUPPLIER_PAN_NUM,
+CUSTOMER_GST_NUM,
+CUSTOMER_PAN_NUM,
+CGST,
+CGST_RATE,
+SGST,
+SGST_RATE,
+IGST,
+IGST_RATE,
+CURRENCY_CONVERSION_RATE,
+REGIME_CODE,
+GST_EVENT_CLASS_CODE,
+GST_ENTITY_CODE,
+DET_FACTOR_ID,
+SUPP_STATE,
+BILL_STATE,
+FREIGHT,
+INSURANCE,
+PACKING,
+TCS,
+SALES_PERSON,
+ORDER_CLASS,
+MIS_CAT1,
+MIS_CAT2,
+HSN_SAC,
+ADDRESSEE,
+TAX_CATEGORY_NAME,
+CREDIT_MEMO_NUM,
+CREDIT_MEMO_DATE)
+VALUES {res};"""
                 cursor.execute(sql_stat)
                 connection.commit()
                 print("Data Inserted successfully in PostgreSQL ")
-            except:
-                return JsonResponse({"Message": "Table Exist in DB"})
+            except Exception as e:
+                return HttpResponse(e)
 
         elif table_type == 'create_table':
-            print(table_type, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq1111111111111111111111111111111111')
             try:
-                create_statement = """
-                                   CREATE TABLE {} (EXCHANGE_RATE VARCHAR(32),
+                create_statement =f""" CREATE TABLE {TABLE_NAME} (EXCHANGE_RATE VARCHAR(32),
                                    BUSINESS_UNIT VARCHAR(64),
                                    BUSINESS_LINE VARCHAR(32),
-                                   EVENT_CLASS_CODE VARCHAR(32));""".format(TABLE_NAME)
-                print(create_statement,'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+                                   EVENT_CLASS_CODE VARCHAR(32),
+                                   ENTITY_CODE VARCHAR(100),
+                                   DEL_ORG_ID VARCHAR(100),
+                                    DELIVERY_DETAIL_ID VARCHAR(100),
+                                    CONSIGNEE_NAME  VARCHAR(100),
+                                    BILL_TO_SITE_USE_ID  VARCHAR(100),
+                                    SHIP_TO_SITE_USE_ID  VARCHAR(100),
+                                    RAC_BILL_TO_CUSTOMER_NAME  VARCHAR(100),
+                                    CUST_ID  VARCHAR(100),
+                                    RAA_BILL_TO_CONCAT_ADDRESS  VARCHAR(100),
+                                    RAA_BILL_TO_POSTAL_CODE  VARCHAR(100),
+                                    RAA_BILL_TO_STATE  VARCHAR(100),
+                                    ORDERED_DATE  VARCHAR(100),
+                                    SHIP_TIME  VARCHAR(100),
+                                    TRX_DATE  VARCHAR(100),
+                                    TERMS  VARCHAR(100),
+                                    CUST_PO_NUMBER  VARCHAR(100),
+                                    PROJ VARCHAR(100),
+                                    CUSTPODATE  VARCHAR(100),
+                                    DELIVERY_ID  VARCHAR(100),
+                                    OA_NO  VARCHAR(100),
+                                    ORDER_TYPE  VARCHAR(100),
+                                    CUR  VARCHAR(100),
+                                    NET VARCHAR(100),
+                                    GROSS  VARCHAR(100),
+                                    GROSS_WEIGHT  VARCHAR(100),
+                                    HEADER_ID  VARCHAR(100),
+                                    SP_INS  VARCHAR(100),
+                                    VOLUME  VARCHAR(100),
+                                    RAT_TERM_NAME  VARCHAR(100),
+                                    FOB  VARCHAR(100),
+                                    GST_DATE VARCHAR(100),
+                                    GST_TIME   VARCHAR(100),
+                                    INVENTORY_ITEM_ID VARCHAR(100),
+                                    ITEM_CODE VARCHAR(100),
+                                    DESCRIPTION VARCHAR(100),
+                                    UNIT_CODE VARCHAR(100),
+                                    LINE_NUMBER VARCHAR(100),
+                                    QUANTITY VARCHAR(100),
+                                    UNIT_PRICE  VARCHAR(100) ,
+                                    CONVERSION_RATE  VARCHAR(100),
+                                    WAYBILL  VARCHAR(100),
+                                    TRX_NUMBER  VARCHAR(100),
+                                    REVENUE_AMOUNT VARCHAR(100),
+                                    REV_UNIT  VARCHAR(100),
+                                    REV_ACCOUNT  VARCHAR(100),
+                                    REV_ACCT_DESC  VARCHAR(100),
+                                    SHIPPING_ORG  VARCHAR(100),
+                                    CUSTOMER_NUMBER  VARCHAR(100),
+                                    SHIP_CUSTOMER  VARCHAR(100),
+                                    SHIP_CUST_GSTN  VARCHAR(100),
+                                    SHIP_CUST_STATE  VARCHAR(100),
+                                    CUSTOMER_CLASS_CODE  VARCHAR(100),
+                                    CUSTOMER_CATEGORY_CODE  VARCHAR(100),
+                                    DOM_IBD  VARCHAR(100),
+                                    ZONE  VARCHAR(100),
+                                    REGION  VARCHAR(100),
+                                    BRANCH  VARCHAR(100),
+                                    COUNTRY  VARCHAR(100),
+                                    SALESREP_ID  VARCHAR(100),
+                                    COMM  VARCHAR(100),
+                                    TRX_CLASS  VARCHAR(100),
+                                    TAXABLE_VALUE VARCHAR(100),
+                                    TAX_INVOICE_NUM  VARCHAR(100),
+                                    RETURN_REASON_CODE  VARCHAR(100),
+                                    RETURN_ORDER_NUM  VARCHAR(100),
+                                    RETURN_INVOICE_NUM  VARCHAR(100),
+                                    TAX_INVOICE_DATE VARCHAR(100),
+                                    TRX_ID  VARCHAR(100),
+                                    TRX_LINE_ID  VARCHAR(100),
+                                    ORG_ID VARCHAR(100),
+                                    SUPPLIER_GST_NUMBER VARCHAR(100),
+                                    SUPPLIER_PAN_NUM VARCHAR(100),
+                                    CUSTOMER_GST_NUM VARCHAR(100),
+                                    CUSTOMER_PAN_NUM VARCHAR(100),
+                                    CGST  VARCHAR(100),
+                                    CGST_RATE VARCHAR(100),
+                                    SGST  VARCHAR(100),
+                                    SGST_RATE VARCHAR(100),
+                                    IGST VARCHAR(100),
+                                    IGST_RATE VARCHAR(100),
+                                    CURRENCY_CONVERSION_RATE VARCHAR(100),
+                                    REGIME_CODE VARCHAR(100),
+                                    GST_EVENT_CLASS_CODE VARCHAR(100),
+                                    GST_ENTITY_CODE VARCHAR(100),
+                                    DET_FACTOR_ID VARCHAR(100),
+                                    SUPP_STATE VARCHAR(100),
+                                    BILL_STATE VARCHAR(100),
+                                    FREIGHT VARCHAR(100),
+                                    INSURANCE VARCHAR(100),
+                                    PACKING VARCHAR(100),
+                                    TCS VARCHAR(100),
+                                    SALES_PERSON VARCHAR(100),
+                                    ORDER_CLASS VARCHAR(100),
+                                    MIS_CAT1 VARCHAR(100),
+                                    MIS_CAT2 VARCHAR(100),
+                                    HSN_SAC VARCHAR(100),
+                                    ADDRESSEE VARCHAR(100),
+                                    TAX_CATEGORY_NAME VARCHAR(100),
+                                    CREDIT_MEMO_NUM VARCHAR(100),
+                                    CREDIT_MEMO_DATE VARCHAR(100));"""
                 cursor.execute(create_statement)
                 connection.commit()
                 print("Table created successfully in PostgreSQL ")
@@ -204,33 +603,480 @@ def dump_report_data(request):
                 return JsonResponse({"Message": "Table Exist in DB"})
 
         elif table_type == 'insert':
-            print(table_type,'22222222222222222222222222222222222222222222222222222222222222222222222222222222222')
-            sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE, BUSINESS_UNIT,BUSINESS_LINE,EVENT_CLASS_CODE)
-            VALUES {res};"""
-            cursor.execute(sql_stat)
-            connection.commit()
+            try:
+                sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE,
+                BUSINESS_UNIT,
+                BUSINESS_LINE,
+                EVENT_CLASS_CODE,
+                ENTITY_CODE,
+                DEL_ORG_ID,
+                DELIVERY_DETAIL_ID,
+                CONSIGNEE_NAME,
+                BILL_TO_SITE_USE_ID,
+                SHIP_TO_SITE_USE_ID,
+                RAC_BILL_TO_CUSTOMER_NAME,
+                CUST_ID,
+                RAA_BILL_TO_CONCAT_ADDRESS,
+                RAA_BILL_TO_POSTAL_CODE,
+                RAA_BILL_TO_STATE,
+                ORDERED_DATE,
+                SHIP_TIME,
+                TRX_DATE,
+                TERMS,
+                CUST_PO_NUMBER,
+                PROJ,
+                CUSTPODATE,
+                DELIVERY_ID,
+                OA_NO,
+                ORDER_TYPE,
+                CUR,
+                NET,
+                GROSS,
+                GROSS_WEIGHT,
+                HEADER_ID,
+                SP_INS,
+                VOLUME,
+                RAT_TERM_NAME,
+                FOB,
+                GST_DATE,
+                GST_TIME,
+                INVENTORY_ITEM_ID,
+                ITEM_CODE,
+                DESCRIPTION,
+                UNIT_CODE,
+                LINE_NUMBER,
+                QUANTITY,
+                UNIT_PRICE ,
+                CONVERSION_RATE,
+                WAYBILL,
+                TRX_NUMBER,
+                REVENUE_AMOUNT,
+                REV_UNIT,
+                REV_ACCOUNT,
+                REV_ACCT_DESC,
+                SHIPPING_ORG,
+                CUSTOMER_NUMBER,
+                SHIP_CUSTOMER,
+                SHIP_CUST_GSTN,
+                SHIP_CUST_STATE,
+                CUSTOMER_CLASS_CODE,
+                CUSTOMER_CATEGORY_CODE,
+                DOM_IBD,
+                ZONE,
+                REGION,
+                BRANCH,
+                COUNTRY,
+                SALESREP_ID,
+                COMM,
+                TRX_CLASS,
+                TAXABLE_VALUE,
+                TAX_INVOICE_NUM,
+                RETURN_REASON_CODE,
+                RETURN_ORDER_NUM,
+                RETURN_INVOICE_NUM,
+                TAX_INVOICE_DATE,
+                TRX_ID,
+                TRX_LINE_ID,
+                ORG_ID,
+                SUPPLIER_GST_NUMBER,
+                SUPPLIER_PAN_NUM,
+                CUSTOMER_GST_NUM,
+                CUSTOMER_PAN_NUM,
+                CGST,
+                CGST_RATE,
+                SGST,
+                SGST_RATE,
+                IGST,
+                IGST_RATE,
+                CURRENCY_CONVERSION_RATE,
+                REGIME_CODE,
+                GST_EVENT_CLASS_CODE,
+                GST_ENTITY_CODE,
+                DET_FACTOR_ID,
+                SUPP_STATE,
+                BILL_STATE,
+                FREIGHT,
+                INSURANCE,
+                PACKING,
+                TCS,
+                SALES_PERSON,
+                ORDER_CLASS,
+                MIS_CAT1,
+                MIS_CAT2,
+                HSN_SAC,
+                ADDRESSEE,
+                TAX_CATEGORY_NAME,
+                CREDIT_MEMO_NUM,
+                CREDIT_MEMO_DATE)VALUES {res};"""
+                cursor.execute(sql_stat)
+                connection.commit()
+            except Exception as e:
+                print(e)
         elif table_type == 'replace':
-            print(table_type,'33333333333333333333333333333333333333333333333333333333333333333333333333333333')
             drop_table = f"DROP TABLE {REPLACE_TABLE_NAME} ;"
             cursor.execute(drop_table)
             connection.commit()
-            sql_statement = """
-                       CREATE TABLE {} (EXCHANGE_RATE VARCHAR(32),
-                       BUSINESS_UNIT VARCHAR(64),
-                       BUSINESS_LINE VARCHAR(32),
-                       EVENT_CLASS_CODE VARCHAR(32));""".format(TABLE_NAME)
+            sql_statement =f""" CREATE TABLE {TABLE_NAME} (EXCHANGE_RATE VARCHAR(32),
+                                   BUSINESS_UNIT VARCHAR(64),
+                                   BUSINESS_LINE VARCHAR(32),
+                                   EVENT_CLASS_CODE VARCHAR(32),
+                                   ENTITY_CODE VARCHAR(100),
+                                   DEL_ORG_ID VARCHAR(100),
+                                    DELIVERY_DETAIL_ID VARCHAR(100),
+                                    CONSIGNEE_NAME  VARCHAR(100),
+                                    BILL_TO_SITE_USE_ID  VARCHAR(100),
+                                    SHIP_TO_SITE_USE_ID  VARCHAR(100),
+                                    RAC_BILL_TO_CUSTOMER_NAME  VARCHAR(100),
+                                    CUST_ID  VARCHAR(100),
+                                    RAA_BILL_TO_CONCAT_ADDRESS  VARCHAR(100),
+                                    RAA_BILL_TO_POSTAL_CODE  VARCHAR(100),
+                                    RAA_BILL_TO_STATE  VARCHAR(100),
+                                    ORDERED_DATE  VARCHAR(100),
+                                    SHIP_TIME  VARCHAR(100),
+                                    TRX_DATE  VARCHAR(100),
+                                    TERMS  VARCHAR(100),
+                                    CUST_PO_NUMBER  VARCHAR(100),
+                                    PROJ VARCHAR(100),
+                                    CUSTPODATE  VARCHAR(100),
+                                    DELIVERY_ID  VARCHAR(100),
+                                    OA_NO  VARCHAR(100),
+                                    ORDER_TYPE  VARCHAR(100),
+                                    CUR  VARCHAR(100),
+                                    NET VARCHAR(100),
+                                    GROSS  VARCHAR(100),
+                                    GROSS_WEIGHT  VARCHAR(100),
+                                    HEADER_ID  VARCHAR(100),
+                                    SP_INS  VARCHAR(100),
+                                    VOLUME  VARCHAR(100),
+                                    RAT_TERM_NAME  VARCHAR(100),
+                                    FOB  VARCHAR(100),
+                                    GST_DATE VARCHAR(100),
+                                    GST_TIME   VARCHAR(100),
+                                    INVENTORY_ITEM_ID VARCHAR(100),
+                                    ITEM_CODE VARCHAR(100),
+                                    DESCRIPTION VARCHAR(100),
+                                    UNIT_CODE VARCHAR(100),
+                                    LINE_NUMBER VARCHAR(100),
+                                    QUANTITY VARCHAR(100),
+                                    UNIT_PRICE  VARCHAR(100) ,
+                                    CONVERSION_RATE  VARCHAR(100),
+                                    WAYBILL  VARCHAR(100),
+                                    TRX_NUMBER  VARCHAR(100),
+                                    REVENUE_AMOUNT VARCHAR(100),
+                                    REV_UNIT  VARCHAR(100),
+                                    REV_ACCOUNT  VARCHAR(100),
+                                    REV_ACCT_DESC  VARCHAR(100),
+                                    SHIPPING_ORG  VARCHAR(100),
+                                    CUSTOMER_NUMBER  VARCHAR(100),
+                                    SHIP_CUSTOMER  VARCHAR(100),
+                                    SHIP_CUST_GSTN  VARCHAR(100),
+                                    SHIP_CUST_STATE  VARCHAR(100),
+                                    CUSTOMER_CLASS_CODE  VARCHAR(100),
+                                    CUSTOMER_CATEGORY_CODE  VARCHAR(100),
+                                    DOM_IBD  VARCHAR(100),
+                                    ZONE  VARCHAR(100),
+                                    REGION  VARCHAR(100),
+                                    BRANCH  VARCHAR(100),
+                                    COUNTRY  VARCHAR(100),
+                                    SALESREP_ID  VARCHAR(100),
+                                    COMM  VARCHAR(100),
+                                    TRX_CLASS  VARCHAR(100),
+                                    TAXABLE_VALUE VARCHAR(100),
+                                    TAX_INVOICE_NUM  VARCHAR(100),
+                                    RETURN_REASON_CODE  VARCHAR(100),
+                                    RETURN_ORDER_NUM  VARCHAR(100),
+                                    RETURN_INVOICE_NUM  VARCHAR(100),
+                                    TAX_INVOICE_DATE VARCHAR(100),
+                                    TRX_ID  VARCHAR(100),
+                                    TRX_LINE_ID  VARCHAR(100),
+                                    ORG_ID VARCHAR(100),
+                                    SUPPLIER_GST_NUMBER VARCHAR(100),
+                                    SUPPLIER_PAN_NUM VARCHAR(100),
+                                    CUSTOMER_GST_NUM VARCHAR(100),
+                                    CUSTOMER_PAN_NUM VARCHAR(100),
+                                    CGST  VARCHAR(100),
+                                    CGST_RATE VARCHAR(100),
+                                    SGST  VARCHAR(100),
+                                    SGST_RATE VARCHAR(100),
+                                    IGST VARCHAR(100),
+                                    IGST_RATE VARCHAR(100),
+                                    CURRENCY_CONVERSION_RATE VARCHAR(100),
+                                    REGIME_CODE VARCHAR(100),
+                                    GST_EVENT_CLASS_CODE VARCHAR(100),
+                                    GST_ENTITY_CODE VARCHAR(100),
+                                    DET_FACTOR_ID VARCHAR(100),
+                                    SUPP_STATE VARCHAR(100),
+                                    BILL_STATE VARCHAR(100),
+                                    FREIGHT VARCHAR(100),
+                                    INSURANCE VARCHAR(100),
+                                    PACKING VARCHAR(100),
+                                    TCS VARCHAR(100),
+                                    SALES_PERSON VARCHAR(100),
+                                    ORDER_CLASS VARCHAR(100),
+                                    MIS_CAT1 VARCHAR(100),
+                                    MIS_CAT2 VARCHAR(100),
+                                    HSN_SAC VARCHAR(100),
+                                    ADDRESSEE VARCHAR(100),
+                                    TAX_CATEGORY_NAME VARCHAR(100),
+                                    CREDIT_MEMO_NUM VARCHAR(100),
+                                    CREDIT_MEMO_DATE VARCHAR(100));"""
             print(sql_statement)
             cursor.execute(sql_statement)
             connection.commit()
             print("Table created successfully in PostgreSQL ")
-            sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE, BUSINESS_UNIT,BUSINESS_LINE,EVENT_CLASS_CODE)
-                       VALUES {res};"""
+            sql_stat = f"""INSERT INTO {TABLE_NAME} (EXCHANGE_RATE,
+            BUSINESS_UNIT,
+            BUSINESS_LINE,
+            EVENT_CLASS_CODE,
+            ENTITY_CODE,
+            DEL_ORG_ID,
+            DELIVERY_DETAIL_ID,
+            CONSIGNEE_NAME,
+            BILL_TO_SITE_USE_ID,
+            SHIP_TO_SITE_USE_ID,
+            RAC_BILL_TO_CUSTOMER_NAME,
+            CUST_ID,
+            RAA_BILL_TO_CONCAT_ADDRESS,
+            RAA_BILL_TO_POSTAL_CODE,
+            RAA_BILL_TO_STATE,
+            ORDERED_DATE,
+            SHIP_TIME,
+            TRX_DATE,
+            TERMS,
+            CUST_PO_NUMBER,
+            PROJ,
+            CUSTPODATE,
+            DELIVERY_ID,
+            OA_NO,
+            ORDER_TYPE,
+            CUR,
+            NET,
+            GROSS,
+            GROSS_WEIGHT,
+            HEADER_ID,
+            SP_INS,
+            VOLUME,
+            RAT_TERM_NAME,
+            FOB,
+            GST_DATE,
+            GST_TIME,
+            INVENTORY_ITEM_ID,
+            ITEM_CODE,
+            DESCRIPTION,
+            UNIT_CODE,
+            LINE_NUMBER,
+            QUANTITY,
+            UNIT_PRICE ,
+            CONVERSION_RATE,
+            WAYBILL,
+            TRX_NUMBER,
+            REVENUE_AMOUNT,
+            REV_UNIT,
+            REV_ACCOUNT,
+            REV_ACCT_DESC,
+            SHIPPING_ORG,
+            CUSTOMER_NUMBER,
+            SHIP_CUSTOMER,
+            SHIP_CUST_GSTN,
+            SHIP_CUST_STATE,
+            CUSTOMER_CLASS_CODE,
+            CUSTOMER_CATEGORY_CODE,
+            DOM_IBD,
+            ZONE,
+            REGION,
+            BRANCH,
+            COUNTRY,
+            SALESREP_ID,
+            COMM,
+            TRX_CLASS,
+            TAXABLE_VALUE,
+            TAX_INVOICE_NUM,
+            RETURN_REASON_CODE,
+            RETURN_ORDER_NUM,
+            RETURN_INVOICE_NUM,
+            TAX_INVOICE_DATE,
+            TRX_ID,
+            TRX_LINE_ID,
+            ORG_ID,
+            SUPPLIER_GST_NUMBER,
+            SUPPLIER_PAN_NUM,
+            CUSTOMER_GST_NUM,
+            CUSTOMER_PAN_NUM,
+            CGST,
+            CGST_RATE,
+            SGST,
+            SGST_RATE,
+            IGST,
+            IGST_RATE,
+            CURRENCY_CONVERSION_RATE,
+            REGIME_CODE,
+            GST_EVENT_CLASS_CODE,
+            GST_ENTITY_CODE,
+            DET_FACTOR_ID,
+            SUPP_STATE,
+            BILL_STATE,
+            FREIGHT,
+            INSURANCE,
+            PACKING,
+            TCS,
+            SALES_PERSON,
+            ORDER_CLASS,
+            MIS_CAT1,
+            MIS_CAT2,
+            HSN_SAC,
+            ADDRESSEE,
+            TAX_CATEGORY_NAME,
+            CREDIT_MEMO_NUM,
+            CREDIT_MEMO_DATE)
+                                        VALUES {res};"""
             cursor.execute(sql_stat)
             connection.commit()
             print("Data inserted successfully in Table !!")
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while creating PostgreSQL table", error)
     context = {
-        "data_list": data_list
+        "newData": newData
     }
     return render(request, 'app/app/dump_report.html', context)
+
+
+def dump_download_report_parameter(request):
+    '''
+    Front view  to download the report
+    :param request:
+    :return:
+    '''
+    form = DumpDownloadForm(request.POST or None)
+    if form.is_valid():
+        data = form.save(commit=False)
+        report_type = form.cleaned_data['report_type']
+        business_line = form.cleaned_data['business_line']
+        business_unit = form.cleaned_data['business_unit']
+        shipping_org = form.cleaned_data['shipping_org']
+        from_date = form.cleaned_data['from_date']
+        to_date = form.cleaned_data['to_date']
+        unit = form.cleaned_data['unit']
+        sales_account = form.cleaned_data['sales_account']
+        form.save()
+        return redirect('')
+    else:
+        print(form.errors)
+    return render(request, 'app/app/dump_report_download_parameter.html', {'form': form})
+
+
+@api_view(['POST'])
+def download_dump_report(request):
+    '''
+    Download the report from postgres database
+    :param request:
+    :return:
+    '''
+    data = request.data
+    report_type = data['report_type']
+    print(report_type)
+    table_data = 'public.Report_NEW_ONE_TWO'
+    cursor = connection.cursor()
+    sql_statement = f'''SELECT * FROM {table_data} '''
+    cursor.execute(sql_statement)
+    row_data = cursor.fetchall()
+    output = BytesIO()
+    if report_type == 'excel':
+        workbook = xlsxwriter.Workbook(output, {'constant_memory': True})
+        worksheet = workbook.add_worksheet()
+        bold = workbook.add_format({'bold': 1})
+        headings = ['EXCHANGE_RATE', 'BUSINESS_UNIT', 'BUSINESS_LINE', 'EVENT_CLASS_CODE', 'ENTITY_CODE', 'DEL_ORG_ID',
+            'DELIVERY_DETAIL_ID', 'CONSIGNEE_NAME', 'BILL_TO_SITE_USE_ID', 'SHIP_TO_SITE_USE_ID', 'RAC_BILL_TO_CUSTOMER_NAME',
+            'CUST_ID', 'RAA_BILL_TO_CONCAT_ADDRESS', 'RAA_BILL_TO_POSTAL_CODE', 'RAA_BILL_TO_STATE',
+            'ORDERED_DATE', 'SHIP_TIME', 'TRX_DATE',  'TERMS', 'CUST_PO_NUMBER', 'PROJ',  'CUSTPODATE', 'DELIVERY_ID',
+            'OA_NO',
+            'ORDER_TYPE',
+            'CUR',
+            'NET',
+            'GROSS',
+            'GROSS_WEIGHT',
+            'HEADER_ID',
+            'SP_INS',
+            'VOLUME',
+            'RAT_TERM_NAME',
+            'FOB',
+            'GST_DATE',
+            'GST_TIME',
+            'INVENTORY_ITEM_ID',
+            'ITEM_CODE',
+            'DESCRIPTION',
+            'UNIT_CODE',
+            'LINE_NUMBER',
+            'QUANTITY',
+            'UNIT_PRICE' ,
+            'CONVERSION_RATE',
+            'WAYBILL',
+            'TRX_NUMBER',
+            'REVENUE_AMOUNT',
+            'REV_UNIT',
+            'REV_ACCOUNT',
+            'REV_ACCT_DESC',
+            'SHIPPING_ORG',
+            'CUSTOMER_NUMBER',
+            'SHIP_CUSTOMER',
+            'SHIP_CUST_GSTN',
+            'SHIP_CUST_STATE',
+            'CUSTOMER_CLASS_CODE',
+            'CUSTOMER_CATEGORY_CODE',
+            'DOM_IBD',
+            'ZONE',
+            'REGION',
+            'BRANCH',
+            'COUNTRY',
+            'SALESREP_ID',
+            'COMM',
+            'TRX_CLASS',
+            'TAXABLE_VALUE',
+            'TAX_INVOICE_NUM',
+            'RETURN_REASON_CODE',
+            'RETURN_ORDER_NUM',
+            'RETURN_INVOICE_NUM',
+            'TAX_INVOICE_DATE',
+            'TRX_ID',
+            'TRX_LINE_ID',
+            'ORG_ID',
+            'SUPPLIER_GST_NUMBER',
+            'SUPPLIER_PAN_NUM',
+            'CUSTOMER_GST_NUM',
+            'CUSTOMER_PAN_NUM',
+            'CGST',
+            'CGST_RATE',
+            'SGST',
+            'SGST_RATE',
+            'IGST',
+            'IGST_RATE',
+            'CURRENCY_CONVERSION_RATE',
+            'REGIME_CODE',
+            'GST_EVENT_CLASS_CODE',
+            'GST_ENTITY_CODE',
+            'DET_FACTOR_ID',
+            'SUPP_STATE',
+            'BILL_STATE',
+            'FREIGHT',
+            'INSURANCE',
+            'PACKING',
+            'TCS',
+            'SALES_PERSON',
+            'ORDER_CLASS',
+            'MIS_CAT1',
+            'MIS_CAT2',
+            'HSN_SAC',
+            'ADDRESSEE',
+            'TAX_CATEGORY_NAME',
+            'CREDIT_MEMO_NUM',
+            'CREDIT_MEMO_DATE']
+        col = 0
+        for row, data in enumerate(row_data):
+            worksheet.write_row('A1', headings, bold)
+            worksheet.write_row(row+1, col, data)
+        workbook.close()
+        output.seek(0)
+        response = HttpResponse(output.read(),
+                                content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        return response
+    if report_type == 'pdf':
+        return HttpResponse("Done")

@@ -11,6 +11,9 @@ class DUMPReport(models.Model):
     sales_account = models.CharField(max_length=200, default="", blank=True)
     table_type = models.CharField(choices=[('create&insert', 'Create & Insert'), ('create_table', 'Create'),
                                            ('insert', 'Insert'), ('replace', 'Replace')], max_length=20)
+    report_type = models.CharField(choices=[('pdf', 'PDF'), ('excel', 'Excel')], max_length=10)
 
     def __str__(self):
         return self.business_line
+
+    # ORDERED_DATE,  TRX_DATE, CUSTPODATE, GST_DATE, TAX_INVOICE_DATE,CREDIT_MEMO_DATE

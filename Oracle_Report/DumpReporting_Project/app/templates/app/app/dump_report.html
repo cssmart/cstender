@@ -12,27 +12,8 @@
 <body>
  <form action="" method="post">
 <div class="container">
-  <h2>Dump Report</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>EXCHANGE_RATE</th>
-<!--        <th>BUSINESS_UNIT</th>-->
-<!--        <th>BUSINESS_LINE</th>-->
-<!--        <th>EVENT_CLASS_CODE</th>-->
-      </tr>
-    </thead>
-    <tbody>
-     {% for post in data_list %}
-      <tr>
-        <td>{{ post }}</td>
-<!--        <td>{{ post.BUSINESS_UNIT }}</td>-->
-<!--        <td>{{ post.BUSINESS_LINE }}</td>-->
-<!--        <td>{{ post.EVENT_CLASS_CODE }}</td>-->
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <h5>Data Stored in Postgres Successfully!!!</h5>
+
 </div>
  </form>
 </body>
