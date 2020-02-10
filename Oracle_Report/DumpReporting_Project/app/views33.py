@@ -59,6 +59,7 @@ def dump_report_data(request):
     sales_account = data['sales_account']
     dsn_tns = cx_Oracle.makedsn('192.168.100.121', '1525', service_name='SANDBOX')
     output = BytesIO()
+    print(output,'222222222222222')
     conn = cx_Oracle.connect(user=r'apps', password='apps1234', dsn=dsn_tns)
     print(conn)
     cursor = conn.cursor()
@@ -283,7 +284,41 @@ def dump_report_data(request):
     rplc_single_quote = rplc_right.replace("'", "pipe")
     rplc_double_quote = rplc_single_quote.replace('"', "'")
     rplc_pip_to_quote = rplc_double_quote.replace("pipe", '"')
+    # print(da)
+    # AAA = q[:-4]
+    # print(AAA)
+    # data = AAA + ')]'
+    # rplc_data = str(newData).replace("'", '"')
+    # cut_data = rplc_data[:-3]
+    # data_val = cut_data + ')]'
+    # print(data_val, '444444444444444444443333333333333333333333333333444444444444444444444444444444444444444444444444')
+    # print(type(data_val), 'oooooo222222222222222222oooooooeeeeeeeeeeoooooooooooooooooooooo')
     res = rplc_pip_to_quote[1:-1]
+    # q = data_.replace('""',"''")
+    # res = q.replace('"',"'")
+    # print(res, 'dddddddddddddddddddddddddddd55555555555555555555555555555555555555555555555555555555555')
+    # s = ""
+    # for v in str(newData):
+    #     s += v
+    # if data_val:
+    #
+    #     for row in data_val:
+    #         # print(row,'p00000000000000000000000000000000000000000000000000000000000000000')
+    #         aa = " PIPE=== ".join(map(str, row))
+    #         # print(aa, 'harshitaharshitaharshitaharshitaharshitaharshitaharshitaharshitaharshita=====================')
+    #         aqq = aa.replace("'", "")
+    #         # print(aqq,'------------------------------------------------------------')
+    #         q = aqq.replace("PIPE===", "','")
+    #         # print(q,'dddddddddddddddddddddddddddddddd')
+    #         res = "('" + q + "')"
+    #         # res = eval(res)
+    #         # print(type(res), 'res_dres_dres_dres_dres_dres_dres_dres_dres_dres_d')
+    #         # print(res, 'reeeeeeeeeeeeeeeeeeeeeeeeeeeeeees_dres_dres_dres_dres_dres_dres_dres_dres_dres_d')
+    # # newData.append()
+    # data = [s]
+    # print(data, 'lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll')
+    # aa = " PIPE=== ".join(map(str, data))
+    # print(aa, 'oooooooooooooooooooooooooooooooooowwwwwwwwwwwwwwwwwwwwwwwwwwwwwoooooooooooooooooooooooooooooooo')
     connection = psycopg2.connect(user="dump_user", password="password", host="127.0.0.1", port="5433",
                                   database="dump_report_db")
     cursor = connection.cursor()
