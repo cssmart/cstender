@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>\
+    <style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2 align="center">MRN STATUS REPORT</h2>
+    <form action=""  method="post">
+    <div class="col"><strong>Inventory Org</strong>
+      <input type="text" class="form-control" name=inventory_org placeholder="Inventory Org">
+        <strong>Item Category</strong>
+      <input type="text" class="form-control" name=item placeholder="Item Category">
+        <strong>From Date</strong>
+      <input type="text" class="form-control" name=fdate placeholder="From Date">
+
+   <strong>To Date</strong>
+      <input type="text" class="form-control" name=tdate placeholder="To Date">
+        <strong>Vender/Customer</strong>
+      <input type="text" class="form-control" name=vender placeholder="Vender/Customer">
+
+   <strong>PO Number</strong>
+      <input type="text" class="form-control" name=po_number placeholder="PO Number">
+      <strong>Item</strong>
+      <input type="text" class="form-control" name=item placeholder="Item">
+    <strong>MRN NO.</strong>
+      <input type="text" class="form-control" name=mrn_no placeholder="MRN NO">
+        <strong>Gate Entry Number</strong>
+      <input type="text" class="form-control" name=gate_no placeholder="Gate Entry No.">
+     <strong>Invoice Number</strong>
+      <input type="text" class="form-control" name=mrn_no placeholder="Invoice NO">
+        <strong>Status</strong>
+      <input type="text" class="form-control" name=status placeholder="Status">
+    </div>
+        <p align="center"><button type="button" class="btn btn-success">View Report</button></p>
+  </form>
+</div>
+
+</body>
+</html>

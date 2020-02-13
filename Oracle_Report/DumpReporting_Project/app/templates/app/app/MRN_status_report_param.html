@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<title>MRN STATUS REPORT</title>
+<!-- Latest compiled and minified Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style><div class="container-fluid"><h6>
+<form>
+  <div class="row">
+    <div class="col"><strong>Inventory Org</strong>
+      <input type="text" class="form-control" name=inventory_org placeholder="Inventory Org">
+    </div>
+    <div class="col"><strong>Item Category</strong>
+      <input type="text" class="form-control" name=item placeholder="Item Category">
+    </div>
+  </div>
+</form>
+<form>
+  <div class="form-row">
+     <div class="col"><strong>From Date</strong>
+      <input type="text" class="form-control" name=fdate placeholder="From Date">
+    </div>
+     <div class="col"><strong>To Date</strong>
+      <input type="text" class="form-control" name=tdate placeholder="To Date">
+    </div>
+  </div>
+</form>
+<form>
+  <div class="form-row">
+     <div class="col"><strong>Vender/Customer</strong>
+      <input type="text" class="form-control" name=vender placeholder="Vender/Customer">
+    </div>
+     <div class="col"><strong>PO Number</strong>
+      <input type="text" class="form-control" name=po_number placeholder="PO Number">
+    </div>
+  </div>
+</form>
+    <form>
+  <div class="form-row">
+     <div class="col"><strong>Item</strong>
+      <input type="text" class="form-control" name=item placeholder="Item">
+    </div>
+     <div class="col"><strong>MRN NO.</strong>
+      <input type="text" class="form-control" name=mrn_no placeholder="MRN NO">
+    </div>
+  </div>
+</form>
+    <form>
+  <div class="form-row">
+     <div class="col"><strong>Gate Entry Number</strong>
+      <input type="text" class="form-control" name=gate_no placeholder="Gate Entry No.">
+    </div>
+     <div class="col"><strong>Invoice Number</strong>
+      <input type="text" class="form-control" name=mrn_no placeholder="Invoice NO">
+    </div>
+  </div>
+</form>
+        <form>
+  <div class="form-row">
+     <div class="col"><strong>Status</strong>
+      <input type="text" class="form-control" name=status placeholder="Status">
+    </div>
+  </div>
+            <input type="submit" value="View Report">
+</form>
+</h6>
+</div>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Initialize Bootstrap functionality -->
+<script>
+// Initialize tooltip component
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Initialize popover component
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>

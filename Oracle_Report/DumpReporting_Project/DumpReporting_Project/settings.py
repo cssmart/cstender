@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'DumpReporting_Project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dump_report_db',
-        'USER': 'dump_user',
+        'NAME': 'oracle_db',
+        'USER': 'oracle_user',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5433',
