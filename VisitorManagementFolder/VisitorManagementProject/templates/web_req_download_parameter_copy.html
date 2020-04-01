@@ -1,0 +1,153 @@
+{% load static %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 30px;
+  max-width: 600px;
+  height: 500px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 2px;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 5px 6px;
+
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 1px;
+  background-color: #f2f2f2;
+  padding: 5px;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 450px;
+<!-- cellspacing="10"-->
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column  {
+    width: 50px;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column  {
+    width: 60px;
+  }
+}
+h4.ex1 {
+  margin: -10px;
+  padding-left: 23em;
+  width: 80%;
+
+}
+.button {
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;</style>
+<body>
+    <div id="login">
+        <h6><div>
+     <a href="#">
+	    <img src="{% static 'logo.jpg' %}" height="100px" style="float:left";>
+	 </a>
+      <h3 align="right">
+          <a href="{% url 'demo_bootstrap_3' %}"><button type="done"  class="button">Back</button></a>
+      </h3>
+       <h4 class="ex1">WEB REQUISITION REPORT</h4>
+        </div></h6>
+<!--          <h3 class="text-center text-black pt-5">WEB REQUISITION REPORT</h3>-->
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="{% url 'download' %}" method="post">
+<!--                        <form id="login-form" class="form" action="#" method="post">-->
+                             {% csrf_token %}
+<!--                            <h3 class="text-center text-info">WEB REQUISITION REPORT</h3>-->
+                        <br/>
+                            <div class="form-group">
+                                 <label>Report Type </label>
+                {{ form.report_type }}
+                            </div>
+                            <div class="form-group">
+                                  <label>From Date </label>
+            <input type="text" name="from_date" class="form-control">
+                            </div>
+							  <div class="form-group">
+                                   <label>To Date</label>
+             <input type="text" name="to_date" class="form-control">
+                            </div>
+							   <div class="form-group">
+                                                                <label>Location </label>
+
+                {{ form.location }}
+                              </div>
+                            <br/>
+							<div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="DownLoad Report">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

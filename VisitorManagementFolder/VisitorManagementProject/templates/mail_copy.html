@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Emails</title>
+  </head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+
+</style>
+  <body>
+    <img src="{% static 'logo.jpg' %}" height="100px" style="float:left";>
+    <h3> Hello {{person_to_meet}}, you have got a new visitor.</h3>
+
+    <h2>Card</h2>
+
+<div class="card">
+  <img src="img_avatar.png" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>John Doe</b></h4>
+    <p>Architect & Engineer</p>
+  </div>
+</div>
+
+   <img src="{% static 'profile.png' %}" height="100px" style="float:left";>
+    <table id="customers">
+                <tr>
+                    <th>Name</th>
+                    <td>{{name}}</td>
+                </tr>
+                  <tr>
+                    <th>Company</th>
+                    <td>{{company}}</td>
+                </tr>
+                  <tr>
+                    <th>Contact No</th>
+                    <td>{{contact_number}}</td>
+                </tr>
+                  <tr>
+                    <th>Reason</th>
+                    <td>{{reason}}</td>
+                </tr>
+        </table>
+    <a href='http://google.com/'><button class="button">Approve</button></a>
+    <a href="https://www.facebook.com/"><button class="button">Reject</button></a>
+
+    <p>Thanks,</p>
+  </body>
+</html>

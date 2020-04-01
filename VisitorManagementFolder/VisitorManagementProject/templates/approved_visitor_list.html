@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+    {% bootstrap_css %}
+{% endblock css %}
+{% block content %}
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding-top:30px;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+</style>
+          <center><h4><b>All Visitor List</b></h4></center>
+        <table id="customers">
+            <thead>
+                <tr width="auto">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Approved</th>
+                    <th>Company</th>
+                    <th>Meet Person</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+ {% for post in visitors %}
+             <div class="scrollable">
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.name }}</td>
+                    <td>{{ post.is_approved }}</td>
+                    <td>{{ post.company }}</td>
+                    <td>{{ post.person_to_meet }}</td>
+                    <td>{{ post.reason }}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

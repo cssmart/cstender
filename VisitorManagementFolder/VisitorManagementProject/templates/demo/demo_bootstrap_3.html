@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+    {% bootstrap_css %}
+{% endblock css %}
+
+{% block content %}
+
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+div {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 8px;
+}
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 530px;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+            <li role="presentation" class="active">
+                <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                    <span class="glyphicon glyphicon-star"></span>
+                   VMS
+                </a>
+            </li>
+        </ul>
+
+        {# ------------------------------- #}
+        <div class="tab-content">
+
+            <div class="tab-pane fade in active" id="bootstrap">
+                <form action="." method="post" class="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                     <div class="row">
+                          <div class="column" style="background-color:#aaa;">
+                         <label>Name </label>
+                              <br/>
+                              <h4>{{form_1.name }}</h4>
+                          </div>
+                          <div class="column" style="background-color:#bbb;">
+                           <label>Contact Number </label>
+                              <br/>
+                              <h4>{{form_1.contact_number}}</h4>
+                          </div>
+                        </div>
+                                             <br/>
+
+                                <div class="row">
+                                               <div class="column" style="background-color:#ddd;">
+                            <label>Company</label>
+                              <br/>
+                              <h4>{{form_1.company }}</h4>
+                          </div>
+                          <div class="column" style="background-color:#ccc;">
+                             <label>Person To Meet</label>
+                                        {{ form_1.person_to_meet }}
+                          </div><br/>
+                        </div>
+                    <div class="row">
+                            <div class="column" style="background-color:#ccc;">
+                             <label>Reason</label>
+                                   {{ form_1.reason }}
+                          </div>
+                    </div>
+                    <br/>
+                    {% buttons %}
+<!--                       <a href="{% url 'app:sendmail' %}"> -->
+                           <button type="submit" class="btn btn-primary" name="done">
+                            {% bootstrap_icon "star" %} Submit
+                       </button>
+<!--                       </a>-->
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% bootstrap_jquery_url %}"></script>
+    {% bootstrap_javascript %}
+{% endblock javascript %}
+
+

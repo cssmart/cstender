@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Emails</title>
+  </head>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+
+</style>
+</html>
+  <body>
+  <div>
+    <h1><strong >Visitor Management System</strong>
+
+<!--  <img src="https://images.assetsdelivery.com/compings_v2/urfandadashov/urfandadashov1808/urfandadashov180815813.jpg" alt="Avatar">-->
+  </div>
+    <h3> Hello {{person_to_meet}}, you have got a new visitor.</h3>
+
+<div class="card">
+  <img src="https://images.assetsdelivery.com/compings_v2/urfandadashov/urfandadashov1808/urfandadashov180815813.jpg" alt="Avatar" style="width:100px">
+  <div class="container">
+    <table id="customers">
+                <tr>
+                    <th>Name</th>
+                    <td>{{name}}</td>
+                </tr>
+                  <tr>
+                    <th>Company</th>
+                    <td>{{company}}</td>
+                </tr>
+                  <tr>
+                    <th>Contact No</th>
+                    <td>{{contact_number}}</td>
+                </tr>
+                  <tr>
+                    <th>Reason</th>
+                    <td>{{reason}}</td>
+                </tr>
+        </table>
+  </div>
+    <br/>
+       <a href='http://google.com/'><button class="button">Approve</button></a>
+    <a href="https://www.facebook.com/"><button class="button">Reject</button></a>
+</div>
+    <p>Thanks,</p>
+  </body>
+</html>

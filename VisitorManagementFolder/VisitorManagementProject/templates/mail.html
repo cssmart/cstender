@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Emails</title>
+  </head>
+</html>
+  <body bgcolor="#E6E6FA">
+  <img src="https://www.modernelectricals.net/img/970x647/c&s.png" alt="" height="70" width="90" style="display: block;margin-left: auto;margin-right: auto;">
+      <h1 align="center" style="display: block;margin-left: auto;margin-right: auto;"><strong >Visitor Management System</strong></h1>
+    <p align="center" > Hello {{person_to_meet}}, you have got a new visitor.</p>
+<div class="w3-panel w3-card-4" align="center" >
+  <img src="https://images.assetsdelivery.com/compings_v2/urfandadashov/urfandadashov1808/urfandadashov180815813.jpg" alt="Avatar" style="width:150px" align="center">
+  <div class="container" style="padding: 2px 16px;">
+    <table style="font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100px;">
+                      <tr >
+                    <th style="padding-top: 12px;padding-bottom: 12px;text-align:left;background-color:#696969;color: white;">Visit Id</th>
+                    <td style=" border: 1px solid #ddd;padding: 8px;">{{visit_id}}</td>
+                </tr>
+                <tr >
+                    <th style="padding-top: 12px;padding-bottom: 12px;text-align:left;background-color:#696969;color: white;">Name</th>
+                    <td style=" border: 1px solid #ddd;padding: 8px;">{{name}}</td>
+                </tr>
+                  <tr>
+                    <th style="padding-top: 12px; width: 150px;padding-bottom: 12px;text-align:left;background-color:#696969;color: white;">Company</th>
+                    <td style=" border: 1px solid #ddd;padding: 8px;">{{company}}</td>
+                </tr>
+                  <tr>
+                    <th style="padding-top: 12px;padding-bottom: 12px;text-align:left;background-color:#696969;color: white;">Contact No</th>
+                    <td style=" border: 1px solid #ddd;padding: 8px;width: 150px;">{{contact_number}}</td>
+                </tr>
+                  <tr>
+                    <th style="padding-top: 12px;padding-bottom: 12px;text-align:left;background-color: #696969;color: white;">Reason</th>
+                    <td style=" border: 1px solid #ddd;padding: 8px;">{{reason}}</td>
+                </tr>
+        </table>
+  </div>
+    <br/>
+    <a href={{url_create_yes}}><button class="button">Approve</button></a>
+    <a href={{url_create_no}}><button class="button">Reject</button></a>
+</div>
+    <p>Thanks,</p>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block css %}
+    {% bootstrap_css %}
+{% endblock css %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Choose bootstrap version</h1>
+            <hr class="my-4">
+            <div class="row">
+
+                <div class="col text-center">
+                    <a class="btn btn-primary btn-lg" href="{% url 'demo_bootstrap_3' %}">
+                        Bootstrap v3
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

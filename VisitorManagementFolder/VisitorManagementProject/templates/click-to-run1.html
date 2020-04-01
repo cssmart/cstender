@@ -1,0 +1,51 @@
+<center>
+    <button type="button" name="button" class='btn btn-outline-dark btn-lg' id='start'>Start Video Capture</button>
+
+    <div class="container-fluid mt-2">
+        <video id="video" width="640" height="480" autoplay></video><br>
+        <button type="button" data-toggle="modal" data-target="#image_model" class="btn btn-lg btn-dark" id="snap">Snap Photo</button>
+    </div>
+</center>
+
+<center>
+    <canvas id="canvas" width="640" height="480"></canvas>
+</center>
+
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Retake</button>
+<form class="image_to_server" action="{% url 'img_submit' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="base64Field" value="" id='base64'>
+    <input type="submit" value="Use Image" class="btn btn-primary" id="use_image">
+</form>
+// Grab elements, create settings, etc.
+var video = document.getElementById('video');
+// Elements for taking the snapshot
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+$('#start').click(function() {
+    // Get access to the camera!
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({
+            video: true
+        }).then(function(stream) {
+            //video.src = window.URL.createObjectURL(stream);
+            video.srcObject = stream;
+            video.play();
+        });
+    }
+
+    $('#snap').fadeIn();
+
+    // Trigger photo take
+    $('#snap').click(function() {
+        context.drawImage(video, 0, 0, 640, 480);
+        var dataURL = canvas.toDataURL();
+        $('#base64').val(dataURL)
+
+        $("#use_image").click(function() {
+            console.log('clicked');
+        });
+    });
+
+});
