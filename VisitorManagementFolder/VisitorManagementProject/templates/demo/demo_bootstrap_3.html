@@ -72,6 +72,8 @@ div {
                            <label>Contact Number </label>
                               <br/>
                               <h4>{{form_1.contact_number}}</h4>
+
+
                           </div>
                         </div>
                                              <br/>
@@ -92,14 +94,20 @@ div {
                              <label>Reason</label>
                                    {{ form_1.reason }}
                           </div>
+                            <div class="column" style="background-color:#ccc;">
+                                                   <label>Picture</label>
+                                {{form_1.pic}}
+                                             <br/>
+<!--                                      <button type="button">-->
+<!--     <a href="{% url 'app:test'  %}">image</a>-->
+<!--                        </button>-->
+                          </div>
                     </div>
                     <br/>
                     {% buttons %}
-<!--                       <a href="{% url 'app:sendmail' %}"> -->
                            <button type="submit" class="btn btn-primary" name="done">
                             {% bootstrap_icon "star" %} Submit
                        </button>
-<!--                       </a>-->
                     {% endbuttons %}
                 </form>
             </div>

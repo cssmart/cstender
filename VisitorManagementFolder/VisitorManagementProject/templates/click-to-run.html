@@ -4,11 +4,16 @@
 </head>
 
 <body>
-<canvas id="canvas" width="640" height="480"></canvas>
+<form>
+    {% csrf_token %}
+    {{form}}
+    <canvas id="canvas" width="640" height="480"></canvas>
 
     <div id="camera" style="height:auto;width:auto; text-align:left;"></div>
     <input type="button" value="Take a Snap and Download Picture" id="btPic"
         onclick="takeSnapShot()" />
+</form>
+
 </body>
 
 <script>
@@ -24,7 +29,7 @@
     // TAKE A SNAPSHOT.
     takeSnapShot = function () {
         Webcam.snap(function (data_uri) {
-            downloadImage('test_user', data_uri);
+            downloadImage('name', data_uri);
 
         });
     }

@@ -1,0 +1,24 @@
+<hr/>
+{% for l in ascii_uppercase %}
+    <a href="{% url "django_popup_view_field:get_popup_view" 'MeetPersonPopupView' %}?code={{ l }}">
+        {{ l }}
+    </a> |
+{% endfor %}
+<hr/>
+
+<form action="{% url "django_popup_view_field:get_popup_view" 'MeetPersonPopupView' %}" method="get">
+    <div class="row">
+        <div class="col-xs-3">Search by name:</div>
+        <div class="col-xs-6"><input type="text" name="name" value=""/></div>
+        <div class="col-xs-4"><button type="submit"> Search </button></div>
+    </div>
+</form>
+
+    <ul>
+        {% for data in item %}
+  <br/>
+            <li style="cursor:pointer" data-popup-view-value='{{data}}'>
+                <strong>{{data}}</strong>
+            </li>
+        {% endfor %}
+    <ul>

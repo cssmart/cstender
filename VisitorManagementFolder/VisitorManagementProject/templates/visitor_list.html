@@ -46,6 +46,8 @@ input {
                     <th>Meet Person</th>
                     <th>Reason</th>
                     <th>In Time</th>
+                    <th>Approved By</th>
+                    <th>Security</th>
                 </tr>
             </thead>
             <tbody style="height:auto">
@@ -59,6 +61,18 @@ input {
                     <td>{{ post.person_to_meet }}</td>
                     <td>{{ post.reason }}</td>
                     <td>{{ post.v_date_time }}</td>
+                    <td>{{ post.Approved_by }}</td>
+                    <td> <a href="{% url 'app:security' post.pk %}" >
+                        <button type="button" name="security_approve">Approve By Security</button>
+                    </a>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>{% if message.tags %} {% endif %}{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    </td>
                 </tr>
              </div>
             {% endfor %}
