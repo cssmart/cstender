@@ -1,0 +1,76 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+</head>
+
+<body>
+<form>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <div id="camera" style="height:auto;width:auto; text-align:left;"></div>
+    <input type="button" value="Take a Snap and Download Picture" id="btPic"
+        onclick="takeSnapShot()" />
+</form>
+
+</body>
+
+<script>
+    // CAMERA SETTINGS.
+    Webcam.set({
+        width: 220,
+        height: 190,
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    });
+    Webcam.attach('#camera');
+
+    // TAKE A SNAPSHOT.
+    takeSnapShot = function () {
+        Webcam.snap(function (data_uri) {
+            downloadImage('name', data_uri);
+
+        });
+    }
+    // DOWNLOAD THE IMAGE.
+    downloadImage = function (name, datauri) {
+        var a = document.createElement('a');
+        a.setAttribute('download', name + '.jpeg');
+        a.setAttribute('href', datauri);
+        a.click();
+
+<!--  // get image data as string-->
+<!--  const imageString = btPic.toDataURL();-->
+
+<!--  // send image to server-->
+<!--  fetch('/image/save', {-->
+<!--    method: "POST",-->
+<!--    cache: "no-cache",-->
+<!--    credentials: "same-origin",-->
+<!--    headers: {-->
+<!--        "Content-Type": "application/json",-->
+<!--    },-->
+<!--    body: JSON.stringify({-->
+<!--      imageString: imageString,-->
+<!--    }),-->
+<!--  })-->
+    }
+
+document.getElementById("btPic").addEventListener("click", function() {
+
+  // get image data as string
+  const imageString = canvas.toDataURL();
+
+  // send image to server
+  fetch('/templates/', {
+    method: "POST",
+    cache: "no-cache",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      imageString: imageString,
+    }),
+  })
+});
+</script>
+</html>

@@ -6,7 +6,6 @@ from .popups import MeetPersonPopupView, HostNAmePopupView
 
 class VistiorsFormFrequent(forms.ModelForm):
     host_name = PopupViewField(view_class=HostNAmePopupView)
-    print(host_name,'dddddddddddddddddddddddd')
     class Meta:
         model = FrequentVisitors
         fields = ['visitor_name', 'mobile_number', 'company','host_department','host_name',
@@ -19,6 +18,12 @@ class VisitorManagementFormCreate(forms.ModelForm):
     class Meta:
         model = VisitorManagementForm
         fields = ['name', 'contact_number', 'company', 'person_to_meet','reason','pic']
+
+
+class VisitorManagementExcelRepot(forms.ModelForm):
+    class Meta:
+        model = VisitorManagementForm
+        fields = ['name', 'contact_number', 'person_to_meet','v_date_time']
 
 
 class VisitorImage(forms.ModelForm):

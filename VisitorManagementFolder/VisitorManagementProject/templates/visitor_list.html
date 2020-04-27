@@ -36,6 +36,11 @@ input {
 
 </style>
           <center><h4><b>All Visitor List</b></h4></center>
+<form action="#" method="get">
+  <input name="q" type="text" placeholder="Search...">
+      <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                       </button>
+</form>
         <table id="customers">
             <thead>
                 <tr width="auto">
@@ -48,6 +53,7 @@ input {
                     <th>In Time</th>
                     <th>Approved By</th>
                     <th>Security</th>
+                    <th>Print Id</th>
                 </tr>
             </thead>
             <tbody style="height:auto">
@@ -73,9 +79,15 @@ input {
                     </ul>
                     {% endif %}
                     </td>
+                      <td>
+                        <a href="{% url 'app:pdf' post.pk %}" >
+                        <button type="button" name="print_id">Print ID</button>
+                    </a>
+                    </td>
                 </tr>
              </div>
             {% endfor %}
             </tbody>
         </table>
 {% endblock %}
+

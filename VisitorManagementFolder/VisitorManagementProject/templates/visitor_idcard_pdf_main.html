@@ -1,0 +1,47 @@
+{% extends "easy_pdf/base.html" %}
+<!DOCTYPE html>
+       <html>
+         <head>
+           <title>ITEM DETAIL REPORT</title>
+             {% block extra_style %}
+    <style type="text/css">
+
+table, th, td {
+  border: 0.001px solid black;
+  border-collapse: collapse;
+}
+th {
+  padding: 14px;
+  width:30%
+}
+td {
+text-align:center;
+width: 100%;
+  border: 1px solid black;
+}
+</style>
+{% endblock %}
+         </head>
+         {% block content %}
+
+<table style="width:100%">
+  <tr>
+    <th>ID</th>
+    <td>{{id}}</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>{{name}}</td>
+  </tr>
+  <tr>
+    <th>Host Name</th>
+    <td>{{host_name}}</td>
+  </tr>
+  <tr>
+    <th>Date</th>
+    <td>{{in_time}}</td>
+  </tr>
+</table>
+         {% endblock %}
+         </body>
+       </html>

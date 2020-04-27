@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load static %}
+{% extends "base.html" %}
 {% load bootstrap3 %}
 {% load crispy_forms_tags %}
 {% block css %}
@@ -46,67 +46,54 @@ div {
 
 </style>
 
-    <div>
+ <div>
         <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
             <li role="presentation" class="active">
                 <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
                     <span class="glyphicon glyphicon-star"></span>
-                   VMS
+                  VMS Reports
                 </a>
             </li>
         </ul>
 
         {# ------------------------------- #}
         <div class="tab-content">
-
             <div class="tab-pane fade in active" id="bootstrap">
-                <form action="." method="post" class="form" enctype="multipart/form-data">
+                <form action="{% url 'app:download_vms_report' %}" method="post" class="form" enctype="multipart/form-data">
                     {% csrf_token %}
                      <div class="row">
                           <div class="column" style="background-color:#aaa;">
                          <label>Name </label>
                               <br/>
-                              <h4>{{form_1.name }}</h4>
+                              <h4>{{form.name }}</h4>
                           </div>
                           <div class="column" style="background-color:#bbb;">
                            <label>Contact Number </label>
                               <br/>
-                              <h4>{{form_1.contact_number}}</h4>
-
-
+                              <h4>{{form.contact_number}}</h4>
                           </div>
                         </div>
                                              <br/>
-
                                 <div class="row">
-                                               <div class="column" style="background-color:#ddd;">
-                            <label>Company</label>
-                              <br/>
-                              <h4>{{form_1.company }}</h4>
-                          </div>
+
                           <div class="column" style="background-color:#ccc;">
                              <label>Person To Meet</label>
-                                        {{ form_1.person_to_meet }}
+                                        {{ form.person_to_meet }}
                           </div><br/>
+                                       <div class="column" style="background-color:#ddd;">
+                            <label style="texr-align:center;">From Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>To Date</label>
+                              <br/>
+                              <h4><input type="date"  name="from_date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="date"  name="to_date"></h4>
+                          </div>
                         </div>
-                    <div class="row">
-                            <div class="column" style="background-color:#ccc;">
-                             <label>Reason</label>
-                                   {{ form_1.reason }}
-                          </div>
-                            <div class="column" style="background-color:#ccc;">
-                                                   <label>Picture</label>
-                                <button type="button" name="image" value="image">
-                                     <a href="{% url 'app:test' %}">image</a>
-                                </button>
-                                             <br/>
-
-                          </div>
-                    </div>
-                    <br/>
                     {% buttons %}
                            <button type="submit" class="btn btn-primary" name="done">
-                            {% bootstrap_icon "star" %} Submit
+                            {% bootstrap_icon "download" %} Download Report
                        </button>
                     {% endbuttons %}
                 </form>
@@ -114,11 +101,5 @@ div {
         </div>
     </div>
 
-{% endblock content %}
 
-{% block javascript %}
-    <script type="text/javascript" src="{% bootstrap_jquery_url %}"></script>
-    {% bootstrap_javascript %}
-{% endblock javascript %}
-
-
+{% endblock %}
