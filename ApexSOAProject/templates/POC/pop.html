@@ -1,0 +1,45 @@
+          <!DOCTYPE html>
+    <html>
+      <head>
+        <title>PO SUMMARY</title>
+      </head>
+      <body>
+      <p align="center"><img src="https://www.modernelectricals.net/img/970x647/c&s.png" alt=""   height=90 width=90></p>
+                                    <h1 align="center"> <strong>PO SUMMARY</strong></h1>
+        <div>
+            <h3>
+          <table style=" border-collapse:separate;border-spacing: 0 15px; width:auto;">
+            <tr>
+               <th style="background-color: gray;color: white;">PO ID</th>
+                <th style="background-color: gray;color: white;">PO NO.</th>
+
+            </tr>
+            <tr>
+               <td class="td"  style="width: 350px;text-align: center;border: 1px solid black;padding: 5px;">{{PO_ID}}</td>
+               <td class="td"  style="width: 350px;text-align: center;border: 1px solid black;padding: 5px;">{{PO_NO}}</td>
+
+            </tr>
+                  <tr>
+               <th style="background-color: gray;color: white;">SUPPLIER</th>
+               <th style="background-color: gray;color: white;">AMOUNT</th>
+
+            </tr>
+            <tr>
+               <td class="td"  style="width: 350px;text-align: center;border: 1px solid black;padding: 5px;">{{SUPPLIER}}</td>
+               <td class="td"  style="width: 350px;text-align: center;border: 1px solid black;padding: 5px;">{{AMOUNT}}</td>
+            </tr>
+          </table>
+                <br/>
+                 <p align="center">
+                     <label>Enter Comments Here</label>
+                      <textarea  rows="5" cols="30" placeholder="Enter the Comment Here"></textarea>
+                     <br/>
+                                          <a href={{url_create}}><button class="button">More Details</button></a>
+                          <br/>
+                          <br/>
+                        <strong>Thank You!</strong>
+                 </p>
+    </h3>
+        </div>
+      </body>
+    </html>

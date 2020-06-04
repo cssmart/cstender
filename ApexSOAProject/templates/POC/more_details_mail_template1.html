@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+   font-weight: 900;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+<!--  background-color: gray;-->
+  color: white;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <h1 style="float:right;color:black;black;padding-right:98vh;">PURCHASE ORDER</h1>
+  <p align="left"><img src="https://cselectric.co.in/wp-content/uploads/2017/02/CS-Logo.jpg" alt="" height="90" width="110" ></p>
+
+</div>
+                <table id="customers">
+                  <tr>
+                      <th><b>PO ID:</b></th>
+                    <td>{{id}}</td>
+                      <th>PO NO:</th>
+                    <td>{{PO_NO}}</td>
+                     <th>PO DATE:</td>
+                    <td>{{PO_DATE}}</td>
+                  </tr>
+                  <tr>
+                    <th>SUPPLIER:</td>
+                    <td>{{SUPPLIER}}</td>
+                      <th>PO DESC:</td>
+                    <td>{{PO_DESC}}</td>
+                      <th>AMOUNT:</td>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                   <tr>
+                    <th>From User:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>Doc Type:</th>
+                    <td>{{SUPPLIER}}</td>
+                      <th>Rev.:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th>Is System Generated?:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>Doc No:</th>
+                    <td>{{SUPPLIER}}</td>
+                      <th>Currency:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                     <tr>
+                    <th>Terms:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>Source:</th>
+                    <td>{{SUPPLIER}}</td>
+                      <th>Special Remark:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th>Base Value:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>Taxes:</th>
+                    <td>{{SUPPLIER}}</td>
+                      <th>Total Value:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+
+                   <tr>
+                    <th>IO:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>FOB:</th>
+                    <td>{{SUPPLIER}}</td>
+                      <th>Price Check:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th>Status:</th>
+                    <td>{{SUPPLIER}}</td>
+                       <th>Hierarchy:</th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                </table>
+ <br/><br/><br/>
+         <font color="blue" align="left" size="5"> <strong>Line Items</strong></font>
+        <hr style="  display: block;border-width: 2px;">
+
+  <div class="panel-group" id="accordion">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            <table>
+              <tr>
+               <th>PO NO</th>
+                <th>VD HIST</th>
+                <th>LINE TYPE</th>
+                <th>LINE NO</th>
+                <th>ITEM</th>
+                <th>LINE TYPE</th>
+                <th>UOM</th>
+                <th>REV</th>
+                <th>DESCRIPTION</th>
+                <th>CATG</th>
+                <th>CURN.</th>
+                <th>CONV RATE</th>
+                <th>QTY</th>
+                <th>UNIT PRICE</th>
+                <th>BASE AMOUNT</th>
+                <th>NEED BY DATE</th>
+                <th>N- RECV TAXES</th>
+                <th>RECV TAXES</th>
+                <th>AVG COST</th>
+                <th>SHIP PLANT</th>
+                <th>PENDING PR QTY</th>
+                <th>PENDING PO QTY</th>
+                <th>STK</th>
+                <th>STK UOM</th>
+                <th>STK DATE</th>
+                <th>SAFETY STOCK</th>
+                <th>MIN QTY</th>
+                <th>MAX QTY</th>
+                <th>IS SYSTEM GENERATED?</th>
+              </tr>
+            </table>
+
+          </a>
+        </h4>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">  <table>
+              <tr>
+               <td>PO NO</td>
+                <td>VD HIST</td>
+                <td>LINE TYPE</td>
+                <td>LINE NO</td>
+                <td>ITEM</td>
+                <td>LINE TYPE</td>
+                <td>UOM</td>
+                <td>REV</td>
+                <td>DESCRIPTION</td>
+                <td>CATG</td>
+                <td>CURN.</td>
+                <td>CONV RATE</td>
+                <td>QTY</td>
+                <td>UNIT PRICE</td>
+                <td>BASE AMOUNT</td>
+                <td>NEED BY DATE</td>
+                <td>N- RECV TAXES</td>
+                <td>RECV TAXES</td>
+                <td>AVG COST</td>
+                <td>SHIP PLANT</td>
+                <td>PENDING PR QTY</td>
+                <td>PENDING PO QTY</td>
+                <td>STK</td>
+                <td>STK UOM</td>
+                <td>STK DATE</td>
+                <td>SAFETY STOCK</td>
+                <td>MIN QTY</td>
+                <td>MAX QTY</td>
+                <td>IS SYSTEM GENERATED?</td>
+              </tr>
+            </table>
+</div>
+    </div>
+
+</div>
+</body>
+</html>

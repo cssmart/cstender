@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+   font-weight: 900;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+<!--  background-color: gray;-->
+  color: white;
+  font-weight: bold;
+}
+
+#customers1 {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers1 td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers1 tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers1 tr:hover {background-color: #ddd;}
+
+#customers1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+
+}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <h1 style="float:right;color:black;black;padding-right:98vh;">PURCHASE ORDER</h1>
+  <p align="left"><img src="https://cselectric.co.in/wp-content/uploads/2017/02/CS-Logo.jpg" alt="" height="90" width="110" ></p>
+
+</div>
+                <table id="customers">
+                  <tr>
+                      <th><b><b>PO ID:</b></b></th>
+                    <td>{{id}}</td>
+                      <th><b>PO NO:</b></th>
+                    <td>{{PO_NO}}</td>
+                      <th><b>PO DATE:</b></th>
+                    <td>{{PO_DATE}}</td>
+                  </tr>
+                  <tr>
+                      <th><b>SUPPLIER:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>PO DESC:</b></th>
+                    <td>{{PO_DESC}}</td>
+                      <th><b>AMOUNT:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                   <tr>
+                    <th><b>From User:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>Doc Type:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>Rev.:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>Is System Generated?:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>Doc No:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>Currency:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                     <tr>
+                    <th><b>Terms:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>Source:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>Special Remark:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>Base Value:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>Taxes:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>Total Value:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+
+                   <tr>
+                    <th><b>IO:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>FOB:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>Price Check:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>Status:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>Hierarchy:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                </table>
+ <br/><br/><br/>
+         <font color="blue" align="left" size="5"> <strong>Line Items</strong></font>
+        <hr style="  display: block;border-width: 2px;">
+
+  <div class="panel-group" id="accordion">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            <table  id="customers1">
+              <tr>
+               <th >Line No.</b></th>
+                <th><b>Line Type</b></th>
+                <th><b>Description</b></th>
+                <th><b>Quantity</b></th>
+                <th><b>Amount</b></th>
+              </tr>
+            </table>
+          </a>
+        </h4>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">                  <table id="customers">
+                  <tr>
+                      <th><b><b>PO ID:</b></b></th>
+                    <td>{{id}}</td>
+                      <th><b>VD HIST:</b></th>
+                    <td>{{PO_NO}}</td>
+                      <th><b>LINE TYPE:</b></th>
+                    <td>{{PO_DATE}}</td>
+                  </tr>
+                  <tr>
+                      <th><b>LINE NO:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>ITEM:</b></th>
+                    <td>{{PO_DESC}}</td>
+                      <th><b>LINE:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                   <tr>
+                    <th><b>UOM:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>REV.:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>DESCRIPTION:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>CATG. :</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>CURN.:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>CONV RATE:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                     <tr>
+                    <th><b>QTY:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>UNIT PRICE:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>BASE AMOUNT:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>NEED BY DATE:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>N- RECV TAXES:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>RECV TAXES:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+
+                   <tr>
+                    <th><b>AVG COST:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>SHIP PLANT:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>PENDING PR QTY:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+                  <th><b>PENDING PO QTY:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                       <th><b>STK:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                         <th><b>STK UOM:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+
+             <tr>
+                       <th><b>STK DATE:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                      <th><b>SAFETY STOCK:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  <th><b>MIN QTY:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                  <tr>
+
+                       <th><b>MAX QTY:</b></th>
+                    <td>{{SUPPLIER}}</td>
+                        <th><b>IS SYSTEM GENERATED? :</b></th>
+                    <td>{{SUPPLIER}}</td>
+                  </tr>
+                </table>
+</div>
+    </div>
+
+</div>
+</body>
+</html>
