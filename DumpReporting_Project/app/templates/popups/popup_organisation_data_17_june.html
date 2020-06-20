@@ -1,0 +1,108 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<style>
+    .dropdown.dropdown-scroll .dropdown-list{
+    max-height: 233px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding-left: 10px;
+    margin-bottom: 0px;
+}
+.dropdown-list  li{
+    font-size: 14px;
+    height: 20px;
+}
+
+.dropdown-list  li > a{
+    color: black;
+}
+.dropdown-list a:hover{
+   color: black;
+}
+
+.dropdown-list li:hover{
+    background-color: lightgray;
+}
+</style>
+<hr/>
+{% for l in ascii_uppercase %}
+    <a href="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}?code={{ l }}">
+        {{ l }}
+    </a> |
+{% endfor %}
+<hr/>
+<!--form 1============================-->
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+ <div style="display:table-cell;" id="search" >
+
+    <label for="default">Organisation</label>
+    <input type="text" id="default" name="search" list="src" placeholder="Type to search for Organisation">
+    <datalist id="src" >
+         {% for id, name in item %}
+        <option value="{{id}},{{name}}" ></option>
+ {% endfor %}
+
+    </datalist>
+    </div>
+<!--    <button type="button" id="button1" data-sample-id="{% url 'app:c_data' %}" onclick="myFunction()"> Clickhere </button>-->
+
+</form>
+<!--form 2============================-->
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+ <div style="display:table-cell;" id="customer_search" >
+
+    <label for="default1">Customer</label>
+    <input type="text" id="default1" name="customer_search" list="src1" placeholder="Type to search for Customer Details">
+             {% for id, name, no in customer %}
+     <datalist id="src1" >
+        <option  value="{{id}},{{name}},{{no}}" ></option>
+ {% endfor %}
+
+    </datalist>
+    </div>
+</form>
+     <form method='post' action="{% url 'app:c_data' %}">
+         {% csrf_token %}
+         <input   name='default11' id="default11" value="">
+<!--             <input type="submit" name="c_data" value="Save customer data">-->
+             <button type="button" id="button1" data-sample-id="{% url 'app:c_data' %}" onclick="myFunction()"> Clickhere </button>
+
+     </form>
+
+<!--form 3============================-->
+<!--<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">-->
+<!-- <div style="display:table-cell;" id="cus_site" >-->
+
+<!--    <label for="default2">Customer Site</label>-->
+<!--    <input type="button" id="default2" name="cus_site" list="src2" value="Enter for Customer Site">-->
+<!--    <datalist id="src2">-->
+<!--         {% for id, name in item %}-->
+<!--        <option value="{{name}},{{id}}" ></option>-->
+<!-- {% endfor %}-->
+
+<!--    </datalist>-->
+<!--    </div>-->
+<!--</form>-->
+<script>
+    var $field1 = $("#default1");
+var $field2 = $("#default11");
+
+$field1.on("keydown",function(){
+   setTimeout(checkValue,0);
+});
+
+var v2 = $field2.val();
+var checkValue = function(){
+    var v1 = $field1.val();
+    if (v1 != v2){
+        $field2.val(v1);
+        v2 = v1;
+    }
+};
+function myFunction(){
+  alert($("#button1").data("sample-id"));
+}
+</script>

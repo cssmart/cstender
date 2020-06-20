@@ -1,0 +1,180 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<style>
+    .dropdown.dropdown-scroll .dropdown-list{
+    max-height: 233px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding-left: 10px;
+    margin-bottom: 0px;
+}
+.dropdown-list  li{
+    font-size: 14px;
+    height: 20px;
+}
+
+.dropdown-list  li > a{
+    color: black;
+}
+.dropdown-list a:hover{
+   color: black;
+}
+
+.dropdown-list li:hover{
+    background-color: lightgray;
+}
+</style>
+<hr/>
+{% for l in ascii_uppercase %}
+    <a href="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}?code={{ l }}">
+        {{ l }}
+    </a> |
+{% endfor %}
+<hr/>
+
+
+
+
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+ <div style="display:table-cell;" id="search" >
+
+    <label for="default">Organisation</label>
+    <input type="text" id="default" name="search" list="src" placeholder="Type to search for Organisation">
+    <datalist id="src">
+         {% for id, name in item %}
+        <option value="{{name}},{{id}}" ></option>
+ {% endfor %}
+
+    </datalist>
+    </div>
+<!--  <p>-->
+<!--	<input type="text" name="search" id="search" placeholder="Type Something" list="searchresults" autocomplete="off">-->
+<!--	<datalist id="searchresults"></datalist>-->
+<!--</p>-->
+</form>
+<form id="form1" action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+
+    <div class="row">
+
+
+
+        <div class="dropdown dropdown-scroll">
+<button class="btn btn-default event-button dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    <span>Search</span>
+    <span class="caret"></span>
+</button>
+<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <div class="input-group input-group-sm search-control">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="Search" name="sear1">
+    </div>
+    <ul class="dropdown-list">
+        {% for id, name in item %}
+        <li role="presentation" ng-repeat='item in items | filter:eventSearch' style="cursor:pointer" >
+            <a>Id :{{id}} , Name : {{name}} <input type="checkbox"> </a>
+        </li>
+ {% endfor %}
+    </ul>
+</div>
+        </div>
+    </div>
+</form>
+
+  <form id="form2">
+    <input name="sear1" type=text>
+  </form>
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+    <div class="row">
+
+
+
+        <div class="col-xs-3">Search by name:</div>
+
+
+
+        <div class="col-xs-6"><input type="text" name="itemcode" value=""/></div>
+
+
+        <div class="col-xs-4"><button type="submit"> Search </button></div>
+    </div>
+
+</form>
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+
+        <div class="row">
+        <div class="col-xs-3">Search by name:</div>
+        <div class="col-xs-6"><input type="text" name="itemcode1" value=""/></div>
+
+        <div class="col-xs-4"><button type="submit"> Search1 </button></div>
+        </div>
+
+</form>
+<form action="{% url 'django_popup_view_field:get_popup_view' 'OrganisationIdPopupView' %}" method="get">
+    </div>
+        <div class="row">
+        <div class="col-xs-3">Search by name:</div>
+        <div class="col-xs-4"><button type="submit" name="cust_site"> Customer Site </button></div>
+    </div>
+</form>
+    <ul class="dropdown-list">
+
+        {% for id, name in item %}
+        <li role="presentation" ng-repeat='item in items | filter:eventSearch' style="cursor:pointer" >
+            <a>Id :{{id}} , Name : {{name}}  <input type="checkbox"></a>
+        </li>
+ {% endfor %}
+    </ul>
+{% if customer %}
+  <ul>
+        {% for id, no ,name in customer %}
+  <br/>
+            <li style="cursor:pointer" data-popup-view-value='Id: {{id}} ,  Customer No  : {{no}},Name : {{name}}'>
+                <strong>id : {{id}} , Name : {{name}}, Customer No  : {{no}}</strong>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<script>
+$(document).ready(function() {
+
+	if(document.createElement("datalist").options) {
+
+		$("#search").on("input", function(e) {
+			var val = $(this).val();
+			if(val === "") return;
+			//You could use this to limit results
+			//if(val.length < 3) return;
+			console.log(val);
+			$.get("artservice.cfc?method=getart&returnformat=json", {term:val}, function(res) {
+				var dataList = $("#searchresults");
+				dataList.empty();
+				if(res.DATA.length) {
+					for(var i=0, len=res.DATA.length; i<len; i++) {
+						var opt = $("<option></option>").attr("value", res.DATA[i][0]);
+						dataList.append(opt);
+					}
+
+				}
+			},"json");
+		});
+
+	}
+
+})
+</script>
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--  var form1 = $('#form1'),-->
+<!--    form2 = $('#form2');-->
+
+<!--  $('input').keyup(function() {-->
+<!--    $(':input[name]', form2).val(function() {-->
+<!--      return $(':input[name=' + this.name + ']', form1).val();-->
+<!--    });-->
+<!--  });-->
+<!--});-->
+
+<!--</script>-->

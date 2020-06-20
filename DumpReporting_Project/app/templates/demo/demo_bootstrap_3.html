@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+    {% bootstrap_css %}
+{% endblock css %}
+
+{% block content %}
+<head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 30px;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #696969	;
+  color: white;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 460px;
+  padding: 10px;
+<!-- cellspacing="10"-->
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column  {
+    width: 50%;
+  }
+}
+.button {
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column  {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<center><h1>Customer Ledger Passbook</h1></center>
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+            <li role="presentation" class="active">
+                <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                    <span class="glyphicon glyphicon-star"></span>
+                    Customer Ledger Passbook
+                </a>
+
+            </li>
+        </ul>
+        <br/>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="bootstrap">
+                <form action="#" method="post" class="form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                          <div class="column" style="background-color:#aaa;">
+                         <label>Organisation</label>
+                              <h4>{{ form_1.organisation }}</h4>
+                          </div>
+                          <div class="column" style="background-color:#bbb;">
+                           <label>Customer</label>
+                              <br/>
+                              <h4>{{form_1.customer}}</h4>
+                          </div>
+                        </div>
+                    {% buttons %}
+                      <button type="submit" class="btn btn-primary">
+                            {% bootstrap_icon "Next" %} Next &raquo;
+                </button>
+                    {% endbuttons %}
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+<script>
+
+    $(document).ready(function() {
+ $('.textBox1').on('change', function() {
+   $('.textBox2').val($(this).val());
+ });
+});
+</script>
+{% endblock content %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% bootstrap_jquery_url %}"></script>
+    {% bootstrap_javascript %}
+{% endblock javascript %}
