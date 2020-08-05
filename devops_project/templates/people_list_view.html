@@ -1,0 +1,84 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+{% block content %}
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding-top:30px;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+</style>
+ <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title" style="font-size: 14px;">All Peoples</h4>
+                                  <form action="#" method="get">
+                <p align="right">
+                    <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+                    <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                    </button>  </h5></p>
+            </form>
+            <br/>
+                    <div class="table-responsive">
+                         <table class="table table-striped">
+            <thead>
+                <tr width="auto">
+                    <th style="font-size: 11px;">ID</th>
+                    <th style="font-size: 11px;">First Name</th>
+                    <th style="font-size: 11px;">Last Name</th>
+                    <th style="font-size: 11px;">Email Id</th>
+                    <th style="font-size: 11px;">Contact No</th>
+                    <th style="font-size: 11px;">Department</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+ {% for post in people_list %}
+             <div class="scrollable">
+                <tr>
+                    <td style="font-size: 11px;">{{ post.id }}</td>
+                    <td style="font-size: 11px;">{{ post.p_first_name }}</td>
+                    <td style="font-size: 11px;">{{ post.p_last_name }}</td>
+                    <td style="font-size: 11px;">{{ post.email_id }}</td>
+                    <td style="font-size: 11px;">{{ post.contact_no }}</td>
+                    <td style="font-size: 11px;">{{ post.department }}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+                         </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="page-header">
+
+    <small>{% block title %}{% endblock %}</small>
+  </h1>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"></h3>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-9">
+      {% block photos_content %}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}

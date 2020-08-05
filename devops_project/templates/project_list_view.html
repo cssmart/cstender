@@ -1,0 +1,90 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+{% block content %}
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding-top:30px;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+</style>
+ <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title" style="font-size: 14px;">All Projects</h4>
+                                  <form action="#" method="get">
+                <p align="right">
+                    <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+                    <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                    </button>  </h5></p>
+            </form>
+            <br/>
+                    <div class="table-responsive">
+                         <table class="table table-striped">
+            <thead>
+                <tr width="auto">
+                    <th style="font-size: 11px;">Project ID</th>
+                    <th style="font-size: 11px;">Project Name</th>
+                    <th style="font-size: 11px;">Application Name</th>
+                    <th style="font-size: 11px;">Project Type</th>
+                    <th style="font-size: 11px;">Start Date</th>
+                    <th style="font-size: 11px;">Expected End Date</th>
+                    <th style="font-size: 11px;">End Date</th>
+                    <th style="font-size: 11px;"> Status</th>
+                    <th style="font-size: 11px;">Owner</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+ {% for post in project_list %}
+             <div class="scrollable">
+                <tr>
+                   <td style="font-size: 11px;">{{ post.id }}</td>
+                    <td style="font-size: 11px;"><a href="{% url 'app:all_task_list' post.pk %}">{{ post.project_name }}</a></td>
+                    <td style="font-size: 11px;">{{ post.application_id }}</td>
+                    <td style="font-size: 11px;">{{ post.project_type }}</td>
+                    <td style="font-size: 11px;">{{ post.start_date }}</td>
+                    <td style="font-size: 11px;">{{ post.expected_end_date }}</td>
+                    <td style="font-size: 11px;">{{ post.end_date }}</td>
+                    <td style="font-size: 11px;">{{ post.status }}</td>
+                    <td style="font-size: 11px;"><a href="{% url 'app:show_owner' post.id %}">Project Owner</a></td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+                         </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock %}
+

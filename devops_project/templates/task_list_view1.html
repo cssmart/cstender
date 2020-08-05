@@ -1,0 +1,194 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% block content %}
+{% for project in project_list %}
+<div class="page-header">
+    <h3 class="page-title" style="font-size: 14px;">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                  <i class="mdi mdi-application"></i>
+                </span> Project Details </h3>
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h2 class="font-weight-normal mb-3">Project Details<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h2>
+                <br/>
+                <div class="row">
+                    <div class="column" >
+                        <h4> Project Name</h4>
+                        <h5> {{project.project_name}}</h5>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="column">
+                        <h4> Project Description</h4>
+                        <h5>{{project.project_description}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Project Tracking <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h4>
+                    <br/>
+                      <div class="row">
+                    <div class="column" >
+                        <h4> Start Date</h4>
+                        <h5> {{project.start_date}}</h5>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="column">
+                        <h4> Project Description</h4>
+                        <h5>{{project.project_description}}</h5>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Application Name<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">{{project.application_id}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-info card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Start Date<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">{{project.start_date}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+            <div class="card bg-gradient-success card-img-holder text-white">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">End Date <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4>
+                    <h2 class="mb-5">{{project.end_date}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-12 grid-margin" >
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" style="font-size: 14px;">
+                        Project Team</h4>
+                    <div class="table-responsive">
+                        <table class="table" >
+                            <thead>
+                            <tr >
+                                <th style="font-size: 11px;"> First Name </th>
+                                <th style="font-size: 11px;"> Last Name </th>
+                                <th style="font-size: 11px;"> Email Id </th>
+                                <th style="font-size: 11px;"> Contact No </th>
+                                <th style="font-size: 11px;"> Department </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for people in people_list %}
+                            <tr>
+                                <td style="font-size: 11px;">{{people.p_first_name}} </td>
+                                <td style="font-size: 11px;"> {{people.p_last_name}} </td>
+                                <td style="font-size: 11px;">
+                                    {{people.email_id}}
+                                </td>
+                                <td style="font-size: 11px;">{{people.contact_no}}</td>
+                                <td style="font-size: 11px;"> <label class="badge badge-gradient-success">{{people.department}}</label></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <br/>
+                    <h4 class="card-title" style="font-size: 14px;">All Tasks</h4>
+                    <form action="#" method="get">
+                        <p align="right">
+                            <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+                            <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                            </button>  </h5></p>
+                    </form>
+                    <br/>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 11px;">ID</th>
+                            <th style="font-size: 11px;">Project Id</th>
+                            <th style="font-size: 11px;">Task Name</th>
+                            <th style="font-size: 11px;">Description</th>
+                            <th style="font-size: 11px;">Performed By</th>
+                            <th style="font-size: 11px;">Assigned BY</th>
+                            <th style="font-size: 11px;">Assigned To</th>
+                            <th style="font-size: 11px;">Re-assignable</th>
+                            <th style="font-size: 11px;">Status</th>
+                            <th style="font-size: 11px;">Start Date</th>
+                            <th style="font-size: 11px;">End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for post in task_list %}
+
+                        <tr>
+                            <td style="font-size: 11px;">{{ post.id }}</td>
+                            <td style="font-size: 11px;">{{ post.project_id }}</td>
+                            <td style="font-size: 11px;"><a href="{% url 'app:edit_task_form' post.pk %}">{{ post.task_name }}</a></td>
+                            <td style="font-size: 11px;">{{ post.description }}</td>
+                            <td style="font-size: 11px;">{{ post.task_by }}</td>
+                            <td style="font-size: 11px;">{{ post.assigned_by }}</td>
+                            <td style="font-size: 11px;">{{ post.assigned_to }}</td>
+                            <td style="font-size: 11px;">{{ post.reassignable }}</td>
+                            <td style="font-size: 11px;">{{ post.status }}</td>
+                            <td style="font-size: 11px;">{{ post.start_date }}</td>
+                            <td style="font-size: 11px;">{{ post.end_date }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}

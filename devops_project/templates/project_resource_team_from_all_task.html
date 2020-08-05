@@ -1,0 +1,69 @@
+{% extends "base1.html" %}
+<style>
+    input[type="text"], textarea {
+
+  background-color : white;
+
+}
+</style>
+{% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"  style="font-size: 22px;">PROJECT RESOURCE FORM</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Name</label>
+                <div class="col-sm-9">
+                  {% for i in project %}
+                  {{i}}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Resource Pool</label>
+                <div class="col-sm-9">
+                  <input type="text" name="res_pool" value="Team" disabled=True style="font-size:13px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Resource Name</label>
+                <div class="col-sm-9">
+                  {{form.team_resource_id}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Resource Role</label>
+                <div class="col-sm-9">
+                  {{form.resource_role}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div align="right">
+              <button type="submit" class="btn btn-primary" name="done" value="{{ post.id }}">
+            Submit
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+

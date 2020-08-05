@@ -1,0 +1,29 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"  style="font-size: 25px;">TASK FORM</h1>
+        <br/>
+        <form class="form-sample">
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 15px;">Attachment</label>
+                <div class="col-sm-9">
+                  {{form.document_upload}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="right"> <button type="submit" class="btn btn-primary" name="done">
+            Submit
+          </button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

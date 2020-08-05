@@ -1,0 +1,114 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder text-white">
+      {% for t in task %}{% for by in task_by %}{% for by in assign_by %}  {% for to in assign_to %}
+
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" style="font-size: 22px;">Parent Task Details<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td style="font-size: 13px;">Task Name</td>
+              <td style="font-size: 13px;"> {{t.task_name}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Task Description</td>
+              <td style="font-size: 13px;"> {{t.description}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Project Name</td>
+              <td style="font-size: 13px;"> {{t.project_id}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Task By</td>
+
+              <td style="font-size: 13px;"> {{by.p_first_name}} {{by.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Assigned By</td>
+
+              <td style="font-size: 13px;"> {{by.p_first_name}} {{by.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Assigned To</td>
+              <td style="font-size: 13px;"> {{to.p_first_name}} {{to.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Start Date</td>
+              <td style="font-size: 13px;"> {{t.start_date}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">End Date</td>
+              <td style="font-size: 13px;"> {{t.end_date}}</td>
+            </tr>
+
+            <tr>
+              <td style="font-size: 13px;">Parent Task Name</td>
+              <td style="font-size: 13px;">
+                {% if t.parent_task != None %}
+                <a href="{% url 'app:parent_task_view' t.parent_task_id %}">{{t.parent_task}}</a>
+                {% else %}
+                <a href="{% url 'app:parent_task_view' t.pk %}">{{t.parent_task}}</a>
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Status</td>
+              <td style="font-size: 13px;"> {{t.status}}</td>
+            </tr>
+            <tr>
+              <td style="font-size: 13px;">Reassignable</td>
+              <td style="font-size: 13px;"> {{t.reassignable}}</td>
+            </tr>
+             <tr>
+              <td style="font-size: 13px;">Last Updated Date</td>
+              <td style="font-size: 13px;"> {{t.end_date}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-12 grid-margin" >
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title" style="font-size: 22px;">
+            ATTACHMENTS</h4>
+          <br/>
+          <div class="table-responsive">
+            <table class="table" >
+              <thead>
+              <tr>
+                <th style="font-size: 13px;"> Document Name </th>
+                <th style="font-size: 13px;"> Location </th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for docs in document %}
+              <tr>
+                <td style="font-size: 13px;"><label class="badge badge-gradient-success">{{docs.document_name}} </label></td>
+                <td style="font-size: 13px;">
+                  <a href="{{docs.document_location.url}}">{{docs.document_location}}</a></td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('people', views.PEOPLE_FORM_DATA.as_view(), name='people_form_create'),
+    path('people_<int:pk>', views.edit_people_form),
+    path('team_add', views.team_view_2, name='team_view'),
+    path('', views.index, name='index'),
+    path('document', views.document_form_upload, name='document_form_view'),
+    path('all_projects_list', views.all_projects_list, name='all_projects_list'),
+    path('show_owner_<int:pk>', views.show_owner, name='show_owner'),
+    path('all_peoples_list', views.all_people_list, name='all_people_list'),
+    path('all_applications_list', views.all_application_list, name='all_application_list'),
+    path('all_task_list_<int:pk>', views.project_all_task_list, name='all_task_list'),
+    path('task_detail_<int:pk>', views.task_details_view, name='task_details_view'),
+    path('parent_task_<int:pk>', views.parent_task_form_view, name='parent_task_view'),
+    path('team', views.team_view_1),
+    path('project', views.project_form_view, name='project'),
+    path('application', views.application_form_view, name='application_add'),
+    path('task', views.task_form_view, name="task_form"),
+    path('task_<int:pk>', views.edit_task_form,name='edit_task_form'),
+    path('project_<int:pk>', views.edit_project_form, name="edit_project"),
+    path('application_<int:pk>', views.edit_application_form),
+    path('project_individual_resource_<int:pk>', views.edit_project_resource_individual_form),
+    path('project_team_resource_<int:pk>', views.edit_project_resource_team_form),
+    path('project_individual_resource', views.project_resource_individual_form_view,name='individual_res'),
+    path('individual_resource_<int:pk>', views.project_resource_individual_from_all_task_list,name='individual_resource'),
+    path('team_resource_<int:pk>', views.project_resource_team_from_all_task,name='team_resource'),
+    path('project_team_resource', views.project_resource_team_form_view,name='team_res'),
+    path('project_resource', views.project_resouce_select_form, name='select_project_resource'),
+    ]

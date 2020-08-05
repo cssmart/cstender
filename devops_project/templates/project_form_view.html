@@ -1,0 +1,104 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"  style="font-size: 25px;">PROJECT FORM</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Name</label>
+                <div class="col-sm-9">
+                  {{form.project_name}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Description</label>
+                <div class="col-sm-9">
+                  {{form.project_description}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Application Name</label>
+                <div class="col-sm-9">
+                  {{form.application_id}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Type</label>
+                <div class="col-sm-9">
+                  {{form.project_type}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Start Date</label>
+                <div class="col-sm-9">
+                  {{form.start_date}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Expected End Date</label>
+                <div class="col-sm-9">
+                  {{form.expected_end_date}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Creation</label>
+                <div class="col-sm-9">
+                  {{form.task_creation}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">status</label>
+                <div class="col-sm-9">
+                  {{form.status}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Allow Task  Re-assignment</label>
+                <div class="col-sm-9">
+                  {{form.self_task_reasignment}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="right"> <button type="submit" class="btn btn-primary" name="done">
+            Submit
+          </button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

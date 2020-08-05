@@ -1,0 +1,168 @@
+{% extends "base1.html" %}
+{% block content %}
+ {% for docs in document %}
+<div class="row">
+              <div class="col-md-12 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h4 class="font-weight-normal mb-3">Attachment <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <h3 class="mb-5">Document Name : {{docs.document_name}} </h3>
+                    <h4 class="card-text">Document Location : <a href="{{docs.document_location.url}}">{{docs.document_location}}</a>
+                      </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+ {% endfor %}
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="font-size: 22px;">
+                     ATTACHMENTS</h4>
+              <br/>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th style="font-size: 13px;"> Document Name </th>
+                            <th style="font-size: 13px;"> Location </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for docs in document %}
+                        <tr>
+                            <td style="font-size: 13px;"><label class="badge badge-gradient-success">{{docs.document_name}} </label></td>
+                            <td style="font-size: 13px;">
+                              <a href="{{docs.document_location.url}}">{{docs.document_location}}</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"  style="font-size: 22px;">TASK FORM</h1>
+        <br/>
+        <form class="form-sample">
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Name</label>
+                <div class="col-sm-9">
+                  {{form.task_name}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Description</label>
+                <div class="col-sm-9">
+                  {{form.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Name</label>
+                <div class="col-sm-9">
+                  {{form.project_id}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task By</label>
+                <div class="col-sm-9">
+                  {{form.task_by}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Start Date</label>
+                <div class="col-sm-9">
+                  {{form.start_date}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">End Date</label>
+                <div class="col-sm-9">
+                  {{form.end_date}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Assigned By</label>
+                <div class="col-sm-9">
+                  {{form.assigned_by}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Assigned To</label>
+                <div class="col-sm-9">
+                  {{form.assigned_to}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Parent Task</label>
+                <div class="col-sm-9">
+                  {{form.parent_task}}
+                </div>
+              </div>
+            </div>
+              <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Status</label>
+                <div class="col-sm-9">
+                  {{form.status}}
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Re-assignable</label>
+                <div class="col-sm-9">
+                  {{form.reassignable}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="right"> <button type="submit" class="btn btn-primary" name="done">
+            Update
+          </button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

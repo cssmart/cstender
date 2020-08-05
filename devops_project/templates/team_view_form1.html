@@ -1,0 +1,107 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+
+{% block content %}
+
+
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+}
+
+button[type=submit] {
+  width: 95%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 30px;
+  margin: 18px 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #696969	;
+  color: white;
+}
+* {
+  box-sizing: border-box;
+}
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 530px;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+
+<div>
+    <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <span class="glyphicon glyphicon-star"></span>
+               Team Form
+            </a>
+        </li>
+    </ul>
+
+    {# ------------------------------- #}
+    <div class="tab-content">
+
+        <div class="tab-pane fade in active" id="bootstrap">
+            <form method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="column" style="background-color:#aaa;">
+                        <label>Team Name</label>
+                        <br/>
+                        {{form.team_name}}
+                    </div>
+                                        <div class="column" style="background-color:#aaa;">
+                        <label>Team Description</label>
+                        <br/>
+                        {{form.team_description}}
+                    </div>
+                </div>
+                <br/>
+
+                {% buttons %}
+                <button type="submit" class="btn btn-primary" name="done">
+                    {% bootstrap_icon "next" %} Next
+                </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

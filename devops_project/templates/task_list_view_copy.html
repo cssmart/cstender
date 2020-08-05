@@ -1,0 +1,156 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+{% block content %}
+
+<head>
+
+<style>
+.card-body {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.card-body>div {
+  padding: 5px;
+}
+  .bs-example{
+        margin: 20px;
+    }
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 6px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+input[type="text"], textarea {
+  background-color : white;
+}
+</style>
+    </head>
+   <ul class="nav nav-tabs" role="tablist" id="tab" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <h5><span class="glyphicon glyphicon-star">Project Description</span></h5>
+            </a>
+        </li>
+       <br/>
+   </ul>
+<br/>
+<!--<div class="bs-example">-->
+<!--    <div class="card border-primary mb-3" style="width: 20rem;">-->
+<!--        <div class="card-body text-primary">-->
+<!--            <h5 class="card-title">Primary card title</h5>-->
+<!--            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <div>
+
+          <h5 class="card-title">Title</h5>
+          <p class="card-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div>
+
+          <img src="https://picsum.photos/100/100" alt="sans" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<br/><br/>
+
+             <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <h5><span class="glyphicon glyphicon-star">All Tasks</span></h5>
+            </a>
+        </li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <form action="#" method="get">
+              <h5><input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+      <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                       </button>  </h5>
+</form> </ul><br/><br/>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="bootstrap">
+        <table id="customers">
+            <thead>
+                <tr width="100%">
+                    <th  width="1%">ID</th>
+                    <th width="2%">Project Id</th>
+                    <th width="4%">Task Name</th>
+                    <th width="4%">Description</th>
+                    <th width="4%">Task By</th>
+                    <th width="4%">Assigned BY</th>
+                    <th width="4%">Assigned To</th>
+                    <th width="2%">Re-assignable</th>
+                    <th width="1%">Status</th>
+                    <th width="2%">Start Date</th>
+                    <th width="2%">End Date</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+ {% for post in task_list %}
+             <div class="scrollable">
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.project_id }}</td>
+                    <td>{{ post.task_name }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.task_by_id }}</td>
+                    <td>{{ post.assigned_by_id }}</td>
+                    <td>{{ post.assigned_to_id }}</td>
+                    <td>{{ post.reassignable }}</td>
+                    <td>{{ post.status }}</td>
+                    <td>{{ post.start_date }}</td>
+                    <td>{{ post.end_date }}</td>
+
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div></div>
+{% endblock %}

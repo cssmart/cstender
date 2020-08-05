@@ -1,0 +1,230 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% block content %}
+
+<div class="page-header">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+              <i class="mdi mdi-application"></i>
+            </span>  Project Details </h3>
+          <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">
+                <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+              </li>
+            </ul>
+          </nav>
+</div>
+
+<div class="row">
+    {% for project in project_list %}
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Project Details<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h4>
+                <br/>
+                 <div class="row">
+                    <div class="column" >
+                        <h5 class="mb-5"> Project Name</h5>
+                        <h4> {{project.project_name}}</h4>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="column">
+                        <h5 class="mb-5"> Project Description</h5>
+                        <h4>{{project.project_description}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-gradient-info card-img-holder text-white">
+            <div class="table-responsive">
+            <div class="card-body">
+
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Project Category <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                </h4>
+ <br/>
+                 <div class="row">
+                    <div class="column" >
+                        <h5 class="mb-5">Project Type</h5>
+                        <h4> {{project.project_type}}
+                        </h4>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="column">
+                        <h5 class="mb-5"> Application Name</h5>
+                        <h4>{{project.application_id}}</h4>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 stretch-card grid-margin">
+        <div class="card bg-gradient-success card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">Project Tracking <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                </h4>
+                 <br/>
+                 <div class="row">
+
+                    <div class="column" >
+                        <h5 class="mb-5"> Start Date</h5>
+                        <h4> {{project.start_date}}</h4>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="column">
+                        <h5 class="mb-5">Expected End Date</h5>
+                        <h4>{{project.expected_end_date}}</h4>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="column">
+                        <h5 class="mb-5"> End Date</h5>
+                        <h4>{{project.end_date}}</h4>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <div class="column">
+                        <h5 class="mb-5"> Last Activity Date</h5>
+                           {% for date in last_activity_Date %}
+                        <h4>{{date.last_update_date}}</h4>
+                            {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="font-size: 14px;">
+                     Project Team
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="{% url 'app:individual_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                         <i class="fa fa-plus"></i> Individual Resource</button>
+                </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'app:team_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                         <i class="fa fa-plus"></i> Team Resource</button>
+                </a>
+                </h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th style="font-size: 11px;"> First Name </th>
+                            <th style="font-size: 11px;"> Last Name </th>
+                            <th style="font-size: 11px;"> Email Id </th>
+                            <th style="font-size: 11px;"> Contact No </th>
+                            <th style="font-size: 11px;"> Role </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for f_name, l_name,email,contact,role in people_list %}
+                        <tr>
+                            <td style="font-size: 11px;">{{f_name}} </td>
+                            <td style="font-size: 11px;"> {{l_name}} </td>
+                            <td style="font-size: 11px;">
+                                {{email}}
+                            </td>
+                            <td style="font-size: 11px;">{{contact}}</td>
+                            <td style="font-size: 11px;"> <label class="badge badge-gradient-success">{{role}}</label></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title" style="font-size: 14px;">All Tasks</h4>
+                                  <form action="#" method="get">
+                <p align="right">
+                    <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+                    <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                    </button>  </h5></p>
+            </form>
+            <br/>
+                    <div class="table-responsive">
+
+                          <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="font-size: 11px;">ID</th>
+                    <th style="font-size: 11px;">Task Name</th>
+                    <th style="font-size: 11px;">Performed By</th>
+                    <th style="font-size: 11px;">Assigned BY</th>
+                    <th style="font-size: 11px;">Assigned To</th>
+                    <th style="font-size: 11px;">Re-assignable</th>
+                    <th style="font-size: 11px;">Status</th>
+                    <th style="font-size: 11px;">Start Date</th>
+                    <th style="font-size: 11px;">Expected End Date</th>
+                    <th style="font-size: 11px;">End Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in task_list %}
+                {% for t_by_fname,t_by_lname, a_by_fname,a_by_lname, a_to_fname,a_to_lname in task_people %}
+                <tr>
+                    <td style="font-size: 11px;">{{ post.id }}</td>
+                    <td style="font-size: 11px;"><a href="{% url 'app:task_details_view' post.pk %}">{{ post.task_name }}</a></td>
+                    <td style="font-size: 11px;"> {{t_by_fname}} {{t_by_lname}}</td>
+                    <td style="font-size: 11px;">{{a_by_fname}} {{a_by_lname}}</td>
+                    <td style="font-size: 11px;">{{a_to_fname}} {{a_to_lname}}</td>
+                    <td style="font-size: 11px;">{{ post.reassignable }}</td>
+                    <td style="font-size: 11px;">{{ post.status }}</td>
+                    <td style="font-size: 11px;">{{ post.start_date }}</td>
+                    <td style="font-size: 11px;">{{ post.expected_end_date }}</td>
+                    <td style="font-size: 11px;">{{ post.end_date }}</td>
+                </tr>
+                {% endfor %}{% endfor %}
+
+                </tbody>
+            </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock %}
