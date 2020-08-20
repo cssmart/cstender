@@ -125,18 +125,13 @@
     <div class="col-12 grid-margin" >
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title" style="font-size: 14px;">
+                <h4 class="card-title" >
                      Project Team
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                      <a href="{% url 'app:individual_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
                          <i class="fa fa-plus"></i> Individual Resource</button>
                 </a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="{% url 'app:team_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
                          <i class="fa fa-plus"></i> Team Resource</button>
                 </a>
@@ -146,23 +141,23 @@
                     <table class="table" >
                         <thead>
                         <tr>
-                            <th style="font-size: 11px;"> First Name </th>
-                            <th style="font-size: 11px;"> Last Name </th>
-                            <th style="font-size: 11px;"> Email Id </th>
-                            <th style="font-size: 11px;"> Contact No </th>
-                            <th style="font-size: 11px;"> Role </th>
+                            <th > First Name </th>
+                            <th > Last Name </th>
+                            <th > Email Id </th>
+                            <th > Contact No </th>
+                            <th > Role </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for f_name, l_name,email,contact,role in people_list %}
                         <tr>
-                            <td style="font-size: 11px;">{{f_name}} </td>
-                            <td style="font-size: 11px;"> {{l_name}} </td>
-                            <td style="font-size: 11px;">
+                            <td >{{f_name}} </td>
+                            <td > {{l_name}} </td>
+                            <td >
                                 {{email}}
                             </td>
-                            <td style="font-size: 11px;">{{contact}}</td>
-                            <td style="font-size: 11px;"> <label class="badge badge-gradient-success">{{role}}</label></td>
+                            <td >{{contact}}</td>
+                            <td > <label class="badge badge-gradient-success">{{role}}</label></td>
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -177,50 +172,54 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                     <h4 class="card-title" style="font-size: 14px;">All Tasks</h4>
-                                  <form action="#" method="get">
-                <p align="right">
-                    <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
-
-                    <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
-                    </button>  </h5></p>
-            </form>
+                     <h4 class="card-title" >All Tasks
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="{% url 'app:task_form_view_from_all_task' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                         <i class="fa fa-plus"></i> Add Task</button>
+                </a></h4>
             <br/>
                     <div class="table-responsive">
 
                           <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th style="font-size: 11px;">ID</th>
-                    <th style="font-size: 11px;">Task Name</th>
-                    <th style="font-size: 11px;">Performed By</th>
-                    <th style="font-size: 11px;">Assigned BY</th>
-                    <th style="font-size: 11px;">Assigned To</th>
-                    <th style="font-size: 11px;">Re-assignable</th>
-                    <th style="font-size: 11px;">Status</th>
-                    <th style="font-size: 11px;">Start Date</th>
-                    <th style="font-size: 11px;">Expected End Date</th>
-                    <th style="font-size: 11px;">End Date</th>
+                    <th >ID</th>
+                    <th >Task Name</th>
+                    <th >Performed By</th>
+                    <th >Assigned BY</th>
+                    <th >Assigned To</th>
+                    <th >Re-assignable</th>
+                    <th >Status</th>
+                    <th >Start Date</th>
+                    <th >Expected End Date</th>
+                    <th >End Date</th>
+                    <th >Task Type</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for post in task_list %}
-                {% for t_by_fname,t_by_lname, a_by_fname,a_by_lname, a_to_fname,a_to_lname in task_people %}
+                    {% for id,task_name, status,start_date,end_date, expected_end_date,task_type,reassignable,t_by_fname,t_by_lname, a_by_fname,a_by_lname, a_to_fname,a_to_lname in task_list %}
                 <tr>
-                    <td style="font-size: 11px;">{{ post.id }}</td>
-                    <td style="font-size: 11px;"><a href="{% url 'app:task_details_view' post.pk %}">{{ post.task_name }}</a></td>
-                    <td style="font-size: 11px;"> {{t_by_fname}} {{t_by_lname}}</td>
-                    <td style="font-size: 11px;">{{a_by_fname}} {{a_by_lname}}</td>
-                    <td style="font-size: 11px;">{{a_to_fname}} {{a_to_lname}}</td>
-                    <td style="font-size: 11px;">{{ post.reassignable }}</td>
-                    <td style="font-size: 11px;">{{ post.status }}</td>
-                    <td style="font-size: 11px;">{{ post.start_date }}</td>
-                    <td style="font-size: 11px;">{{ post.expected_end_date }}</td>
-                    <td style="font-size: 11px;">{{ post.end_date }}</td>
+                    <td >{{ id }}</td>
+                    <td><a href="{% url 'app:task_details_view' id %}">{{ task_name }}</a></td>
+                    <td > {{t_by_fname}} {{t_by_lname}}</td>
+                    <td >{{a_by_fname}} {{a_by_lname}}</td>
+                    <td >{{a_to_fname}} {{a_to_lname}}</td>
+                    <td >{{ reassignable }}</td>
+                    <td >{{ status }}</td>
+                    <td >{{ start_date }}</td>
+                    <td >{{ expected_end_date}}</td>
+                    <td >{{ end_date }}</td>
+                    <td >{{ task_type }}</td>
                 </tr>
-                {% endfor %}{% endfor %}
-
+    {% endfor %}
                 </tbody>
+
+
             </table>
                     </div>
                   </div>

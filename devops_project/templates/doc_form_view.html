@@ -5,22 +5,22 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title"  style="font-size: 22px;">Document Form</h1>
+        <h1 class="card-title">Document Form</h1>
         <br/>
     <form action='' method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
           <div class="row" >
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Id</label>
+                <label class="col-sm-3 col-form-label" >Task Id</label>
                 <div class="col-sm-9">
-                 <input type="text" name="{{id}}", value="{{id}}", disabled=True>
+                 <input type="text" name="{{id}}" value="{{id}}" disabled=True>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Id</label>
+                <label class="col-sm-3 col-form-label" >Project Id</label>
                 <div class="col-sm-9">
                    <input type="text" name="{{project_id}}", value="{{project_id}}", disabled=True>
                 </div>
@@ -31,7 +31,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Document Name</label>
+                <label class="col-sm-3 col-form-label">Document Name</label>
                 <div class="col-sm-9">
                   {{form.document_name}}
                 </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Document Location</label>
+                <label class="col-sm-3 col-form-label">Document Location</label>
                 <div class="col-sm-9">
                   {{form.document_location}}
                 </div>

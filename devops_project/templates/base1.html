@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:'en'}}">
-    <head>
- <meta charset="utf-8">
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>DEVOPS</title>
     <!-- plugins:css -->
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    </head>
+  </head>
     <body>
         <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar bg-light" id = "nav_bar">
@@ -44,7 +49,7 @@
                 </div>
                 <div class="nav-profile-text">
                   {% if user.is_authenticated %}
-                    <p class="mb-1 text-black "style="font-size:16px;"> Welcome {{ user.username }}</p>
+                    <p class="mb-1 text-black "> Welcome {{ user.username }}</p>
 {% else %}
     <a href="{% url django.contrib.auth.login %}">Login</a>
 {% endif %}
@@ -54,7 +59,7 @@
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{% url 'app:logout_view' %}">
                   <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
               </div>
             </li>
@@ -174,48 +179,48 @@
           <h1>
           <ul class="nav">
               <li class="nav-item">
-              <a class="nav-link" href="{% url 'app:index' %}">
-            <span class="menu-title" style="font-size:12px; color: black;">HOME</span>
-                <i class="mdi mdi-home menu-icon" style="font-size:12px;color: black;"></i>
+              <a class="nav-link" href="{% url 'app:home_approval_task' %}">
+            <span class="menu-title" >HOME</span>
+                <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
           <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#project-pages" aria-expanded="false" aria-controls="project-pages">
-               <span class="menu-title" style="font-size:12px; color: black;">PROJECTS</span>
-                <i class="menu-arrow" style="font-size:12px; color: black;"></i>
-                <i class="fa fa-folder-open menu-icon" style="font-size:12px; color: black;"></i>
+               <span class="menu-title" >PROJECTS</span>
+                <i class="menu-arrow" ></i>
+                <i class="mdi mdi-folder-plus menu-icon"></i>
               </a>
               <div class="collapse" id="project-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_projects_list' %}" style="font-size:12px; color: black;">ALL PROJECTS </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:project' %}" style="font-size:12px; color: black;"> ADD NEW PROJECT </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_projects_list' %}" >ALL PROJECTS </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:project' %}" > ADD NEW PROJECT </a></li>
                 </ul>
               </div>
             </li>
            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#application-pages" aria-expanded="false" aria-controls="application-pages">
-                  <span class="menu-title" style="font-size:12px; color: black;">APPLICATIONS</span>
-                <i class="menu-arrow" style="font-size:12px; color: black;"></i>
-                  <b><i class="fa fa-tasks menu-icon" style="font-size:12px; color: black;"></i></b>
+                  <span class="menu-title" >APPLICATIONS</span>
+                <i class="menu-arrow" ></i>
+                  <b><i class="mdi mdi-application menu-icon" ></i></b>
               </a>
               <div class="collapse" id="application-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_application_list' %}" style="font-size:12px; color: black;">ALL APPLICATIONS </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:application_add' %}" style="font-size:12px; color: black;"> ADD NEW APPLICATION </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_application_list' %}" >ALL APPLICATIONS </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:application_add' %}" > ADD NEW APPLICATION </a></li>
                 </ul>
               </div>
             </li>
 
               <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                  <span class="menu-title" style="font-size:12px; color: black;">PEOPLE</span>
-                <i class="menu-arrow" style="font-size:12px; color: black;"></i>
-                <i class="fa fa-user menu-icon" style="font-size:12px; color: black;"></i>
+                  <span class="menu-title" >PEOPLE</span>
+                <i class="menu-arrow" ></i>
+                <i class="mdi mdi-account-plus menu-icon"></i>
               </a>
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_people_list' %}" style="font-size:12px; color: black;">ALL PEOPLES </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:people_form_create' %}" style="font-size:12px; color: black;"> ADD NEW PEOPLE </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:all_people_list' %}" >ALL PEOPLES </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'app:people_form_create' %}" > ADD NEW PEOPLE </a></li>
                 </ul>
               </div>
             </li>

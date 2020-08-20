@@ -4,14 +4,14 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title"  style="font-size: 22px;">PEOPLE FORM</h1>
+        <h1 class="card-title" >PEOPLE FORM</h1>
         <br/>
     <form action='' method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
           <div class="row" >
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">First Name</label>
+                <label class="col-sm-3 col-form-label" >First Name</label>
                 <div class="col-sm-9">
                   {{form_1.p_first_name}}
                 </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Last Name</label>
+                <label class="col-sm-3 col-form-label" >Last Name</label>
                 <div class="col-sm-9">
                 {{form_1.p_last_name}}
                 </div>
@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Email Id</label>
+                <label class="col-sm-3 col-form-label" >Email Id</label>
                 <div class="col-sm-9">
                   {{form_1.email_id}}
                 </div>
@@ -37,27 +37,46 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Contact No</label>
+                <label class="col-sm-3 col-form-label" >Contact No</label>
                 <div class="col-sm-9">
                   {{form_1.contact_no}}
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="row">
+                <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Department</label>
+                <label class="col-sm-3 col-form-label" >Department</label>
                 <div class="col-sm-9">
                   {{form_1.department}}
                 </div>
               </div>
             </div>
+                   <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Create Project</label>
+                <div class="col-sm-9">
+                  {{form_1.can_create_project}}
+                </div>
+              </div>
+            </div>
           </div>
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Create Application</label>
+                <div class="col-sm-9">
+                  {{form_1.can_create_application}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
           <div align="right">
               <button type="submit" class="btn btn-primary" name="done" value="{{ post.id }}">
-            Submit
+            Next
           </button>
           </div>
         </form>

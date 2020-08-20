@@ -7,7 +7,7 @@
         <h1 class="card-title"  style="font-size: 22px;">TASK FORM</h1>
         <br/>
     <form action='' method="post" class="form" enctype="multipart/form-data">
-                {% csrf_token %}
+      {% csrf_token %}
           <div class="row" >
             <div class="col-md-6">
               <div class="form-group row">
@@ -31,7 +31,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Name</label>
                 <div class="col-sm-9">
-                  {{form.project_id}}
+                {{form.project_id}}
                 </div>
               </div>
             </div>
@@ -54,7 +54,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label" style="font-size: 13px;">Assigned To</label>
@@ -112,14 +111,23 @@
             </div>
               <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Re-assignable</label>
+                <label class="col-sm-3 col-form-label" >Task Type</label>
+                <div class="col-sm-9">
+                  {{form.task_type}}
+                </div>
+              </div>
+              </div></div>
+       <div class="row">
+                    <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Re-assignable</label>
                 <div class="col-sm-9">
                   {{form.reassignable}}
                 </div>
               </div>
-              </div></div>
+                    </div></div>
           <div align="right">
-              <button type="submit" class="btn btn-primary" name="done" value="{{ post.id }}">
+              <button type="submit" class="btn btn-primary" name="done">
             Next
           </button>
           </div>
@@ -127,6 +135,5 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 {% endblock %}

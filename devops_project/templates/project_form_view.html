@@ -4,14 +4,21 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title"  style="font-size: 25px;">PROJECT FORM</h1>
+        <h1 class="card-title" >PROJECT FORM</h1>
         <br/>
     <form action='' method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
+               {% if messages %}
+                      <ul class="messages">
+                          {% for message in messages %}
+                          <li>{{ message }}</li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
           <div class="row" >
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Name</label>
+                <label class="col-sm-3 col-form-label" >Project Name</label>
                 <div class="col-sm-9">
                   {{form.project_name}}
                 </div>
@@ -19,7 +26,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Description</label>
+                <label class="col-sm-3 col-form-label" >Project Description</label>
                 <div class="col-sm-9">
                   {{form.project_description}}
                 </div>
@@ -30,7 +37,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Application Name</label>
+                <label class="col-sm-3 col-form-label" >Application Name</label>
                 <div class="col-sm-9">
                   {{form.application_id}}
                 </div>
@@ -38,7 +45,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Type</label>
+                <label class="col-sm-3 col-form-label" >Project Type</label>
                 <div class="col-sm-9">
                   {{form.project_type}}
                 </div>
@@ -48,7 +55,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Start Date</label>
+                <label class="col-sm-3 col-form-label" >Start Date</label>
                 <div class="col-sm-9">
                   {{form.start_date}}
                 </div>
@@ -56,7 +63,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Expected End Date</label>
+                <label class="col-sm-3 col-form-label" >Expected End Date</label>
                 <div class="col-sm-9">
                   {{form.expected_end_date}}
                 </div>
@@ -66,7 +73,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Creation</label>
+                <label class="col-sm-3 col-form-label" >Task Creation</label>
                 <div class="col-sm-9">
                   {{form.task_creation}}
                 </div>
@@ -75,7 +82,7 @@
 
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">status</label>
+                <label class="col-sm-3 col-form-label" >status</label>
                 <div class="col-sm-9">
                   {{form.status}}
                 </div>
@@ -85,7 +92,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Allow Task  Re-assignment</label>
+                <label class="col-sm-3 col-form-label" >Allow Task  Re-assignment</label>
                 <div class="col-sm-9">
                   {{form.self_task_reasignment}}
                 </div>

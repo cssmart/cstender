@@ -27,8 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'harshitaagarwal219@gmail.com'
+EMAIL_HOST_PASSWORD = 'H@rshit@8791'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'crispy_forms',
     'django_popup_view_field',
+    'accounts',
 ]
 
 MIDDLEWARE = [

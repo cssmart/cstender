@@ -1,126 +1,69 @@
 {% extends "base1.html" %}
-{% load bootstrap3 %}
-{% load crispy_forms_tags %}
-{% block css %}
-{% bootstrap_css %}
-{% endblock css %}
-
 {% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">TEAM FORM</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+      {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Name</label>
+                <div class="col-sm-9">
 
-
-<style>
-input[type=text], select {
-  width: 100%;
-  padding: 6px 20px 20px 50px;
-  border: 1px solid #ccc;
-}
-
-button[type=submit] {
-  width: 95%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px 30px;
-  margin: 18px 13px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-#customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-#customers tr:hover {background-color: #ddd;}
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #696969	;
-  color: white;
-}
-
-/* Create four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 530px;
-  padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-input[type="text"], textarea {
-
-  background-color : white;
-
-}
-</style>
-
-<div>
-    <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
-        <li role="presentation" class="active">
-            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
-                <span class="glyphicon glyphicon-star"></span>
-               Team Form
-            </a>
-        </li>
-    </ul>
-<br/><br/>
-    {# ------------------------------- #}
-    <div class="tab-content">
-
-        <div class="tab-pane fade in active" id="bootstrap">
-            <form  method="post" class="form" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="column" style="background-color:#aaa;">
-                       <label>Team Name</label>
-                        <br/>
-                      <input type="text" name="{{team_name}}" value="{{team_name}}" disabled=True>
-                    </div>
-                     <div class="column" style="background-color:#aaa;">
-                       <label>Team Description</label>
-                        <br/>
-               <input type="text" name="{{ team_description }}" value="{{ team_description }}" disabled=True>
-                    </div>
+                  <input type="text" name="{{team_name}}" value="{{team_name}}" disabled=True style="font-size:18px;height:40px;width:100%;">
                 </div>
-                <br/>
-                <div class="row">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="column" style="background-color:#aaa;">
-                       <label>Team Member</label>
-                        <br/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Description</label>
+                <div class="col-sm-9">
+             <input type="text" name="{{ team_description }}" value="{{ team_description }}" disabled=True style="font-size:18px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Member</label>
+                <div class="col-sm-9">
                         {{form.team_member}}
-                    </div>
                 </div>
-                <br/>
-
-                {% buttons %}
-                <button type="submit" class="btn btn-primary" name="done">
-                    {% bootstrap_icon "star" %} Submit
-                </button>
-                {% endbuttons %}
-                   <h3 align="center"><strong>Team Members</strong></h3>
-                      <table id="customers">
+              </div>
+            </div>
+          </div>
+          <div align="right">
+              <button type="submit" class="btn btn-primary" name="done">
+            Submit
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title" >Members</h4>
+            <br/>
+                    <div class="table-responsive">
+                         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th width="15%">Name</th>
-                    <th width="15%">Email Id</th>
-                    <th width="15%">Department</th>
+                <tr width="auto">
+                    <th >Name</th>
+                    <th >Email Id</th>
+                    <th >Department</th>
                 </tr>
             </thead>
+            <tbody style="height:auto">
   {% for post  in model_data %}
-                                      <tbody style="height:auto">
-
              <div class="scrollable">
                 <tr>
                     <td>{{ post.p_first_name}} {{post.p_last_name}}</td>
@@ -128,12 +71,15 @@ input[type="text"], textarea {
                     <td>{{post.department}}</td>
                 </tr>
              </div>
+            {% endfor %}
             </tbody>
-                                      {% endfor %}
         </table>
-            </form>
-        </div>
-    </div>
-</div>
-
+                         </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 {% endblock %}
+
+
+
