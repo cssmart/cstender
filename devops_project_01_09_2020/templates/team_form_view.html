@@ -1,0 +1,85 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">TEAM FORM</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+      {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Name</label>
+                <div class="col-sm-9">
+
+                  <input type="text" name="{{team_name}}" value="{{team_name}}" disabled=True style="font-size:18px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Description</label>
+                <div class="col-sm-9">
+             <input type="text" name="{{ team_description }}" value="{{ team_description }}" disabled=True style="font-size:18px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Team Member</label>
+                <div class="col-sm-9">
+                        {{form.team_member}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="right">
+              <button type="submit" class="btn btn-primary" name="done">
+            Submit
+          </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title" >Members</h4>
+            <br/>
+                    <div class="table-responsive">
+                         <table class="table table-striped">
+            <thead>
+                <tr width="auto">
+                    <th >Name</th>
+                    <th >Email Id</th>
+                    <th >Department</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+  {% for post  in model_data %}
+             <div class="scrollable">
+                <tr>
+                    <td>{{ post.p_first_name}} {{post.p_last_name}}</td>
+                    <td>{{ post.email_id }}</td>
+                    <td>{{post.department}}</td>
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+                         </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock %}
+
+
+

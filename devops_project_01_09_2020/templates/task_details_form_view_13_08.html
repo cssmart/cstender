@@ -1,0 +1,118 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder text-white">
+
+
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" >Task Details<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          <table class="table">
+{% for task_name,description,status,reassignable,start_date,end_date,expected_end_date,task_type,last_update_date,parent_task,approval_flag,project_id in task %}
+
+            <tbody>
+            <tr>
+              <td>Task Name</td>
+              <td> {{task_name}}</td>
+            </tr>
+            <tr>
+              <td>Task Description</td>
+              <td> {{description}}</td>
+            </tr>
+            <tr>
+              <td>Task By</td>
+{% for t_by in task_by %}
+              <td> {{t_by.p_first_name}} {{t_by.p_last_name}}</td>
+               {% endfor %}
+            </tr>
+            <tr>
+              <td>Assigned By</td>
+{% for by in assign_by %}
+              <td> {{by.p_first_name}} {{by.p_last_name}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+              <td>Assigned To</td>
+               {% for to in assign_to %}
+              <td> {{to.p_first_name}} {{to.p_last_name}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+              <td>Start Date</td>
+              <td> {{start_date}}</td>
+            </tr>
+            <tr>
+              <td>End Date</td>
+              <td> {{end_date}}</td>
+            </tr>
+            <tr>
+              <td>Parent Task Name</td>
+              <td>
+
+                {% if parent_task != None %}
+                <a href="{% url 'app:parent_task_view' parent_task_id %}">{{parent_task}}</a>
+                {% else %}
+                <a href="#">{{parent_task}}</a>
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td> {{status}}</td>
+            </tr>
+            <tr>
+              <td>Reassignable</td>
+              <td> {{reassignable}}</td>
+            </tr>
+            <tr>
+              <td>Last Updated Date</td>
+              <td> {{end_date}}</td>
+            </tr>
+               <tr>
+              <td>Approval Status</td>
+              <td> {{approval_flag}}</td>
+            </tr>
+            </tbody>
+                            {% endfor %}
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 grid-margin" >
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          ATTACHMENTS</h4>
+        <br/>
+        <div class="table-responsive">
+          <table class="table" >
+            <thead>
+            <tr>
+              <th> Document Name </th>
+              <th> Location </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for docs in document %}
+            <tr>
+              <td><label class="badge badge-gradient-success">{{docs.document_name}} </label></td>
+              <td>
+                <a href="{{docs.document_location.url}}">{{docs.document_location}}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

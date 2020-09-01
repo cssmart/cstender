@@ -1,0 +1,46 @@
+{% extends "base1.html" %}
+{% block content %}
+
+<div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title"> My Tasks</h4>
+                      <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th > Id</th>
+                            <th > Task Name </th>
+                            <th >Description </th>
+                            <th > Project Name </th>
+                            <th > assigned By </th>
+                            <th > Status </th>
+                            <th > Task Type </th>
+                            <th > Task Completed </th>
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for i in task_search %}
+                        <div class="scrollable">
+                            <tr>
+                                <td >{{i.id}}</td>
+                                <td ><a href="{% url 'app:task_details_view' i.id %}">{{i.task_name}}</a></td>
+                                <td >{{i.description}}</td>
+                                <td >{{i.project_id}}</td>
+                                <td >{{i.assigned_by}}</td>
+                                <td >{{i.status}}</td>
+                                <td >{{i.task_type}}</td>
+                                <td >{{i.task_complete}}</td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

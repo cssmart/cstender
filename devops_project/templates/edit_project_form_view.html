@@ -1,0 +1,101 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title" >PROJECT FORM</h1>
+                <br/>
+                <form action='' method="post" class="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="row" >
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >Project Description</label>
+                                <div class="col-sm-9">
+                                    {{form.project_description}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >Project Type</label>
+                                <div class="col-sm-9">
+                                    {{form.project_type}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >Expected End Date</label>
+                                <div class="col-sm-9">
+                                    {{form.expected_end_date}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >Task Creation</label>
+                                <div class="col-sm-9">
+                                    {{form.task_creation}}
+                                </div>
+                            </div>
+                        </div></div>
+
+ <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >status</label>
+                                <div class="col-sm-9">
+                                    {{form.status}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" >Allow Task  Re-assignment</label>
+                                <div class="col-sm-9">
+                                    {{form.self_task_reasignment}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Project Objective</label>
+                <div class="col-sm-9">
+                  {{form.project_objective}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Project Business Owner</label>
+                <div class="col-sm-9">
+                  {{form.project_business_owner}}
+                </div>
+              </div>
+            </div>
+          </div>
+                    <div align="right"> <button type="submit" class="btn btn-primary" name="done">
+                        Submit
+                    </button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

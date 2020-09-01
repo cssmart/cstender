@@ -1,0 +1,104 @@
+{% extends "base1.html" %}
+{% block content %}
+<body>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"  style="font-size: 22px;">Document Form</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Task Id</label>
+                <div class="col-sm-9">
+
+                 <input type="text" name="{{id}}" value="{{id}}" disabled=True style="font-size:13px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Project Id</label>
+                <div class="col-sm-9">
+                   <input type="text" name="{{project_id}}" value="{{project_id}}" disabled=True style="font-size:13px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Document Name</label>
+                <div class="col-sm-9">
+                  {{form.document_name}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Document Location</label>
+                <div class="col-sm-9">
+                  {{form.document_location}}
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" style="font-size: 13px;">Document Type</label>
+                <div class="col-sm-9">
+                  {{form.document_type}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="right">
+              <button type="submit" class="btn btn-primary" name="done">
+                   Upload          </button>
+          </div>
+        </form>
+           <br/>
+          <div align="right">
+            <a href="{% url 'app:all_task_list' pk %}"> <button type="submit" name="submit">Final Submit</button></a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="font-size: 22px;">
+                    Attachment Details</h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th style="font-size: 13px;"> Document Name </th>
+                            <th style="font-size: 13px;"> Attachment</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         {% for photo in photos_list %}
+      <tr>
+            <td style="font-size:13px;">{{ photo.document_name }}</td>
+          <td style="font-size:13px;"><a href="{{ photo.document_location.url }}">{{ photo.document_location.name }}</a></td>
+       </tr>
+      {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
