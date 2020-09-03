@@ -11,14 +11,15 @@
                         <thead>
                         <tr width="auto">
                             <th>Approval Line ID</th>
-                            <th>Approval Level</th>
+                            <th>Approval Level111</th>
                             <th>Forwarded By</th>
                             <th>Forwarded To</th>
                             <th>Approval Status</th>
+                            <th>Forwarded Note</th>
                         </tr>
                         </thead>
                         <tbody style="height:auto">
-                    {% for approval_id,approval_level,executed,approval_status,forwarded_by,forwarded_to in approval_data %}
+                        {% for approval_id, approval_level, approval_status, forwarded_by, forwarded_to,forwarded_note in approval_data %}
                         <div class="scrollable">
                             <tr>
                                 <td> {{approval_id}}</td>
@@ -26,6 +27,7 @@
                                 <td> {{forwarded_by}}</td>
                                 <td> {{forwarded_to}}</td>
                                 <td> {{approval_status}}</td>
+                                <td> {{forwarded_note}}</td>
                             </tr>
                         </div>
                         {% endfor %}
@@ -53,7 +55,7 @@
                         </tr>
                         </thead>
                         <tbody style="height:auto">
-                    {% for approval_id,approval_level,type,project_id,forwarded_by,forwarded_to in approval_hierarchy %}
+                        {% for approval_id,approval_level,type,project_id,forwarded_by,forwarded_to in approval_hierarchy %}
                         <div class="scrollable">
                             <tr>
                                 <td> {{project_name}}</td>

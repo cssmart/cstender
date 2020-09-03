@@ -1,0 +1,110 @@
+{% extends "base1.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >
+                    Approval Notifications
+                </h4>
+                <br/>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th > Id </th>
+                            <th > Task Name </th>
+                            <th > Project Name </th>
+                            <th > Forwarded By </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t_id, f_id, p_id, seq_id, task_id in list_val %}
+                        <tr>
+                            <td>{{seq_id}}</td>
+                            <td ><a href="{% url 'app:task_details_view' task_id %}">{{t_id}} </a> </td>
+                            <td > {{p_id}} </td>
+                            <td>{{f_id}}</td>
+                            <td>
+                                <a href="{% url 'app:approval_notification_approved' seq_id %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                                    Approve</button>
+                                </a></td>
+                            <td>
+                                <a href="{% url 'app:reject_approval_notification' seq_id %}"> <button type="button" class="btn btn-inverse-danger btn-fw">
+                                    Reject</button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >
+                    Other Notifications
+                </h4>
+                <br/>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th > Task Id </th>
+                            <th > Task Name </th>
+                            <th > Project Name </th>
+                            <th > Forwarded By </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t_id, f_id, p_id, seq_id, task_id in list_val %}
+                        <tr>
+                            <td>{{task_id}}</td>
+                            <td ><a href="{% url 'app:task_details_view' task_id %}">{{t_id}} </a> </td>
+                            <td > {{p_id}} </td>
+                            <td>{{f_id}}
+                            </td>
+                            <td>
+                                <a href="{% url 'app:approval_notification_approved' seq_id %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                                    Approve</button>
+                                </a></td>
+                            <td>
+                                <a href="{% url 'app:reject_approval_notification' seq_id %}"> <button type="button" class="btn btn-inverse-danger btn-fw">
+                                    Reject</button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

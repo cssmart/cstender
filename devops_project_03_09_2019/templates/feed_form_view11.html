@@ -1,0 +1,9 @@
+    <div id="%(unique_id)s"></div>
+    <!-- When this script block executes, the <div> is ready for data. -->
+    <script type="text/javascript">
+        var id = '%(836474)s';
+        // See if the `Javascript` block executed first, and if so trigger the render.
+        if (window['render_' + id]) {
+            window['render_' + id]();
+        }
+    </script>

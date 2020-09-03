@@ -1,0 +1,55 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="font-size: 14px;">All Projects</h4>
+                <form action="#" method="get">
+                    <p align="right">
+                        <input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+                        <button type="submit" class="btn btn-primary" name="done">Search
+                        </button>  </h5></p>
+                </form>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th>Project ID</th>
+                            <th>Project Name</th>
+                            <th>Area Name</th>
+                            <th>Project Type</th>
+                            <th>Start Date</th>
+                            <th>Expected End Date</th>
+                            <th>End Date</th>
+                            <th> Status</th>
+                            <th>Owner</th>
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for post in project_list %}
+                        <div class="scrollable">
+                            <tr>
+                                <td>{{ post.id }}</td>
+                                <td ><a href="{% url 'app:all_task_list' post.pk %}">{{ post.project_name }}</a></td>
+                                <td >{{ post.application_id }}</td>
+                                <td >{{ post.project_type }}</td>
+                                <td >{{ post.start_date }}</td>
+                                <td >{{ post.expected_end_date }}</td>
+                                <td >{{ post.end_date }}</td>
+                                <td >{{ post.status }}</td>
+                                <td ><a href="{% url 'app:show_owner' post.id %}">Project Owner</a></td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

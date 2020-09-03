@@ -1,0 +1,53 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >All People</h4>
+                <form action="#" method="get">
+                    <p align="right">
+                        <input name="q" type="text" placeholder="Search..." size="25" >
+
+                        <button type="submit" class="btn btn-primary" name="done">Search
+                        </button>  </h5></p>
+                </form>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th >ID</th>
+                            <th >First Name</th>
+                            <th >Last Name</th>
+                            <th >Email Id</th>
+                            <th >Contact No</th>
+                            <th >Department</th>
+
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for post in people_list %}
+                        <div class="scrollable">
+                            <tr>
+                                <td >{{ post.id }}</td>
+                                <td >{{ post.p_first_name }}</td>
+                                <td >{{ post.p_last_name }}</td>
+                                <td >{{ post.email_id }}</td>
+                                <td >{{ post.contact_no }}</td>
+                                <td >{{ post.department }}</td>
+                                <td><a href="{% url 'app:edit_people_form' post.id %}">
+                                    <button type="button" class="btn btn-inverse-success btn-fw">
+                                        Edit</button></a></td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
