@@ -1,0 +1,272 @@
+{% extends "base1.html" %}
+{% block content %}
+<p align="right">
+  {% for t in task %}
+  <a href="{% url 'app:edit_task_form' t.id %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+  <i class="fa fa-plus"></i> Edit Task</button>
+</a>&nbsp;
+{% if t.status != 'closed' %}
+<a href="{% url 'app:complete_task_process' t.id %}">
+  <button type="button" class="btn btn-inverse-success btn-fw">
+    Complete Task</button></a>
+{% endif %}
+{% if t.status == 'closed' %}
+<a href="#"> <button type="button" class="btn btn-inverse-success btn-fw">
+  Completed</button></a>
+{% endif %}
+{% endfor %}</p>
+<div class="row">
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder text-white">
+
+
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" style="color:black;"><b>Task Details</b><i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          {% for t in task %}
+          <table class="table">
+            <tbody>
+            <tr>
+              <td width="40%">Task Id</td>
+              <td> {{t.id}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Task Name</td>
+              <td> {{t.task_name}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Task Description</td>
+              <td> {{t.description}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Project Name</td>
+              <td> {{t.project_id}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Type</td>
+              <td> {{t.task_type}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Parent Task Name</td>
+              <td>
+                {% if t.parent_task != None %}
+                <a href="{% url 'app:task_details_view' t.parent_task_id %}">{{t.parent_task}}</a>
+                {% else %}
+                <a href="{% url 'app:task_details_view' t.pk %}">{{t.parent_task}}</a>
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td width="40%">Status</td>
+              <td> {{t.status}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Required DBA Processing</td>
+              <td> {{t.required_dba_processing}}</td>
+            </tr>
+            </tbody>
+          </table>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {% for t in task %}
+  {% if t.approval_flag == 'Rejected' %}
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder text-white">
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" >Task Approval<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td>Approval Status</td>
+              <td> {{t.approval_flag}}</td>
+              {% for t in task %}
+              <td> <a href="{% url 'app:task_workshow_in_task_summary' t.id %}" style="color:blue;">View Workflow</a></td>
+              {% endfor %}
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elif t.approval_flag == 'on_going' %}
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-info card-img-holder text-white">
+      <!--# yellow(warning) -->
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" >Task Approval<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td>Approval Status</td>
+              <td> {{t.approval_flag}}</td>
+              {% for t in task %}
+              <td> <a href="{% url 'app:task_workshow_in_task_summary' t.id %}" style="color:blue;">View Workflow</a></td>
+              {% endfor %}
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elif t.approval_flag == 'Not Required' or t.approval_flag == 'Approved' %}
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card bg-gradient-success card-img-holder text-white">
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" >Task Approval<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td>Approval Status</td>
+              <td> {{t.approval_flag}}</td>
+              {% for t in task %}
+              <td> <a href="{% url 'app:task_workshow_in_task_summary' t.id %}" style="color:blue;">View Workflow</a></td>
+              {% endfor %}
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+</div>
+<div class="row">
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card card-img-holder text-white">
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" style="color:black;"><b>Task Assignment</b><i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          {% for t in task %}{% for t_by in task_by %}{% for by in assign_by %}  {% for to in assign_to %}
+          <table class="table">
+            <tbody>
+            <tr>
+              <td width="40%">Created By</td>
+
+              <td> {{t_by.p_first_name}} {{t_by.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Assigned By</td>
+
+              <td> {{by.p_first_name}} {{by.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Assigned To</td>
+              <td> {{to.p_first_name}} {{to.p_last_name}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Reassignable</td>
+              <td> {{t.reassignable}}</td>
+            </tr>
+            </tbody>
+          </table>
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 stretch-card grid-margin">
+    <div class="card  card-img-holder text-white">
+
+
+      <div class="card-body">
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3" style="color:black;"><b>Task Tracking</b><i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h4><br/>
+        <div class="table-responsive">
+          {% for t in task %}
+          <table class="table">
+            <tbody>
+            <tr>
+              <td width="40%">Start Date</td>
+              <td> {{t.start_date}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Expected End Date</td>
+              <td> {{t.expected_end_date}}</td>
+            </tr>
+            <tr>
+              <td width="40%">End Date</td>
+              <td> {{t.end_date}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Initial Expected End Date</td>
+              <td> {{t.initial_expected_end_date}}</td>
+            </tr>
+            <tr>
+              <td width="40%">Last Updated Date</td>
+              <td> {{t.last_update_date}}</td>
+            </tr>
+            </tbody>
+          </table>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12 grid-margin" >
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          Attachments</h4>
+        <br/>
+        <div class="table-responsive">
+          <table class="table" >
+            <thead>
+            <tr>
+              <th> Document Name </th>
+              <th> Document Type </th>
+              <th> Location </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for docs in document %}
+            <tr>
+              <td><label class="badge badge-gradient-success">{{docs.document_name}} </label></td>
+              <td><label class="badge badge-gradient-success">{{docs.document_type}} </label></td>
+              <td>
+                <a href="{{docs.document_location.url}}">{{docs.document_location}}</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

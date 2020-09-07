@@ -1,0 +1,97 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">PROJECT RESOURCE FORM</h1>
+        <br/>
+    <form action='' method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Project Name</label>
+                <div class="col-sm-9">
+                  {% for i in project %}
+                   <input type="text"   name="p" value="{{i}}" disabled=True style="font-size:13px;height:40px;width:100%;">
+
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Resource Pool</label>
+                <div class="col-sm-9">
+                  <input type="text"   name="res_pool" value="Individual" disabled=True style="font-size:13px;height:40px;width:100%;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Resource Name</label>
+                <div class="col-sm-9">
+                  {{form.individual_resource_id}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Resource Role</label>
+                <div class="col-sm-9">
+                  {{form.resource_role}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div align="right">
+              <button type="submit" class="btn btn-primary" name="done" value="{{ post.id }}">
+            Submit
+              </button></div>
+             </form>
+        <br/>
+         <div align="right">
+           <a  href="{% url 'app:all_task_list' pk %}"> <button type="submit"  name="back">
+             Back
+           </button></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >ALLOCATED RESOURCES</h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th >Resource Name</th>
+                            <th >Resource Role</th>
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for role,name in resources %}
+                        <div class="scrollable">
+                            <tr>
+                                <td >{{ name}}</td>
+                                <td >{{ role }}</td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

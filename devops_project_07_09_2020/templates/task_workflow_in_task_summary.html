@@ -1,0 +1,80 @@
+{% extends "base1.html" %}
+{% block content %}
+<p align="right">
+      <a href="{% url 'app:Reinitialize_Approval_Workflow' pk %}">
+        <button type="button" class="btn btn-inverse-success btn-fw">
+            Reinitialize Approval Workflow</button></a>
+</p>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >Workflow for this task ( <b>{{task_name}}</b> )</h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th>Approval Line ID</th>
+                            <th>Approval Level</th>
+                            <th>Forwarded By</th>
+                            <th>Forwarded To</th>
+                            <th>Approval Status</th>
+                            <th>Forwarded Note</th>
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for approval_id,approval_level,approval_status,forwarded_by,forwarded_to,forwarded_note in approval_data %}
+                        <div class="scrollable">
+                            <tr>
+                                <td> {{approval_id}}</td>
+                                <td> {{approval_level}}</td>
+                                <td> {{forwarded_by}}</td>
+                                <td> {{forwarded_to}}</td>
+                                <td> {{approval_status}}</td>
+                                <td> {{forwarded_note}}</td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >Standard Workflow for this project ( <b>{{project_name}}</b> )</h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr width="auto">
+                            <th>Project Name</th>
+                            <th>Approval Level</th>
+                            <th>Approver</th>
+                        </tr>
+                        </thead>
+                        <tbody style="height:auto">
+                        {% for approval_id,approval_level,type,project_id,forwarded_by,forwarded_to in approval_hierarchy %}
+                        <div class="scrollable">
+                            <tr>
+                                <td> {{project_name}}</td>
+                                <td> {{approval_level}}</td>
+                                <td> {{forwarded_to}}</td>
+                            </tr>
+                        </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

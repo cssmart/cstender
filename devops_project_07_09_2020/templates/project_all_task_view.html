@@ -1,0 +1,250 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% block content %}
+
+<div class="page-header">
+    <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+              <i class="mdi mdi-application"></i>
+            </span>  Project Details </h3>
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'app:edit_project' pk %}">
+                    <button type="button" class="btn btn-inverse-success btn-fw">
+                        Edit Project</button></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+    {% for project in project_list %}
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h3 class="font-weight-normal mb-3">Project Details<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h3>
+                <br/>
+                <div class="row">
+                    <div class="column"  style="width: 50%; float:left">
+                        <h6 class="mb-2" style="color:white;"> Project Name</h6>
+                        <h4> {{project.project_name}}</h4>
+                    </div>
+                    <div class="column" style="width: 50%; float:right">
+                        <h6 class="mb-2" style="color:white;"> Project Description</h6>
+                        <h4>{{project.project_description}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-gradient-dark card-img-holder text-white">
+            <div class="table-responsive">
+                <div class="card-body">
+                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <h3 class="font-weight-normal mb-3">Project Category <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    </h3>
+                    <br/>
+                    <div class="row">
+                        <div class="column" style="width: 50%; float:left">
+                            <h6 class="mb-2" style="color:white;">Project Type</h6>
+                            <h4> {{project.project_type}}
+                            </h4>
+                        </div>
+                        <div class="column" style="width: 50%; float:right">
+                            <h6 class="mb-2" style="color:white;"> Area Name</h6>
+                            <h4>{{project.application_id}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <div class="col-md-12 stretch-card grid-margin">
+        <div class="card bg-gradient-info card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h3 class="font-weight-normal mb-3">Project Objective <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                </h3>
+                <br/>
+                <div class="row">
+                    <div class="column" style="width:60%; float:left" >
+                        <h6 class="mb-2" style="color:white;">Project Objective</h6>
+                        <h4> {{project.project_objective}}</h4>
+                    </div>
+                    <div class="column" style="width: 40%; float:left" >
+                        <h6 class="mb-2" style="color:white;"> Business Owner</h6>
+                        <h4>{{project.project_business_owner}}</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <div class="col-md-12 stretch-card grid-margin">
+        <div class="card bg-gradient-success card-img-holder text-white">
+            <div class="card-body">
+                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                <h3 class="font-weight-normal mb-3">Project Tracking <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                </h3>
+                <br/>
+                <div class="row">
+
+                    <div class="column" style="width:20%; float:left" >
+                        <h6 class="mb-2" style="color:white;"> Start Date</h6>
+                        <h4> {{project.start_date}}</h4>
+                    </div>
+                    <div class="column" style="width: 20%; float:left" >
+                        <h6 class="mb-2" style="color:white;">Expected End Date</h6>
+                        <h4>{{project.expected_end_date}}</h4>
+                    </div>
+                    <div class="column" style="width: 20%; float:left" >
+                        <h6 class="mb-2" style="color:white;"> End Date</h6>
+                        <h4>{{project.end_date}}</h4>
+                    </div>
+                    <div class="column" style="width: 20%; float:left">
+                        <h6 class="mb-2" style="color:white;"> Initial Exp. End Date</h6>
+                        <h4>{{project.initial_exp_completion_dt}}</h4>
+                    </div>
+                     <div class="column" style="width: 20%; float:left">
+                        <h6 class="mb-2" style="color:white;"> Last Activity Date</h6>
+                        <h4>{{last_activity_Date}}</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >
+                    Project Team
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'app:individual_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                        <i class="fa fa-plus"></i> Add Resource</button>
+                    </a>
+<!--                    <a href="{% url 'app:team_resource' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">-->
+<!--                        <i class="fa fa-plus"></i> Team Resource</button>-->
+<!--                    </a>-->
+                </h4>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                        <tr>
+                            <th > First Name </th>
+                            <th > Last Name </th>
+                            <th > Email Id </th>
+                            <th > Contact No </th>
+                            <th > Role </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for f_name, l_name,email,contact,role in people_list %}
+                        <tr>
+                            <td >{{f_name}} </td>
+                            <td > {{l_name}} </td>
+                            <td >
+                                {{email}}
+                            </td>
+                            <td >{{contact}}</td>
+                            <td > <label class="badge badge-gradient-success">{{role}}</label></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" >All Tasks
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'app:task_form_view_from_all_task' pk %}"> <button type="button" class="btn btn-inverse-success btn-fw">
+                        <i class="fa fa-plus"></i> Add Task</button>
+                    </a></h4>
+                <br/>
+                <div class="table-responsive">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th >ID</th>
+                            <th >Task Name</th>
+                            <th >Created By</th>
+                            <th >Assigned BY</th>
+                            <th >Assigned To</th>
+                            <th >Re-assignable</th>
+                            <th >Status</th>
+                            <th >Start Date</th>
+                            <th >Expected End Date</th>
+                            <th >End Date</th>
+                            <th >Initial Expected End Date</th>
+                            <th >Task Type</th>
+                            <th >Task Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for id,task_name, status,start_date,end_date, expected_end_date,task_type,reassignable,t_by_fname,t_by_lname, a_by_fname,a_by_lname, a_to_fname,a_to_lname ,task_complete,initial_expected_end_date in task_list %}
+                        <tr>
+                            <td >{{ id }}</td>
+                            <td><a href="{% url 'app:task_details_view' id %}">{{ task_name }}</a></td>
+                            <td > {{t_by_fname}} {{t_by_lname}}</td>
+                            <td >{{a_by_fname}} {{a_by_lname}}</td>
+                            <td >{{a_to_fname}} {{a_to_lname}}</td>
+                            <td >{{ reassignable }}</td>
+                            <td >{{ status }}</td>
+                            <td >{{ start_date }}</td>
+                            <td >{{ expected_end_date}}</td>
+                            <td >{{ end_date }}</td>
+                            <td >{{ initial_expected_end_date }}</td>
+                            <td >{{ task_type }}</td>
+                            <td>
+                                {% if status != 'closed' %}
+                                <a href="{% url 'app:complete_task_process' id %}">
+                                    <button type="button" class="btn btn-inverse-success btn-fw">
+                                        Complete Task</button></a>
+                                {% endif %}
+                                {% if status == 'closed' %}
+                                <a href="#"> <button type="button" class="btn btn-inverse-success btn-fw">
+                                    Completed</button></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

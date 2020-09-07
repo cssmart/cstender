@@ -1,0 +1,149 @@
+{% extends "base1.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+{% block content %}
+<head>
+
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 6px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #696969	;
+  color: white;
+}
+input[type="text"], textarea {
+  background-color : white;
+}
+</style>
+    </head>
+   <ul class="nav nav-tabs" role="tablist" id="tab" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <h5><span class="glyphicon glyphicon-star">Project Description</span></h5>
+            </a>
+        </li>
+       <br/>
+   </ul>
+       <div class="container py-5">
+            {% for project in project_list %}
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="inputFirstname"><h5>Project Name</h5></label>
+                        <input type="text" class="form-control" id="inputFirstname" value="{{project.project_name}}" disabled=True>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="inputLastname"><h5>Project Description</h5></label>
+                        <input type="text" class="form-control" id="inputLastname" value="{{project.project_description}}" disabled=True>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="inputAddressLine1"><h5>Project Type</h5></label>
+                        <input type="text" class="form-control" id="inputAddressLine1"  value="{{project.project_type}}" disabled=True>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="inputAddressLine2"><h5>Application Name</h5></label>
+                        <input type="text" class="form-control" id="inputAddressLine2"  value="{{project.application_id}}" disabled=True>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="inputCity"><h5>Start Date</h5></label>
+                        <input type="text" class="form-control" id="inputCity" value="{{project.start_date}}" disabled=True>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="inputContactNumber"><h5>End Date</h5></label>
+                        <input type="text" class="form-control" id="inputContactNumber" value="{{project.end_date}}" disabled=True>
+                    </div>
+                </div> </form>
+        </div>
+    </div>
+           {% endfor %}
+</div>
+<br/><br/>
+
+             <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <h5><span class="glyphicon glyphicon-star">All Tasks</span></h5>
+            </a>
+        </li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <form action="#" method="get">
+              <h5><input name="q" type="text" placeholder="Search..." size="25" style="height: 30px;">
+
+      <button type="submit" class="btn btn-primary" name="done"> {% bootstrap_icon "search" %} Search
+                       </button>  </h5>
+</form> </ul><br/><br/>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="bootstrap">
+        <table id="customers">
+            <thead>
+                <tr width="100%">
+                    <th  width="1%">ID</th>
+                    <th width="2%">Project Id</th>
+                    <th width="4%">Task Name</th>
+                    <th width="4%">Description</th>
+                    <th width="4%">Task By</th>
+                    <th width="4%">Assigned BY</th>
+                    <th width="4%">Assigned To</th>
+                    <th width="2%">Re-assignable</th>
+                    <th width="1%">Status</th>
+                    <th width="2%">Start Date</th>
+                    <th width="2%">End Date</th>
+                </tr>
+            </thead>
+            <tbody style="height:auto">
+ {% for post in task_list %}
+             <div class="scrollable">
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.project_id }}</td>
+                    <td>{{ post.task_name }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.task_by_id }}</td>
+                    <td>{{ post.assigned_by_id }}</td>
+                    <td>{{ post.assigned_to_id }}</td>
+                    <td>{{ post.reassignable }}</td>
+                    <td>{{ post.status }}</td>
+                    <td>{{ post.start_date }}</td>
+                    <td>{{ post.end_date }}</td>
+
+                </tr>
+             </div>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div></div>
+{% endblock %}

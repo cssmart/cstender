@@ -1,0 +1,40 @@
+{% extends "base1.html" %}
+{% block content %}
+<body>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title" >Approval FORM</h1>
+        <br/>
+       <form action='' method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+        <div class="row">
+                    <div class="col-md-9">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" >Forwarded Note</label>
+                <div class="col-sm-9">
+                          {{form.forwarded_note}}
+                </div>
+              </div></div>
+                                            <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" ></label>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-inverse-danger btn-fw" name="done">Save Note</button>
+                </div>
+              </div>
+            </div>
+          </div>
+</form>
+               <br/>
+          <div align="right">
+            <a href="{% url 'app:home_approval_task' %}"> <button type="button" name="submit"class="btn btn-inverse-success btn-fw">Back</button></a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+{% endblock %}
