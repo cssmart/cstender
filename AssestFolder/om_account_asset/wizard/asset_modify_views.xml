@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    Asset Addd-->
+        <record model="ir.ui.view" id="asset_add_maintenance_form">
+        <field name="name">wizard.asset.add.form</field>
+        <field name="model">asset.add.maintenance</field>
+        <field name="arch" type="xml">
+            <form string="Add Asset">
+                  <group>
+                <field name="asset_id"  domain="[('maintanance_asset', '=', False)]" widget="selection"/>
+                  </group>
+                <footer>
+                    <button name="add_asset_method" string="Add" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_asset_add_maintenance" model="ir.actions.act_window">
+         <field name="name">Add Asset</field>
+         <field name="res_model">asset.add.maintenance</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="view_mode">form</field>
+         <field name="view_id" ref="asset_add_maintenance_form"/>
+         <field name="target">new</field>
+   </record>
+
+    <menuitem name="Add Asset In Maintenance"
+              action="action_asset_add_maintenance"
+              id="menu_asset_add_wizard"
+              parent="base.menu_mro_root"
+              sequence="1"/>
+<!--    Asset End Complete-->
+    
+    <record model="ir.ui.view" id="asset_modify_form">
+        <field name="name">wizard.asset.modify.form</field>
+        <field name="model">asset.modify</field>
+        <field name="arch" type="xml">
+            <form string="Modify Asset">
+                <field name="asset_method_time" invisible="1"/>
+                <group string="Asset Durations to Modify" col="4">
+                    <group colspan="2" col="2">
+                	    <field name="name"/>
+                        <field name="method_number" attrs="{'invisible': [('asset_method_time', '=', 'end')]}"/>
+                    </group>
+                    <group colspan="2" col="2">
+                        <field name="method_end" attrs="{'invisible': [('asset_method_time', '=', 'number')]}"/>
+                        <label for="method_period"/>
+                        <div>
+                            <field name="method_period" class="oe_inline"/> months
+                        </div>	                        
+                    </group>
+                </group>
+                <footer>
+                    <button name="modify" string="Modify" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_asset_modify" model="ir.actions.act_window">
+         <field name="name">Modify Asset</field>
+         <field name="res_model">asset.modify</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="view_mode">tree,form</field>
+         <field name="view_id" ref="asset_modify_form"/>
+         <field name="target">new</field>
+   </record>
+    
+</odoo>

@@ -1,0 +1,81 @@
+    @api.model
+    def create(self, vals):
+        program = super(AssetAdd, self).create(vals)
+        discount_line_product_id = self.env['asset.asset'].create({
+            'name': self.asset_id.id,
+            'category_id':'',
+            'start_date':self.asset_id.date,
+            'purchase_date':self.asset_id.first_depreciation_manual_date
+        })
+        program.write({'discount_line_product_id': discount_line_product_id.id})
+        return program
+
+    # @api.model
+    # def create(self, vals):
+    #     company_info = {
+    #          'name':'self asset_idid',
+    #          'category_id':'',
+    #          'start_date':self.asset_id.date,
+    #          'purchase_date':self.asset_id.first_depreciation_manual_date
+    #     }
+    #     print('yes==yyyyyyyyyyyy======iiiiiiiiiiiiiii=================================')
+    #     record = self.env['asset.asset'].create(company_info)
+    #     print('record====================')
+    #     return super(AssetAdd, self).create(vals)
+
+         <t t-name="kanban-box">
+                           <div t-attf-class="oe_kanban_global_click">
+                                <div class="codup_kanban_left">
+                                </div>
+
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="finance_asset_id"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>User Name: <field name="user_id"></field></li>
+                                        <li>Loation: <field name="property_stock_asset"></field></li>
+                                        <li>Asset Number: <field name="asset_number"></field></li>
+                                        <li>Serial No: <field name="serial"></field></li>
+                                        <li>Model: <field name="model"></field></li>
+                                        <li>Status: <field name="status"></field></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+
+
+                                         <t t-name="kanban-box">
+                              <div t-attf-class="oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-6">
+                                    <strong><span><t t-esc="record.finance_asset_id.value"/></span></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                    User Name: <t t-esc="record.user_id.value"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-muted">
+                                   Location:  <span> <t t-esc="record.property_stock_asset.value"/></span>
+                                </div>
+                                 <div class="col-6 text-right">
+                                 Asset Number:   <strong> <t t-esc="record.asset_number.value"/></strong>
+                                </div>
+                            </div>
+                          <div class="row mb4">
+                                <div class="col-6">
+                                 Model:  <span><t t-esc="record.model.value"/></span>
+                                </div>
+                                <div class="col-6 text-right">
+                                    serial: <t t-esc="record.serial.value"/>
+                                </div>
+                            </div>
+                                     <div class="row mb4">
+                                <div class="col-6">
+                                 Status: <span> <t t-esc="record.status.value"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>

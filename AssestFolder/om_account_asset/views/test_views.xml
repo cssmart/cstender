@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="parent_test_a_menu"
+		  name="TEST"
+              sequence="3"
+		  />
+        <record id="action_test_a" model="ir.actions.act_window">
+            <field name="name">Test A</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">test.a</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+<menuitem id="test_type_menu_a"
+            name="Test A"
+            parent="parent_test_a_menu"
+            sequence="5"
+            action="action_test_a"
+    />
+<record id="view_test_a_tree" model="ir.ui.view">
+        <field name="name">Test A</field>
+        <field name="model">test.a</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_id"/>
+                <field name="asset_id"/>
+                <field name="test_ids"/>
+            </tree>
+        </field>
+</record>
+
+<record id="view_test_a_form" model="ir.ui.view">
+        <field name="name">Test A</field>
+        <field name="model">test.a</field>
+        <field name="arch" type="xml">
+            <form string="Test A">
+            <sheet>
+                    <h1>Test A</h1>
+
+                    <group>
+                        <field name="project_id"/>
+                    </group>
+                    <group>
+                        <field name="asset_id"/>
+                    </group>
+
+                <notebook>
+                    <page string="Test">
+                        <field name="test_ids">
+                            <tree editable="top">
+                                <field name="test_name"/>
+                                <field name="test_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+            </form>
+        </field>
+</record>
+<!--    test b-->
+          <record id="action_test_b" model="ir.actions.act_window">
+            <field name="name">Test B</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">test.b</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+
+<menuitem id="test_type_menu_b"
+            name="Test B"
+            parent="parent_test_a_menu"
+            sequence="6"
+            action="action_test_b"
+    />
+<record id="view_test_a_tree" model="ir.ui.view">
+        <field name="name">Test A</field>
+        <field name="model">test.b</field>
+        <field name="arch" type="xml">
+            <tree>
+    <field name="test_name"/>
+                                <field name="test_id"/>
+            </tree>
+        </field>
+</record>
+
+<record id="view_test_b_form" model="ir.ui.view">
+        <field name="name">Test B</field>
+        <field name="model">test.b</field>
+        <field name="arch" type="xml">
+            <form string="Test B">
+            <sheet>
+                    <h1>Test B</h1>
+
+                    <group>
+                      <field name="test_name"/>
+                                <field name="test_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                    </group>
+            </sheet>
+            </form>
+        </field>
+</record>
+
+</odoo>
