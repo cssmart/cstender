@@ -1,0 +1,9 @@
+Sorry your response was not recognised. Please try again.
+Welcome to C&S Electric. Kindly choose an option.
+
+1 - To know about new product launches
+2 - To book a service request for low voltage products
+3 - To know your credit limit as a dealer
+4 - To know about latest offers
+5 - To get a list of C&S registered GST numbers
+6 - To stop receiving whatsapp notifications

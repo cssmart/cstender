@@ -1,0 +1,1 @@
+{'channel': 'WABA', 'appDetails': {'type': 'LIVE'}, 'events': {'eventType': 'User initiated', 'timestamp': '1595074523', 'date': '2020-7-18'}, 'eventContent': {'message': {'from': '918393944951', 'id': 'ABEGkYOTlElRAhB6cVPAD5TT0rl7-0akIbqu', 'location': {'latitude': '28.4475854', 'longitude': '78.7768411'}, 'to': '919999567202', 'contentType': 'location'}}}

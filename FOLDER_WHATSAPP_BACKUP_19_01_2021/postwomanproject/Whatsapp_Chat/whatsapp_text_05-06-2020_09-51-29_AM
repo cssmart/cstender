@@ -1,0 +1,1 @@
+{'channel': 'WABA', 'appDetails': {'type': 'LIVE'}, 'events': {'eventType': 'User initiated', 'timestamp': '1591086665', 'date': '2019-7-01'}, 'eventContent': {'message': {'from': '9999567202', 'id': 'ABEGkYEFhYeTAhCvtYmIxSgfdhxAyX07K1nt', 'text': {'body': 'Welcome harshita agarwal'}, 'to': '918393944951', 'contentType': 'text'}}}

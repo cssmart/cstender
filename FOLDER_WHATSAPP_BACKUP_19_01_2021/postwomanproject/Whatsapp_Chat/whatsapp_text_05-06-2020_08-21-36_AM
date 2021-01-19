@@ -1,0 +1,1 @@
+{'channel': 'WABA', 'appDetails': {'type': 'LIVE'}, 'events': {'eventType': 'User initiated', 'timestamp': '1591344990', 'date': '2020-6-05'}, 'eventContent': {'message': {'from': '918800518850', 'id': 'ABEGkYgAUYhQAgo-sN0c5HKaZMOw', 'text': {'body': 'Hey'}, 'to': '919999567202', 'contentType': 'text'}}}

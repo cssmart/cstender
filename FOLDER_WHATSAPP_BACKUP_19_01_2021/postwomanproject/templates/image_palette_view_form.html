@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% bootstrap_css %}
+{% endblock css %}
+
+{% block content %}
+
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 530px;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+input[type="text"], textarea {
+
+  background-color : white;
+
+}
+
+</style>
+
+<div>
+    <br/>
+    <ul class="nav nav-tabs" role="tablist" id="tabs" data-toggle="tab">
+        <li role="presentation" class="active">
+            <a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">
+                <span class="glyphicon glyphicon-star"></span>
+                Image Palette
+            </a>
+        </li>
+    </ul>
+    <br/>
+    {# ------------------------------- #}
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="bootstrap">
+            <form  method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="column" style="background-color:#bbb;">
+                        <label>File Link</label>
+                        <br/>
+                        <h4>{{form.fileLink}}</h4>
+                    </div>
+                    <div class="column" style="background-color:#ddd;">
+                        <label>Mime Type</label>
+                        <br/>
+                        <h4>{{form.mime_type }}</h4>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="column" style="background-color:#bbb;">
+                        <label>Content Type</label>
+                        <br/>
+                         <input type="text" name="ATTACHMENT", value="ATTACHMENT", disabled=True>
+                    </div>
+                    <div class="column" style="background-color:#ddd;">
+                        <label>Attachment Type</label>
+                        <br/>
+                         <input type="text" name="attachmentType", value="Image", disabled=True>
+                    </div>
+                </div>
+                <br/>
+                {% buttons %}
+                 <button type="submit" class="btn btn-primary" name="done">
+                    {% bootstrap_icon "star" %} Next
+             </button>
+                {% endbuttons %}
+                   </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

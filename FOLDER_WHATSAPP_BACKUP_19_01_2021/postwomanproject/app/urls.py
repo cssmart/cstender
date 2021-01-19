@@ -1,0 +1,36 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('receive_msg/', views.whatsapp_chatbot),
+    path('erp_order/', views.erp_order),
+    path('abc/', views.abc),
+    path('home/', views.home_page, name='home'),
+    path('location/', views.location, name='location'),
+    path('Palette_category/<int:pk>', views.Palette_category_view, name='Palette_category_view'),
+    path('media/', views.media, name='media'),
+    path('document_palette', views.document_palette, name='document_palette'),
+    # path('document_palette/<int:pk>', views.document_palette, name='document_palette'),
+    path('video_palette/<int:pk>', views.video_palette, name='video_palette'),
+    path('image_palette/<int:pk>', views.image_palette, name='image_palette'),
+    path('text_palette/<int:pk>', views.text_palette, name='text_palette'),
+    path('location_palette/<int:pk>', views.location_palette, name='location_palette'),
+    path('genric_api/', views.genric_api_call, name='genric_api_call'),
+    path('multiple_connection', views.multiple_connection_form, name='multiple_connection_form'),
+    path('erp_connection', views.erp_connection, name='erp_connection'),
+    path('mysql_function', views.mysql_function, name='mysql_function'),
+    #path('sql_connection', views.sql_connection, name='sql_connection'),
+    path('palette_structure', views.palette_structure_form_view, name='p_s'),
+    path('palette', views.palette_form_view, name='palette'),
+    path('delete_palette/<int:pk>', views.delete_palette,name="delete_palette"),
+    path('delete_palette_structure/<int:pk>', views.delete_palette_structure,name="delete_palette_s"),
+    path('edit_palette/<int:pk>', views.edit_palette,name="edit_palette"),
+    path('edit_palette_structure/<int:pk>', views.edit_palette_structure,name="edit_palette_s"),
+    path('General_configuration', views.General_configuration_form_view, name='gc'),
+    path('whatsapp_settings',views.whatsapp_settings_form_view, name='whatsapp_setting'),
+    path('whatsapp_mail/', views.whatsapp_mail),
+    #path('receive_msg/', views.whatsapp_bot_receive_msg),
+    path('receive/', views.whatsapp_bot_receive),
+    #path('message_process', views.message_process),
+    path('fn_data', views.function_receive_data)
+]

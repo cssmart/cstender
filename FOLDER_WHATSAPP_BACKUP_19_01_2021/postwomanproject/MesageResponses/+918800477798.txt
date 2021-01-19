@@ -1,0 +1,11 @@
+Welcome to KARAM Industries. Kindly choose an option.
+
+1 - To know more about KARAM
+ 
+ 2 - To get product brochures and price lists
+ 
+ 3 - To shop online
+ 
+ 4 - To get contact details of your nearest sales center
+ 
+ 5 - To check your order status
